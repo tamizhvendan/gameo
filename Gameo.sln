@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Web", "Gameo.Web\Gameo.Web.csproj", "{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Domain", "Gameo.Domain\Gameo.Domain.csproj", "{6C1430F5-F4B4-49E1-9699-17A389669124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Domain.Tests", "Gameo.Domain.Tests\Gameo.Domain.Tests.csproj", "{24F64B61-DE04-4A19-A3CD-E6C20FF73ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Web.Tests", "Gameo.Web.Tests\Gameo.Web.Tests.csproj", "{EFE6A136-54FC-4403-9160-5F6F701637AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.DataAccess", "Gameo.DataAccess\Gameo.DataAccess.csproj", "{793918AB-BA53-417E-8CA2-0191E42582B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.DataAccess.Tests", "Gameo.DataAccess.Tests\Gameo.DataAccess.Tests.csproj", "{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C1430F5-F4B4-49E1-9699-17A389669124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1430F5-F4B4-49E1-9699-17A389669124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1430F5-F4B4-49E1-9699-17A389669124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1430F5-F4B4-49E1-9699-17A389669124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F64B61-DE04-4A19-A3CD-E6C20FF73ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F64B61-DE04-4A19-A3CD-E6C20FF73ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F64B61-DE04-4A19-A3CD-E6C20FF73ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F64B61-DE04-4A19-A3CD-E6C20FF73ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE6A136-54FC-4403-9160-5F6F701637AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE6A136-54FC-4403-9160-5F6F701637AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE6A136-54FC-4403-9160-5F6F701637AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE6A136-54FC-4403-9160-5F6F701637AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793918AB-BA53-417E-8CA2-0191E42582B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793918AB-BA53-417E-8CA2-0191E42582B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793918AB-BA53-417E-8CA2-0191E42582B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793918AB-BA53-417E-8CA2-0191E42582B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
