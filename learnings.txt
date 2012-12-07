@@ -1,0 +1,2 @@
+1. Use default .gitignore comes with github
+2. 
