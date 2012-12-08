@@ -1,4 +1,4 @@
-gameo
+Gameo
 =====
 
-Game Parlor Management Application to experiment, practice to my learnings.
+Game Parlor Management Application to experiment, practice, hack and also play.
