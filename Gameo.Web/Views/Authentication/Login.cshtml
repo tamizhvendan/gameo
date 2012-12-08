@@ -1,0 +1,15 @@
+﻿@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<div class="container">
+    @using (Html.BeginForm("Login", "Authentication", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        <h2 class="form-signin-heading">
+            Please sign in</h2>
+        @Html.TextBoxFor(model => model.UserName, new { @class = "input-block-level", placeholder = "username" })
+        @Html.PasswordFor(model => model.Password, new { @class = "input-block-level", placeholder = "password" })
+        @Html.DropDownListFor(model => model.BranchId, Model.BranchSelectListItems)
+        <input type="submit" value="Sign in" class="btn btn-primary offset2" />
+    }
+</div>
