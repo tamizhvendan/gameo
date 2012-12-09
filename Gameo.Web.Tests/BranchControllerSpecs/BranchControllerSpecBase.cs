@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Gameo.Web.Tests.BranchControllerSpecs
 {
-    public abstract class BranchControllerSpecBase
+    public abstract class BranchControllerSpecBase : ControllerSpecBase
     {
         protected Mock<IBranchRepository> BranchRepositoryMock;
         protected BranchController BranchController;

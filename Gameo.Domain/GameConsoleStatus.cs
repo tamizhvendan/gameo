@@ -4,6 +4,7 @@ namespace Gameo.Domain
     {
         Unknown,
         Working,
-        UnderMaintanance
+        UnderMaintenance,
+        Removed
     }
 }

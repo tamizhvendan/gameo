@@ -1,0 +1,33 @@
+﻿@model Gameo.Domain.GameConsole
+@{
+    ViewBag.Title = "Create New Game Console";
+}
+<div class="container">
+    @using (Html.BeginForm("Create", "GameConsole", FormMethod.Post, new { @class = "form-horizontal gameo-form form-gameconsole" }))
+    {
+        <div class="control-group">
+            <h4>
+                Create New Game Console</h4>
+            <label class="control-label" for="@Model.Name">
+                Console Name</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.BranchName">
+                Branch Name</label>
+            <div class="controls">
+                @Html.DropDownList("BranchName", ViewBag.Branches as IEnumerable<SelectListItem>)
+                @Html.ValidationMessageFor(model => model.BranchName)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Create" class="btn btn-primary offset1" />
+                @Html.ActionLink("Back", "Index", "GameConsole", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>

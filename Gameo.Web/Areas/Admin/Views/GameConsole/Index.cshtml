@@ -1,0 +1,71 @@
+﻿@using Gameo.Domain
+@model IEnumerable<Gameo.Domain.GameConsole>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container table-branch">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <h4>No Game Consoles Found!</h4>
+            Only available Game Consoles will be listed down here. Click @Html.ActionLink("here", "Create", "GameConsole") to add a new Game Console.
+        </div>
+    }
+    else
+    { 
+        <h3>Available Game Consoles</h3>
+        <p class="offset5">
+            @Html.ActionLink("Create New Game Console", "Create", "GameConsole", null, new { @class = "btn btn-primary" })
+        </p>
+        <table class="table table-striped span7">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Console Name
+                </th>
+                <th>
+                    Branch Name
+                </th>
+                <th>
+                    Console Working Status
+                </th>
+            </tr>
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@(i + 1)
+                    </td>
+                    <td>@Model.ElementAt(i).Name
+                    </td>
+                    <td>
+                        @Model.ElementAt(i).BranchName
+                    </td>
+                    <td >
+                        @RenderGameConsoleWorkingStatus(Model.ElementAt(i).GameConsoleStatus)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+@helper RenderGameConsoleWorkingStatus(GameConsoleStatus gameConsoleStatus){
+    switch (gameConsoleStatus)
+    {
+        case GameConsoleStatus.Working:
+            <p class="working-status alert-success">Working</p>
+            break;
+        case GameConsoleStatus.Removed:
+            <p class="alert-error  working-status">Removed</p>
+            break;
+        case GameConsoleStatus.UnderMaintenance:
+            <p class="alert-info  working-status">Under Maintenance</p>
+            break;
+        default:
+            <p class="alert-info  working-status">Unknown Status</p>
+            break;
+    }
+}

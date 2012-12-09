@@ -5,11 +5,9 @@
 <div class="container table-branch">
     @if (!Model.Any())
     {
-        <div class="alert alert-block">
-            <h4>
-                No Branches Found!</h4>
-            Only available branches will be listed down here. Click @Html.ActionLink("here", "Create", "Branch")
-            to add new branch
+        <div class="alert alert-info">
+            <h4>No Branches Found!</h4>
+            Only available branches will be listed down here. Click @Html.ActionLink("here", "Create", "Branch") to add a new branch
         </div>
     }
     else
@@ -18,7 +16,7 @@
         <p class="offset5">
             @Html.ActionLink("Create New Branch", "Create", "Branch", null, new { @class = "btn btn-primary" })
         </p>
-        <table class="table table-striped table-hover span7">
+        <table class="table table-striped span7">
             <tr>
                 <th>
                     #

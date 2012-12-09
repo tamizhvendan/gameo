@@ -55,8 +55,7 @@ namespace Gameo.Web.Tests.BranchControllerSpecs
         {
             var actionResult = BranchController.Create(new Branch());
 
-            var redirectToRouteResult = actionResult as RedirectToRouteResult;
-            redirectToRouteResult.RouteValues["Action"].ShouldEqual("Index");
+            AssertReadirectToIndexAction(actionResult);
         }
     }
 }

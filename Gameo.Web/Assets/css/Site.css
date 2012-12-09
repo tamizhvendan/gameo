@@ -36,11 +36,18 @@
     margin-bottom: 15px;
     padding: 7px 9px;
 }
-.form-branch {
-    width: 600px;
+.form-branch, .form-gameconsole {
+    width: 500px;
 }
 
 .table-branch {
     width: 800px;
     margin: auto;
+}
+
+.working-status {    
+    width: 150px;
+    border: 1px solid #FBEED5;
+    text-align: center;
+    padding: 3px 5px;
 }
