@@ -89,12 +89,12 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Checks_existence_of_branch_name()
+        public void Checks_existence_of_branch_name_with_case_ignored()
         {
             var branch = new Branch { Name = "foo" };
             AddBranch(branch);
 
-            var isBranchNameExists = branchRepository.IsBranchNameExists(branch.Name);
+            var isBranchNameExists = branchRepository.IsBranchNameExists(branch.Name.ToUpperInvariant());
 
             isBranchNameExists.ShouldBeTrue();
         }

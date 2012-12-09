@@ -26,8 +26,16 @@ namespace Gameo.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Branch branch)
         {
-            branchRepository.Add(branch);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if (!branchRepository.IsBranchNameExists(branch.Name))
+                {
+                    branchRepository.Add(branch);
+                    return RedirectToAction("Index");        
+                }
+                ModelState.AddModelError("Name", "Branch Name already exists");
+            }
+            return View(branch);
         }
     }
 }

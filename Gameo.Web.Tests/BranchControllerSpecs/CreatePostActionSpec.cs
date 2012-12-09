@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Gameo.Domain;
 using Moq;
 using NUnit.Framework;
@@ -18,6 +19,35 @@ namespace Gameo.Web.Tests.BranchControllerSpecs
             BranchController.Create(branch);
 
             BranchRepositoryMock.Verify(repo => repo.Add(branch), Times.Once());
+        }
+
+        [Test]
+        public void Returns_create_view_if_new_branch_is_invalid()
+        {
+            BranchController.ModelState.AddModelError("Name", "The Name field is required");
+            var invalidBranch = new Branch();
+
+            var viewResult = BranchController.Create(invalidBranch) as ViewResult;
+
+            viewResult.Model.ShouldEqual(invalidBranch);
+            viewResult.ViewName.ShouldEqual(string.Empty);
+        }
+
+        [Test]
+        public void Returs_crete_view_with_model_error_if_new_branch_name_already_exists()
+        {
+            var branchWithExistingBranchName = new Branch() {Name = "foo"};
+            BranchRepositoryMock.Setup(repo => repo.IsBranchNameExists(branchWithExistingBranchName.Name)).Returns(true);
+
+            var viewResult = BranchController.Create(branchWithExistingBranchName) as ViewResult;
+
+            viewResult.Model.ShouldEqual(branchWithExistingBranchName);
+            viewResult.ViewName.ShouldEqual(string.Empty);
+            BranchController.ModelState.IsValid.ShouldBeFalse();
+            BranchController.ModelState.Values.Count.ShouldEqual(1);
+            var modelState = BranchController.ModelState["Name"];
+            modelState.Errors.Count.ShouldEqual(1);
+            modelState.Errors.First().ErrorMessage.ShouldEqual("Branch Name already exists");
         }
 
         [Test]

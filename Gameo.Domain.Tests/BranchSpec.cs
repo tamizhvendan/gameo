@@ -16,5 +16,13 @@ namespace Gameo.Domain.Tests
             var validationException = Assert.Throws<ValidationException>(() => Validator.ValidateObject(branch, validationContext));
             validationException.ValidationResult.ErrorMessage.ShouldEqual("The Name field is required.");
         }
+
+        [Test]
+        public void IsOperating_should_be_true_by_default()
+        {
+            var branch = new Branch();
+
+            branch.IsOperating.ShouldBeTrue();
+        }
     }
 }

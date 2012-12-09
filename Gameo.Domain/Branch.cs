@@ -6,5 +6,12 @@ namespace Gameo.Domain
     {
         [Required]
         public string Name { get; set; }
+
+        public bool IsOperating { get; set; }
+
+        public Branch()
+        {
+            IsOperating = true;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
@@ -9,7 +10,9 @@ namespace Gameo.DataAccess
     {
         public bool IsBranchNameExists(string branchName)
         {
-            return EntityCollection.AsQueryable().Any(branch => branch.Name == branchName);
+            return EntityCollection
+                    .AsQueryable()
+                    .Any(branch => branch.Name.ToLowerInvariant() == branchName.ToLowerInvariant());
         }
     }
 }
