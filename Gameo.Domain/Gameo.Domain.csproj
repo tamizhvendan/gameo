@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Branch.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="GameConsole.cs" />
+    <Compile Include="GameConsoleStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

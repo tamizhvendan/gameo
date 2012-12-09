@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BranchSpec.cs" />
+    <Compile Include="EntitySpecBase.cs" />
+    <Compile Include="GameConsoleSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

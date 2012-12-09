@@ -1,12 +1,20 @@
+using System;
 using System.Configuration;
+using System.Linq;
+using Gameo.Domain;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 using NUnit.Framework;
+using Should;
 
 namespace Gameo.DataAccess.Tests
 {
-    public abstract class RepositoryTestBase
+    public abstract class RepositoryTestBase<T> where T : Entity
     {
         private readonly MongoDatabase gameoTestDatabase;
+
+        protected MongoCollection<T> collection;
 
         protected RepositoryTestBase()
         {
@@ -15,9 +23,42 @@ namespace Gameo.DataAccess.Tests
             gameoTestDatabase = mongoServer.GetDatabase(ConfigurationManager.AppSettings["database_name"]);
         }
 
-        protected MongoCollection<T> GetCollection<T>() where T : class
+        [SetUp]
+        public void InitDatabase()
         {
-            return gameoTestDatabase.GetCollection<T>(typeof(T).Name.ToLowerInvariant());
+            collection = gameoTestDatabase.GetCollection<T>(typeof(T).Name.ToLowerInvariant());
+        }
+
+        protected void AssertNewlyAddedEntity(Action<T> assertEntityDelegate)
+        {
+            var actualEntitySaved = collection.AsQueryable().First();
+            collection.Count().ShouldEqual(1);
+            actualEntitySaved.Id.ShouldNotEqual(Guid.Empty);
+            assertEntityDelegate(actualEntitySaved);
+        }
+
+        protected void AssertDeletedEntity()
+        {
+            collection.Count().ShouldEqual(0);
+        }
+
+        protected void AssertUpdatedEntity(Guid id, Action<T> assertEntityDelegate)
+        {
+            var actualUpdatedEntity = collection.Find(Query<T>.EQ(entity => entity.Id, id)).First();
+            assertEntityDelegate(actualUpdatedEntity);
+        }
+
+        protected void AddEntityToDatabase(T entity)
+        {
+            collection.Save(entity);
+        }
+
+        protected void AddEntityToDatabase(params T[] entities)
+        {
+            foreach (var entity in entities)
+            {
+                AddEntityToDatabase(entity);
+            }
         }
 
         [TearDown]
