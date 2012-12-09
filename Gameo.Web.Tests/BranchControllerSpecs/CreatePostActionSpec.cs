@@ -43,11 +43,7 @@ namespace Gameo.Web.Tests.BranchControllerSpecs
 
             viewResult.Model.ShouldEqual(branchWithExistingBranchName);
             viewResult.ViewName.ShouldEqual(string.Empty);
-            BranchController.ModelState.IsValid.ShouldBeFalse();
-            BranchController.ModelState.Values.Count.ShouldEqual(1);
-            var modelState = BranchController.ModelState["Name"];
-            modelState.Errors.Count.ShouldEqual(1);
-            modelState.Errors.First().ErrorMessage.ShouldEqual("Branch Name already exists");
+            AssertModelError(BranchController, "Name", "Branch Name already exists");
         }
 
         [Test]

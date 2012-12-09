@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Should;
 
 namespace Gameo.Web.Tests
@@ -9,6 +10,15 @@ namespace Gameo.Web.Tests
         {
             var redirectToRouteResult = actionResult as RedirectToRouteResult;
             redirectToRouteResult.RouteValues["Action"].ShouldEqual("Index");
+        }
+
+        protected void AssertModelError(Controller controller, string propertyName, string errorMessage)
+        {
+            controller.ModelState.IsValid.ShouldBeFalse();
+            controller.ModelState.Values.Count.ShouldEqual(1);
+            var modelState = controller.ModelState[propertyName];
+            modelState.Errors.Count.ShouldEqual(1);
+            modelState.Errors.First().ErrorMessage.ShouldEqual(errorMessage);
         }
     }
 }

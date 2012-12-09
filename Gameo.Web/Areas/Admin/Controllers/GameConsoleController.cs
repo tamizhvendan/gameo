@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
@@ -27,19 +29,36 @@ namespace Gameo.Web.Areas.Admin.Controllers
         public ViewResult Create()
         {
             var gameConsole = new GameConsole();
-            ViewBag.Branches = branchRepository.All.Select(branch => new SelectListItem
-                                                                         {
-                                                                             Text = branch.Name,
-                                                                             Value = branch.Name
-                                                                         });
+            ViewBag.Branches = MapBranchesToSelectListItems();
             return View(gameConsole);
+        }
+
+        private IEnumerable<SelectListItem> MapBranchesToSelectListItems()
+        {
+            return branchRepository
+                    .All
+                    .Select(branch => new SelectListItem
+                    {
+                        Text = branch.Name,
+                        Value = branch.Name
+                    });
         }
 
         [HttpPost]
         public ActionResult Create(GameConsole gameConsole)
         {
-            gameConsoleRepository.Add(gameConsole);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if (!gameConsoleRepository.IsConsoleNameExists(gameConsole.Name, gameConsole.BranchName))
+                {
+                    gameConsoleRepository.Add(gameConsole);
+                    return RedirectToAction("Index");   
+                }
+                ModelState.AddModelError("Name", "Console Name already exists in the selected branch");
+            }
+
+            ViewBag.Branches = MapBranchesToSelectListItems();
+            return View(gameConsole);
         }
     }
 }

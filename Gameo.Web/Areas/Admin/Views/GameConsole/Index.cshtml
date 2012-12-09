@@ -32,6 +32,9 @@
                 <th>
                     Console Working Status
                 </th>
+                <th>
+                    
+                </th>
             </tr>
             @for (var i = 0; i < Model.Count(); i++)
             {
@@ -45,6 +48,9 @@
                     </td>
                     <td >
                         @RenderGameConsoleWorkingStatus(Model.ElementAt(i).GameConsoleStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit Status", "EditStatus", "GameConsole", new { id = @Model.ElementAt(i).Id }, new { @class = "btn btn-link" })
                     </td>
                 </tr>
             }

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Gameo.Domain;
-using Gameo.Web.Tests.BranchControllerSpecs;
 using Moq;
 using NUnit.Framework;
 using Should;
@@ -13,7 +12,7 @@ namespace Gameo.Web.Tests.GameConsoleControllerSpecs
         [Test]
         public void Retrieve_all_GameConsoles_from_GameConsoles_repository()
         {
-            GameConsoleRepositoryMock.Setup(repo => repo.All).Verifiable();
+            GameConsoleRepositoryMock.Setup(repo => repo.All).Returns(Enumerable.Empty<GameConsole>()).Verifiable();
 
             GameConsoleController.Index();
 
