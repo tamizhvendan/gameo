@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Gameo.Domain;
+using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using NUnit.Framework;
 using Should;
@@ -56,7 +57,7 @@ namespace Gameo.DataAccess.Tests
             var branch = new Branch {Name = "foo"};
             AddBranch(branch);
 
-            var actualBranch = branchRepository.GetById(branch.Id.ToString());
+            var actualBranch = branchRepository.GetById(branch.Id);
 
             actualBranch.Id.ShouldEqual(branch.Id);
             actualBranch.Name.ShouldEqual(branch.Name);
@@ -71,6 +72,42 @@ namespace Gameo.DataAccess.Tests
             branchRepository.Delete(branch.Id);
 
             GetCollection<Branch>().Count().ShouldEqual(0);
+        }
+
+        [Test]
+        public void Updates_branch()
+        {
+            var branchToBeUpdated = new Branch { Name = "foo" };
+            AddBranch(branchToBeUpdated);
+            branchToBeUpdated.Name = "bar";
+
+            branchRepository.Update(branchToBeUpdated);
+
+            var actualUpdatedBranch = GetCollection<Branch>().Find(Query<Branch>.EQ(branch => branch.Id, branchToBeUpdated.Id)).First();
+            actualUpdatedBranch.Name.ShouldEqual(branchToBeUpdated.Name);
+            actualUpdatedBranch.Id.ShouldEqual(branchToBeUpdated.Id);
+        }
+
+        [Test]
+        public void Checks_existence_of_branch_name()
+        {
+            var branch = new Branch { Name = "foo" };
+            AddBranch(branch);
+
+            var isBranchNameExists = branchRepository.IsBranchNameExists(branch.Name);
+
+            isBranchNameExists.ShouldBeTrue();
+        }
+
+        [Test]
+        public void Checks_non_existence_of_branch_name()
+        {
+            var branch = new Branch { Name = "foo" };
+            AddBranch(branch);
+
+            var isBranchNameExists = branchRepository.IsBranchNameExists("bar");
+
+            isBranchNameExists.ShouldBeFalse();
         }
     }
 }

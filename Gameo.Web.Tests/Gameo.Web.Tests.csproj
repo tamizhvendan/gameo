@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -39,6 +42,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,10 +51,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BranchControllerSpecs\BranchControllerSpecBase.cs" />
+    <Compile Include="BranchControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="BranchControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="BranchControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gameo.DataAccess\Gameo.DataAccess.csproj">
+      <Project>{793918AB-BA53-417E-8CA2-0191E42582B8}</Project>
+      <Name>Gameo.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gameo.Domain\Gameo.Domain.csproj">
+      <Project>{6C1430F5-F4B4-49E1-9699-17A389669124}</Project>
+      <Name>Gameo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gameo.Web\Gameo.Web.csproj">
+      <Project>{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}</Project>
+      <Name>Gameo.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

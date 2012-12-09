@@ -31,14 +31,19 @@ namespace Gameo.DataAccess.Core
             EntityCollection.Save(entity);
         }
 
-        public T GetById(string guid)
+        public T GetById(Guid guid)
         {
-            return EntityCollection.AsQueryable().First(entity => entity.Id == Guid.Parse(guid));
+            return EntityCollection.AsQueryable().First(entity => entity.Id == guid);
         }
 
         public void Delete(Guid guid)
         {
             EntityCollection.Remove(Query<T>.EQ(entity => entity.Id, guid));
+        }
+
+        public void Update(T entityToBeUpdated)
+        {
+            EntityCollection.Save(entityToBeUpdated);
         }
     }
 }
