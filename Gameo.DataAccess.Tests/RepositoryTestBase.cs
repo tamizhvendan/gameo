@@ -15,13 +15,13 @@ namespace Gameo.DataAccess.Tests
             gameoTestDatabase = mongoServer.GetDatabase(ConfigurationManager.AppSettings["database_name"]);
         }
 
-        protected MongoCollection<T> GetMongoCollection<T>() where T : class
+        protected MongoCollection<T> GetCollection<T>() where T : class
         {
             return gameoTestDatabase.GetCollection<T>(typeof(T).Name.ToLowerInvariant());
         }
 
         [TearDown]
-        protected void DropDatabase()
+        protected void DropTestDatabase()
         {
             gameoTestDatabase.Drop();
         }
