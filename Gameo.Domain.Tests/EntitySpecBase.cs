@@ -6,11 +6,11 @@ namespace Gameo.Domain.Tests
 {
     public abstract class EntitySpecBase
     {
-        protected void Validate<T>(T entity, string errorMessage) where T : Entity
+        protected void Validate<T>(T entity, string expectedErrorMessage) where T : Entity
         {
             var validationContext = new ValidationContext(entity, null, null);
             var validationException = Assert.Throws<ValidationException>(() => Validator.ValidateObject(entity, validationContext));
-            validationException.ValidationResult.ErrorMessage.ShouldEqual(errorMessage);
+            validationException.ValidationResult.ErrorMessage.ShouldEqual(expectedErrorMessage);
         }
     }
 }
