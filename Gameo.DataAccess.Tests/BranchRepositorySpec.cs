@@ -63,8 +63,8 @@ namespace Gameo.DataAccess.Tests
             AddEntityToDatabase(branch);
 
             branchRepository.Delete(branch.Id);
-
-            collection.Count().ShouldEqual(0);
+            
+            AssertDeletedEntity();
         }
 
         [Test]

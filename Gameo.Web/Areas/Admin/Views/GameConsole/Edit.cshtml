@@ -1,0 +1,56 @@
+﻿@using Gameo.Domain;
+@model GameConsole
+@{
+    ViewBag.Title = "Edit Game Console Status";
+}
+@using (Html.BeginForm("Edit", "GameConsole", FormMethod.Post, new { @class = "form-horizontal gameo-form form-gameconsole" }))
+{
+    <h4>
+        Edit Game Console Working Status</h4>
+    <div class="control-group">
+        <label class="control-label">
+            Console Name :
+        </label>
+        <div class="controls">
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { disabled = true })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Branch Name :
+        </label>
+        <div class="controls">
+            @Html.HiddenFor(model => model.BranchName)
+            @Html.TextBoxFor(model => model.BranchName, new { disabled = true })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Working Status :
+        </label>
+        <div class="controls">
+            <select id="GameConsoleStatus" name="GameConsoleStatus">
+                @RenderGameConsoleStatus()
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary  offset1">
+                Update</button>
+            @Html.ActionLink("Back", "Index", "GameConsole", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+@helper RenderGameConsoleStatus() {
+    foreach (var gameConsoleStatusString in Enum.GetNames(typeof(GameConsoleStatus)))
+    {
+        var gameConsoleStatus = (GameConsoleStatus) Enum.Parse(typeof (GameConsoleStatus), gameConsoleStatusString);
+        var selectedAttribute = gameConsoleStatus == Model.GameConsoleStatus ? "selected=selected" : "";
+        
+        <option value="@gameConsoleStatus" @selectedAttribute>@gameConsoleStatusString</option>
+    }
+}

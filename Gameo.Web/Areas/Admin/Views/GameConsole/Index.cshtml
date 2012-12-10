@@ -50,7 +50,7 @@
                         @RenderGameConsoleWorkingStatus(Model.ElementAt(i).GameConsoleStatus)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit Status", "EditStatus", "GameConsole", new { id = @Model.ElementAt(i).Id }, new { @class = "btn btn-link" })
+                        @Html.ActionLink("Edit Status", "Edit", "GameConsole", new { id = @Model.ElementAt(i).Id }, new { @class = "btn btn-link" })
                     </td>
                 </tr>
             }

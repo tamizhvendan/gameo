@@ -60,5 +60,20 @@ namespace Gameo.Web.Areas.Admin.Controllers
             ViewBag.Branches = MapBranchesToSelectListItems();
             return View(gameConsole);
         }
+
+        public ViewResult Edit(Guid id)
+        {
+            var gameConsole = gameConsoleRepository.GetById(id);
+            
+            return View(gameConsole);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(GameConsole gameConsole)
+        {
+            gameConsoleRepository.Update(gameConsole);
+
+            return RedirectToAction("Index");
+        }
     }
 }

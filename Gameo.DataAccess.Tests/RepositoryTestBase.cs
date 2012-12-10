@@ -14,7 +14,7 @@ namespace Gameo.DataAccess.Tests
     {
         private readonly MongoDatabase gameoTestDatabase;
 
-        protected MongoCollection<T> collection;
+        private MongoCollection<T> collection;
 
         protected RepositoryTestBase()
         {
@@ -62,9 +62,9 @@ namespace Gameo.DataAccess.Tests
         }
 
         [TearDown]
-        protected void DropTestDatabase()
+        protected void TearDown()
         {
-            gameoTestDatabase.Drop();
+            collection.Drop();
         }
     }
 }
