@@ -1,6 +1,6 @@
 namespace Gameo.Domain
 {
-    public enum GameConsoleStatus
+    public enum Status
     {
         Unknown,
         Working,

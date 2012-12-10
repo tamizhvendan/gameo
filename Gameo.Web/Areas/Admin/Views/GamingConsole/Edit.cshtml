@@ -1,9 +1,9 @@
 ﻿@using Gameo.Domain;
-@model GameConsole
+@model GamingConsole
 @{
     ViewBag.Title = "Edit Game Console Status";
 }
-@using (Html.BeginForm("Edit", "GameConsole", FormMethod.Post, new { @class = "form-horizontal gameo-form form-gameconsole" }))
+@using (Html.BeginForm("Edit", "GamingConsole", FormMethod.Post, new { @class = "form-horizontal gameo-form form-gameconsole" }))
 {
     <h4>
         Edit Game Console Working Status</h4>
@@ -31,7 +31,7 @@
             Working Status :
         </label>
         <div class="controls">
-            <select id="GameConsoleStatus" name="GameConsoleStatus">
+            <select id="GameConsoleStatus" name="GamingConsoleStatus">
                 @RenderGameConsoleStatus()
             </select>
         </div>
@@ -40,16 +40,16 @@
         <div class="controls">
             <button type="submit" class="btn btn-primary  offset1">
                 Update</button>
-            @Html.ActionLink("Back", "Index", "GameConsole", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Back", "Index", "GamingConsole", null, new { @class = "btn btn-primary" })
         </div>
     </div>
 }
 
 @helper RenderGameConsoleStatus() {
-    foreach (var gameConsoleStatusString in Enum.GetNames(typeof(GameConsoleStatus)))
+    foreach (var gameConsoleStatusString in Enum.GetNames(typeof(Status)))
     {
-        var gameConsoleStatus = (GameConsoleStatus) Enum.Parse(typeof (GameConsoleStatus), gameConsoleStatusString);
-        var selectedAttribute = gameConsoleStatus == Model.GameConsoleStatus ? "selected=selected" : "";
+        var gameConsoleStatus = (Status) Enum.Parse(typeof (Status), gameConsoleStatusString);
+        var selectedAttribute = gameConsoleStatus == Model.Status ? "selected=selected" : "";
         
         <option value="@gameConsoleStatus" @selectedAttribute>@gameConsoleStatusString</option>
     }

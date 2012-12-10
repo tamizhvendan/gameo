@@ -50,8 +50,8 @@
     <Compile Include="Core\IBranchRepository.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\RepositoryBase.cs" />
-    <Compile Include="GameConsoleRepository.cs" />
-    <Compile Include="Core\IGameConsoleRepository.cs" />
+    <Compile Include="GamingConsoleRepository.cs" />
+    <Compile Include="Core\IGamingConsoleRepository.cs" />
     <Compile Include="MongoClassMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BranchRepository.cs" />

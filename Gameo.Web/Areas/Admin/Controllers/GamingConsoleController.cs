@@ -7,20 +7,20 @@ using Gameo.Domain;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
-    public class GameConsoleController : Controller
+    public class GamingConsoleController : Controller
     {
-        private readonly IGameConsoleRepository gameConsoleRepository;
+        private readonly IGamingConsoleRepository gamingConsoleRepository;
         private readonly IBranchRepository branchRepository;
 
-        public GameConsoleController(IGameConsoleRepository gameConsoleRepository, IBranchRepository branchRepository)
+        public GamingConsoleController(IGamingConsoleRepository gamingConsoleRepository, IBranchRepository branchRepository)
         {
-            this.gameConsoleRepository = gameConsoleRepository;
+            this.gamingConsoleRepository = gamingConsoleRepository;
             this.branchRepository = branchRepository;
         }
 
         public ViewResult Index()
         {
-            var gameConsoles = gameConsoleRepository.All.ToList();
+            var gameConsoles = gamingConsoleRepository.All.ToList();
             
             return View(gameConsoles);
         }
@@ -28,7 +28,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
 
         public ViewResult Create()
         {
-            var gameConsole = new GameConsole();
+            var gameConsole = new GamingConsole();
             ViewBag.Branches = MapBranchesToSelectListItems();
             return View(gameConsole);
         }
@@ -45,33 +45,33 @@ namespace Gameo.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(GameConsole gameConsole)
+        public ActionResult Create(GamingConsole gamingConsole)
         {
             if (ModelState.IsValid)
             {
-                if (!gameConsoleRepository.IsConsoleNameExists(gameConsole.Name, gameConsole.BranchName))
+                if (!gamingConsoleRepository.IsConsoleNameExists(gamingConsole.Name, gamingConsole.BranchName))
                 {
-                    gameConsoleRepository.Add(gameConsole);
+                    gamingConsoleRepository.Add(gamingConsole);
                     return RedirectToAction("Index");   
                 }
                 ModelState.AddModelError("Name", "Console Name already exists in the selected branch");
             }
 
             ViewBag.Branches = MapBranchesToSelectListItems();
-            return View(gameConsole);
+            return View(gamingConsole);
         }
 
         public ViewResult Edit(Guid id)
         {
-            var gameConsole = gameConsoleRepository.GetById(id);
+            var gameConsole = gamingConsoleRepository.GetById(id);
             
             return View(gameConsole);
         }
 
         [HttpPost]
-        public ActionResult Edit(GameConsole gameConsole)
+        public ActionResult Edit(GamingConsole gamingConsole)
         {
-            gameConsoleRepository.Update(gameConsole);
+            gamingConsoleRepository.Update(gamingConsole);
 
             return RedirectToAction("Index");
         }

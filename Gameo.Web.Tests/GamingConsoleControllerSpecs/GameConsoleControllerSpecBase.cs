@@ -8,20 +8,20 @@ using Moq;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.GameConsoleControllerSpecs
+namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
     public abstract class GameConsoleControllerSpecBase : ControllerSpecBase
     {
-        protected Mock<IGameConsoleRepository> GameConsoleRepositoryMock;
+        protected Mock<IGamingConsoleRepository> GamingConsoleRepositoryMock;
         protected Mock<IBranchRepository> BranchRepositoryMock;
-        protected GameConsoleController GameConsoleController;
+        protected GamingConsoleController GamingConsoleController;
 
         [SetUp]
         public void BranchControllerSpecSetUp()
         {
             BranchRepositoryMock = new Mock<IBranchRepository>();
-            GameConsoleRepositoryMock = new Mock<IGameConsoleRepository>();
-            GameConsoleController = new GameConsoleController(GameConsoleRepositoryMock.Object, BranchRepositoryMock.Object);    
+            GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
+            GamingConsoleController = new GamingConsoleController(GamingConsoleRepositoryMock.Object, BranchRepositoryMock.Object);    
         }
 
         protected void SetupBranchRepositoryToReturnSomeRandomBranches()

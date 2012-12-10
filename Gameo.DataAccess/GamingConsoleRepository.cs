@@ -5,7 +5,7 @@ using MongoDB.Driver.Linq;
 
 namespace Gameo.DataAccess
 {
-    public class GameConsoleRepository : RepositoryBase<GameConsole>, IGameConsoleRepository
+    public class GamingConsoleRepository : RepositoryBase<GamingConsole>, IGamingConsoleRepository
     {
         public bool IsConsoleNameExists(string consoleName, string branchName)
         {

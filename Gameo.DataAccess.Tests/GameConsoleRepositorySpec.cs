@@ -6,14 +6,14 @@ using Should;
 namespace Gameo.DataAccess.Tests
 {
     [TestFixture]
-    public class GameConsoleRepositorySpec : RepositoryTestBase<GameConsole>
+    public class GameConsoleRepositorySpec : RepositoryTestBase<GamingConsole>
     {
-        private GameConsoleRepository gameConsoleRepository;
+        private GamingConsoleRepository gamingConsoleRepository;
 
         [SetUp]
         public void SetUp()
         {
-            gameConsoleRepository = new GameConsoleRepository();
+            gamingConsoleRepository = new GamingConsoleRepository();
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace Gameo.DataAccess.Tests
         {
             var gameConsoleToAdd = CreateGameConsole("foo", "bar");
             
-            gameConsoleRepository.Add(gameConsoleToAdd);
+            gamingConsoleRepository.Add(gameConsoleToAdd);
 
             AssertNewlyAddedEntity(actualGameConsoleStored =>
                                        {
@@ -36,16 +36,16 @@ namespace Gameo.DataAccess.Tests
             AddEntityToDatabase(CreateGameConsole("Console1", "Branch1"));
             AddEntityToDatabase(CreateGameConsole("Console2", "Branch2"));
 
-            var gameConsoles = gameConsoleRepository.All.ToList();
+            var gameConsoles = gamingConsoleRepository.All.ToList();
 
             gameConsoles.Count().ShouldEqual(2);
             gameConsoles.Any(console => console.BranchName == "Branch1" && console.Name == "Console1").ShouldBeTrue();
             gameConsoles.Any(console => console.BranchName == "Branch2" && console.Name == "Console2").ShouldBeTrue();
         }
 
-        private static GameConsole CreateGameConsole(string gameConsoleName, string branchName)
+        private static GamingConsole CreateGameConsole(string gameConsoleName, string branchName)
         {
-            return new GameConsole { Name = gameConsoleName, BranchName = branchName };
+            return new GamingConsole { Name = gameConsoleName, BranchName = branchName };
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Gameo.DataAccess.Tests
             var gameConsole = CreateGameConsole("foo", "bar");
             AddEntityToDatabase(gameConsole);
 
-            var acutalGameConsole = gameConsoleRepository.GetById(gameConsole.Id);
+            var acutalGameConsole = gamingConsoleRepository.GetById(gameConsole.Id);
 
             acutalGameConsole.Id.ShouldEqual(gameConsole.Id);
             acutalGameConsole.Name.ShouldEqual(gameConsole.Name);
@@ -67,7 +67,7 @@ namespace Gameo.DataAccess.Tests
             var gameConsole = CreateGameConsole("foo", "bar");
             AddEntityToDatabase(gameConsole);
 
-            gameConsoleRepository.Delete(gameConsole.Id);
+            gamingConsoleRepository.Delete(gameConsole.Id);
 
             AssertDeletedEntity();
         }
@@ -79,7 +79,7 @@ namespace Gameo.DataAccess.Tests
             AddEntityToDatabase(gameConsole);
             gameConsole.Name = "bar";
 
-            gameConsoleRepository.Update(gameConsole);
+            gamingConsoleRepository.Update(gameConsole);
 
             AssertUpdatedEntity(gameConsole.Id, updatedGameConsole =>
                                                     {
@@ -96,8 +96,8 @@ namespace Gameo.DataAccess.Tests
             var gameConsole2 = CreateGameConsole("Console2", "Branch2");
             AddEntityToDatabase(gameConsole1, gameConsole2);
 
-            var isGameConsole1Exists = gameConsoleRepository.IsConsoleNameExists("Console1".ToUpperInvariant(), "Branch1".ToUpperInvariant());
-            var isGameConsole2Exists = gameConsoleRepository.IsConsoleNameExists("Console2".ToUpperInvariant(), "Branch2".ToUpperInvariant());
+            var isGameConsole1Exists = gamingConsoleRepository.IsConsoleNameExists("Console1".ToUpperInvariant(), "Branch1".ToUpperInvariant());
+            var isGameConsole2Exists = gamingConsoleRepository.IsConsoleNameExists("Console2".ToUpperInvariant(), "Branch2".ToUpperInvariant());
 
             isGameConsole1Exists.ShouldBeTrue();
             isGameConsole2Exists.ShouldBeTrue();
@@ -110,8 +110,8 @@ namespace Gameo.DataAccess.Tests
             var gameConsole2 = CreateGameConsole("Console2", "Branch1");
             AddEntityToDatabase(gameConsole1, gameConsole2);
 
-            var isGameConsole1Exists = gameConsoleRepository.IsConsoleNameExists("Console1".ToUpperInvariant(), "Branch1".ToUpperInvariant());
-            var isGameConsole2Exists = gameConsoleRepository.IsConsoleNameExists("Console2".ToUpperInvariant(), "Branch2".ToUpperInvariant());
+            var isGameConsole1Exists = gamingConsoleRepository.IsConsoleNameExists("Console1".ToUpperInvariant(), "Branch1".ToUpperInvariant());
+            var isGameConsole2Exists = gamingConsoleRepository.IsConsoleNameExists("Console2".ToUpperInvariant(), "Branch2".ToUpperInvariant());
 
             isGameConsole1Exists.ShouldBeFalse();
             isGameConsole2Exists.ShouldBeFalse();

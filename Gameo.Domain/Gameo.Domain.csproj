@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Branch.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="GameConsole.cs" />
-    <Compile Include="GameConsoleStatus.cs" />
+    <Compile Include="GamingConsole.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

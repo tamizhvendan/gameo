@@ -6,31 +6,31 @@ namespace Gameo.Domain.Tests
     [TestFixture]
     public class GameConsoleSpec : EntitySpecBase
     {
-        private GameConsole gameConsole;
+        private GamingConsole gamingConsole;
 
         [SetUp]
         public void SetUp()
         {
-            gameConsole = new GameConsole();
+            gamingConsole = new GamingConsole();
         }
 
         [Test]
         public void GameConsoleStatus_should_be_working_by_default()
         {
-            gameConsole.GameConsoleStatus.ShouldEqual(GameConsoleStatus.Working);
+            gamingConsole.Status.ShouldEqual(Status.Working);
         }
 
         [Test]
         public void Name_should_not_be_empty()
         {
-           Validate(gameConsole, "The Name field is required.");
+           Validate(gamingConsole, "The Name field is required.");
         }
 
         [Test]
         public void BranchName_should_not_be_empty()
         {
-            gameConsole.Name = "foo";
-            Validate(gameConsole, "The BranchName field is required.");
+            gamingConsole.Name = "foo";
+            Validate(gamingConsole, "The BranchName field is required.");
         }
     }
 }

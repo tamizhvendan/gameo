@@ -2,18 +2,17 @@
 
 namespace Gameo.Domain
 {
-    public class GameConsole : Entity
+    public class GamingConsole : Entity
     {
         [Required]
         public string Name { get; set; }
         [Required]
         public string BranchName { get; set; }
-        public GameConsoleStatus GameConsoleStatus { get; set; }
+        public Status Status { get; set; }
 
-        public GameConsole()
+        public GamingConsole()
         {
-            GameConsoleStatus = GameConsoleStatus.Working;
-            ;
+            Status = Status.Working;
         }
     }
 }

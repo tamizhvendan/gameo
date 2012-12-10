@@ -2,7 +2,7 @@ using Gameo.Domain;
 
 namespace Gameo.DataAccess.Core
 {
-    public interface IGameConsoleRepository : IRepository<GameConsole>
+    public interface IGamingConsoleRepository : IRepository<GamingConsole>
     {
         bool IsConsoleNameExists(string consoleName, string branchName);
     }

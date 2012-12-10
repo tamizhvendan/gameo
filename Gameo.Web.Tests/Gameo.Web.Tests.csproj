@@ -56,12 +56,12 @@
     <Compile Include="BranchControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="BranchControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="ControllerSpecBase.cs" />
-    <Compile Include="GameConsoleControllerSpecs\CreatePostActionSpec.cs" />
-    <Compile Include="GameConsoleControllerSpecs\CreateGetActionSpec.cs" />
-    <Compile Include="GameConsoleControllerSpecs\EditGetActionSpec.cs" />
-    <Compile Include="GameConsoleControllerSpecs\EditPostActionSpec.cs" />
-    <Compile Include="GameConsoleControllerSpecs\GameConsoleControllerSpecBase.cs" />
-    <Compile Include="GameConsoleControllerSpecs\IndexActionSpec.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\EditGetActionSpec.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\EditPostActionSpec.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\GameConsoleControllerSpecBase.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -57,7 +57,7 @@ namespace Gameo.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IBranchRepository>().To<BranchRepository>();
-            kernel.Bind<IGameConsoleRepository>().To<GameConsoleRepository>();
+            kernel.Bind<IGamingConsoleRepository>().To<GamingConsoleRepository>();
 
         }        
     }

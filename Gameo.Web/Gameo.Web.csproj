@@ -84,7 +84,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
-    <Compile Include="Areas\Admin\Controllers\GameConsoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GamingConsoleController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -155,13 +155,13 @@
     <Content Include="Areas\Admin\Views\Branch\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\GameConsole\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GamingConsole\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\GameConsole\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GamingConsole\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\GameConsole\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GamingConsole\Edit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
