@@ -39,7 +39,7 @@ namespace Gameo.DataAccess.Tests
             AddEntityToDatabase(user1, user2);
 
             var isUser1Exists = userRepository.IsUserNameExists("user1".ToUpperInvariant(), "Branch1".ToUpperInvariant());
-            var isUser2Exists = userRepository.IsUserNameExists("Console2".ToUpperInvariant(), "Branch2".ToUpperInvariant());
+            var isUser2Exists = userRepository.IsUserNameExists("user2".ToUpperInvariant(), "Branch2".ToUpperInvariant());
 
             isUser1Exists.ShouldBeTrue();
             isUser2Exists.ShouldBeTrue();

@@ -31,7 +31,7 @@
             Working Status :
         </label>
         <div class="controls">
-            <select id="GameConsoleStatus" name="GamingConsoleStatus">
+            <select id="Status" name="Status">
                 @RenderGameConsoleStatus()
             </select>
         </div>
@@ -50,7 +50,6 @@
     {
         var gameConsoleStatus = (Status) Enum.Parse(typeof (Status), gameConsoleStatusString);
         var selectedAttribute = gameConsoleStatus == Model.Status ? "selected=selected" : "";
-        
         <option value="@gameConsoleStatus" @selectedAttribute>@gameConsoleStatusString</option>
     }
 }
