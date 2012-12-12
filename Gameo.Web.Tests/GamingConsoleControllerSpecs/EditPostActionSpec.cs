@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
     [TestFixture]
-    public class EditPostActionSpec : GameConsoleControllerSpecBase
+    public class EditPostActionSpec : GamingConsoleControllerSpecBase
     {
         private GamingConsole gamingConsole;
 

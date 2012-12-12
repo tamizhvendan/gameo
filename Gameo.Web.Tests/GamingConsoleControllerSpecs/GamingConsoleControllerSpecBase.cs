@@ -10,7 +10,7 @@ using Should;
 
 namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
-    public abstract class GameConsoleControllerSpecBase : ControllerSpecBase
+    public abstract class GamingConsoleControllerSpecBase : ControllerSpecBase
     {
         protected Mock<IGamingConsoleRepository> GamingConsoleRepositoryMock;
         protected Mock<IBranchRepository> BranchRepositoryMock;

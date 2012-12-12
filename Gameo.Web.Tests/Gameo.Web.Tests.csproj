@@ -60,7 +60,7 @@
     <Compile Include="GamingConsoleControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="GamingConsoleControllerSpecs\EditGetActionSpec.cs" />
     <Compile Include="GamingConsoleControllerSpecs\EditPostActionSpec.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\GameConsoleControllerSpecBase.cs" />
+    <Compile Include="GamingConsoleControllerSpecs\GamingConsoleControllerSpecBase.cs" />
     <Compile Include="GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

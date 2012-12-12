@@ -7,7 +7,7 @@ using Should;
 namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
     [TestFixture]
-    public class IndexActionSpec : GameConsoleControllerSpecBase
+    public class IndexActionSpec : GamingConsoleControllerSpecBase
     {
         [Test]
         public void Retrieve_all_GamingConsoles_from_GamingConsoles_repository()

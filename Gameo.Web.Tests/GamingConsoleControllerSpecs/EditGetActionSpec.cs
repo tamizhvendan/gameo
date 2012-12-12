@@ -6,7 +6,7 @@ using Should;
 namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
     [TestFixture]
-    public class EditGetActionSpec : GameConsoleControllerSpecBase
+    public class EditGetActionSpec : GamingConsoleControllerSpecBase
     {
         private Guid guid;
 

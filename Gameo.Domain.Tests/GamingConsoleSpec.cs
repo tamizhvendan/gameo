@@ -4,7 +4,7 @@ using Should;
 namespace Gameo.Domain.Tests
 {
     [TestFixture]
-    public class GameConsoleSpec : EntitySpecBase
+    public class GamingConsoleSpec : EntitySpecBase
     {
         private GamingConsole gamingConsole;
 
@@ -15,7 +15,7 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
-        public void GameConsoleStatus_should_be_working_by_default()
+        public void Status_should_be_working_by_default()
         {
             gamingConsole.Status.ShouldEqual(Status.Working);
         }

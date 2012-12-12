@@ -6,7 +6,7 @@ using Should;
 namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
     [TestFixture]
-    public class CreateGetActionSpec : GameConsoleControllerSpecBase
+    public class CreateGetActionSpec : GamingConsoleControllerSpecBase
     {
         [Test]
         public void Returns_create_view_with_GamingConsole_model()

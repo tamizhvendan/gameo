@@ -17,7 +17,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Adds_new_GameConsole()
+        public void Adds_new_GamingConsole()
         {
             var gamingConsole = CreateGamingConsole("foo", "bar");
             
@@ -31,7 +31,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Lists_all_GameConsoles()
+        public void Lists_all_GamingConsoles()
         {
             AddEntityToDatabase(CreateGamingConsole("Console1", "Branch1"));
             AddEntityToDatabase(CreateGamingConsole("Console2", "Branch2"));
@@ -49,7 +49,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Gets_GameConsole_by_guid()
+        public void Gets_GamingConsole_by_guid()
         {
             var gamingConsole = CreateGamingConsole("foo", "bar");
             AddEntityToDatabase(gamingConsole);
@@ -62,7 +62,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Deletes_GameConsole_by_guid()
+        public void Deletes_GamingConsole_by_guid()
         {
             var gamingConsole = CreateGamingConsole("foo", "bar");
             AddEntityToDatabase(gamingConsole);
@@ -73,7 +73,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Updates_GameConsole()
+        public void Updates_GamingConsole()
         {
             var gamingConsole = CreateGamingConsole("foo", "bar");
             AddEntityToDatabase(gamingConsole);
@@ -90,7 +90,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Checks_the_existance_of_gameconsole_name_within_the_branch_with_case_ignored()
+        public void Checks_the_existance_of_GamingConsole_name_within_the_branch_with_case_ignored()
         {
             var gamingConsole1 = CreateGamingConsole("Console1", "Branch1");
             var gamingConsole2 = CreateGamingConsole("Console2", "Branch2");
@@ -104,7 +104,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Checks_the_non_existance_of_gameconsole_name_within_the_branch_with_case_ignored()
+        public void Checks_the_non_existance_of_GamingConsole_name_within_the_branch_with_case_ignored()
         {
             var gamingConsole1 = CreateGamingConsole("Console1", "Branch2");
             var gamingConsole2 = CreateGamingConsole("Console2", "Branch1");

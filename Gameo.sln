@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.DataAccess", "Gameo.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.DataAccess.Tests", "Gameo.DataAccess.Tests\Gameo.DataAccess.Tests.csproj", "{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{718280EC-9E4A-415E-A84B-DE3C9C504AE7}"
+	ProjectSection(SolutionItems) = preProject
+		learnings.txt = learnings.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

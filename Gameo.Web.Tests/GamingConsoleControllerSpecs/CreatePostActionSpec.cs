@@ -5,7 +5,7 @@ using Should;
 
 namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
 {
-    public class CreatePostActionSpec : GameConsoleControllerSpecBase
+    public class CreatePostActionSpec : GamingConsoleControllerSpecBase
     {
         [Test]
         public void Adds_new_GamingConsole_to_the_GamingConsole_repository()

@@ -38,6 +38,7 @@
       <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,7 +50,9 @@
   <ItemGroup>
     <Compile Include="Core\IBranchRepository.cs" />
     <Compile Include="Core\IRepository.cs" />
+    <Compile Include="Core\IUserRepository.cs" />
     <Compile Include="Core\RepositoryBase.cs" />
+    <Compile Include="Core\UserRepository.cs" />
     <Compile Include="GamingConsoleRepository.cs" />
     <Compile Include="Core\IGamingConsoleRepository.cs" />
     <Compile Include="MongoClassMap.cs" />
