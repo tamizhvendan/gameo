@@ -4,7 +4,7 @@ using Gameo.Domain;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
-    public class BranchController : Controller
+    public class BranchController : ApplicationControllerBase
     {
         private readonly IBranchRepository branchRepository;
 

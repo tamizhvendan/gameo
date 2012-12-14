@@ -4,6 +4,6 @@ namespace Gameo.DataAccess.Core
 {
     public interface IUserRepository : IRepository<User>
     {
-        
+        bool IsUserNameExists(string userName, string branchName);
     }
 }

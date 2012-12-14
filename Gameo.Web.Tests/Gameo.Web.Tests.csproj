@@ -41,6 +41,7 @@
       <HintPath>..\packages\Should.1.1.12.0\lib\Should.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -63,6 +64,10 @@
     <Compile Include="GamingConsoleControllerSpecs\GamingConsoleControllerSpecBase.cs" />
     <Compile Include="GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="UserControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="UserControllerSpecs\IndexActionSpec.cs" />
+    <Compile Include="UserControllerSpecs\UserControllerSpecBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -81,9 +86,7 @@
       <Name>Gameo.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControllerSpecs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

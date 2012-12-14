@@ -7,7 +7,7 @@ using Gameo.Domain;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
-    public class GamingConsoleController : Controller
+    public class GamingConsoleController : ApplicationControllerBase
     {
         private readonly IGamingConsoleRepository gamingConsoleRepository;
         private readonly IBranchRepository branchRepository;
@@ -29,19 +29,8 @@ namespace Gameo.Web.Areas.Admin.Controllers
         public ViewResult Create()
         {
             var gameConsole = new GamingConsole();
-            ViewBag.Branches = MapBranchesToSelectListItems();
+            ViewBag.Branches = MapBranchesToSelectListItems(branchRepository);
             return View(gameConsole);
-        }
-
-        private IEnumerable<SelectListItem> MapBranchesToSelectListItems()
-        {
-            return branchRepository
-                    .All
-                    .Select(branch => new SelectListItem
-                    {
-                        Text = branch.Name,
-                        Value = branch.Name
-                    });
         }
 
         [HttpPost]
@@ -57,7 +46,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
                 ModelState.AddModelError("Name", "Console Name already exists in the selected branch");
             }
 
-            ViewBag.Branches = MapBranchesToSelectListItems();
+            ViewBag.Branches = MapBranchesToSelectListItems(branchRepository);
             return View(gamingConsole);
         }
 

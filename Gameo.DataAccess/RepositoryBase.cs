@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Gameo.DataAccess.Core;
 using Gameo.Domain;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 
-namespace Gameo.DataAccess.Core
+namespace Gameo.DataAccess
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : Entity  
     {

@@ -1,0 +1,44 @@
+﻿@model Gameo.Domain.User
+@{
+    ViewBag.Title = "Create New User";
+}
+<div class="container">
+    @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal gameo-form form-gameconsole" }))
+    {
+        <div class="control-group">
+            <h4>
+                Create New User</h4>
+            <label class="control-label" for="@Model.Name">
+                User Name</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.Password">
+                Password</label>
+            <div class="controls">
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.BranchName">
+                Branch Name</label>
+            <div class="controls">
+                @Html.DropDownList("BranchName", ViewBag.Branches as IEnumerable<SelectListItem>)
+                @Html.ValidationMessageFor(model => model.BranchName)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.IsAdmin) Administrator
+                </label>
+                <input type="submit" value="Create" class="btn btn-primary offset1" />
+                @Html.ActionLink("Back", "Index", "User", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>

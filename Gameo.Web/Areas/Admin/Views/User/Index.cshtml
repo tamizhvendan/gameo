@@ -1,0 +1,80 @@
+﻿@using Gameo.Domain
+@model IEnumerable<Gameo.Domain.User>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container table-branch">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <h4>No Users Found!</h4>
+            Only available users will be listed down here. Click @Html.ActionLink("here", "Create", "User") to add a new User.
+        </div>
+    }
+    else
+    { 
+        <h3>Available Users</h3>
+        <p class="offset5">
+            @Html.ActionLink("Create New User", "Create", "User", null, new { @class = "btn btn-primary" })
+        </p>
+        <table class="table table-striped span7">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Branch Name
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    User Status
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@(i + 1)
+                    </td>
+                    <td>@Model.ElementAt(i).Name
+                    </td>
+                    <td>
+                        @Model.ElementAt(i).BranchName
+                    </td>
+                    <td >
+                        @if (Model.ElementAt(i).IsAdmin)
+                        {
+                            <span>Admin</span>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
+                    <td >
+                        @if (Model.ElementAt(i).IsActive)
+                        {
+                            <span class="icon-ok"></span>
+                        }
+                        else
+                        {
+                            <span class="icon-remove"></span>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit Status", "Edit", "GamingConsole", new { id = @Model.ElementAt(i).Id }, new { @class = "btn btn-link" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+

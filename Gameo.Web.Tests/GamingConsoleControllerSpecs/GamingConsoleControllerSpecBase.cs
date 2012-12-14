@@ -13,13 +13,11 @@ namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
     public abstract class GamingConsoleControllerSpecBase : ControllerSpecBase
     {
         protected Mock<IGamingConsoleRepository> GamingConsoleRepositoryMock;
-        protected Mock<IBranchRepository> BranchRepositoryMock;
         protected GamingConsoleController GamingConsoleController;
 
         [SetUp]
         public void BranchControllerSpecSetUp()
         {
-            BranchRepositoryMock = new Mock<IBranchRepository>();
             GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
             GamingConsoleController = new GamingConsoleController(GamingConsoleRepositoryMock.Object, BranchRepositoryMock.Object);    
         }

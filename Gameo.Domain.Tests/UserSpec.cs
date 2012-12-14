@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Should;
 
 namespace Gameo.Domain.Tests
 {
@@ -26,9 +27,17 @@ namespace Gameo.Domain.Tests
         [TestCase(null)]
         public void BranchName_should_not_be_empty_if_the_user_is_not_an_adminstrator(string branchName)
         {
-            var user = new User {Name = "foo", IsAdministrator = false, Password = "bar", BranchName = branchName};
+            var user = new User {Name = "foo", IsAdmin = false, Password = "bar", BranchName = branchName};
 
             Validate(user, "Branch Name field is required for a non-admin user");
+        }
+
+        [Test]
+        public void IsActive_should_be_true_by_default()
+        {
+            var user = new User();
+
+            user.IsActive.ShouldBeTrue();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Gameo.DataAccess.Core;
-using Gameo.Domain;
+﻿using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
@@ -19,7 +18,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Adds_new_User()
         {
-            var user = new User {Name = "foo", Password = "bar"};
+            var user = CreateUser("foo", "bar");
 
             userRepository.Add(user);
 
@@ -33,8 +32,8 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Checks_the_existance_of_user_name_within_the_branch_with_case_ignored()
         {
-            var user1 = new User { Name = "user1", BranchName = "branch1" }; 
-            var user2 = new User { Name = "user2", BranchName = "branch2" };
+            var user1 = CreateUser("user1", "", "branch1");
+            var user2 = CreateUser("user2", "", "branch2");
 
             AddEntityToDatabase(user1, user2);
 
@@ -43,6 +42,11 @@ namespace Gameo.DataAccess.Tests
 
             isUser1Exists.ShouldBeTrue();
             isUser2Exists.ShouldBeTrue();
+        }
+
+        private User CreateUser(string userName, string password, string branchName = "")
+        {
+            return new User {Name = userName, Password = password, BranchName = branchName};
         }
     }
 }

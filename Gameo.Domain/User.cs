@@ -10,11 +10,18 @@ namespace Gameo.Domain
         [Required]
         public string Password { get; set; }
         public string BranchName { get; set; }
-        public bool IsAdministrator { get; set; }
+        public bool IsAdmin { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public User()
+        {
+            IsActive = true;
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!IsAdministrator && string.IsNullOrEmpty(BranchName))
+            if (!IsAdmin && string.IsNullOrEmpty(BranchName))
             {
                 yield return new ValidationResult("Branch Name field is required for a non-admin user");
             }
