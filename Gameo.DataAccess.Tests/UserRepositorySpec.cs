@@ -48,5 +48,28 @@ namespace Gameo.DataAccess.Tests
         {
             return new User {Name = userName, Password = password, BranchName = branchName};
         }
+
+        [Test]
+        public void Deactivates_the_user_account()
+        {
+            var userToDeActivate = CreateUser("user1", "password1", "branch1");
+            AddEntityToDatabase(userToDeActivate);
+
+            userRepository.DeActivateUser(userToDeActivate.Id);
+
+            AssertUpdatedEntity(userToDeActivate.Id, user => user.IsActive.ShouldBeFalse());
+        }
+
+        [Test]
+        public void Activates_the_user_account()
+        {
+            var userToActivate = CreateUser("user1", "password1", "branch1");
+            userToActivate.IsActive = false;
+            AddEntityToDatabase(userToActivate);
+
+            userRepository.ActivateUser(userToActivate.Id);
+
+            AssertUpdatedEntity(userToActivate.Id, user => user.IsActive.ShouldBeTrue());
+        }
     }
 }

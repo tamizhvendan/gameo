@@ -63,10 +63,12 @@
                         @if (Model.ElementAt(i).IsActive)
                         {
                             <span class="icon-ok"></span>
+                            @Html.ActionLink("Deactivate", "DeActivate", "User", new { id = Model.ElementAt(i).Id }, new { @class = "link" })
                         }
                         else
                         {
                             <span class="icon-remove"></span>
+                            @Html.ActionLink("Activate", "Activate", "User", new { id = Model.ElementAt(i).Id }, new { @class = "link" })
                         }
                     </td>
                     <td>

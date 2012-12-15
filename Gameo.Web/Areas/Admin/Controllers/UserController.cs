@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
 
@@ -41,6 +42,20 @@ namespace Gameo.Web.Areas.Admin.Controllers
         {
             var users = userRepository.All;
             return View(users);
+        }
+
+        public RedirectToRouteResult DeActivate(Guid id)
+        {
+            userRepository.DeActivateUser(id);
+
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToRouteResult Activate(Guid id)
+        {
+            userRepository.ActivateUser(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

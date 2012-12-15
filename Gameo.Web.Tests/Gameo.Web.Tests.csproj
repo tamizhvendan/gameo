@@ -64,8 +64,10 @@
     <Compile Include="GamingConsoleControllerSpecs\GamingConsoleControllerSpecBase.cs" />
     <Compile Include="GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControllerSpecs\ActivateActionSpec.cs" />
     <Compile Include="UserControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="UserControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="UserControllerSpecs\DeActivateActionSpec.cs" />
     <Compile Include="UserControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="UserControllerSpecs\UserControllerSpecBase.cs" />
   </ItemGroup>
