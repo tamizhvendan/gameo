@@ -6,5 +6,6 @@ namespace Gameo.Services
     {
         User Authenticate(string userName, string password, string branchName);
         void SetAuthCookie(string userName);
+        void LogOff();
     }
 }

@@ -31,5 +31,10 @@ namespace Gameo.Services
         {
             FormsAuthentication.SetAuthCookie(userName, false);
         }
+
+        public void LogOff()
+        {
+            FormsAuthentication.SignOut();
+        }
     }
 }

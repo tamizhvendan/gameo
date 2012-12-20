@@ -22,9 +22,29 @@ namespace Gameo.Web.Tests
 
         protected void AssertReadirectToIndexAction(ActionResult actionResult)
         {
-            var redirectToRouteResult = actionResult as RedirectToRouteResult;
-            redirectToRouteResult.RouteValues["Action"].ShouldEqual("Index");
+            AssertReadirectToAction(actionResult, "Index");
         }
+
+        protected void AssertReadirectToAction(ActionResult actionResult, string actionName, string controllerName, string areaName)
+        {
+            var redirectToRouteResult = actionResult as RedirectToRouteResult;
+            AssertReadirectToAction(actionResult, actionName, controllerName);
+            redirectToRouteResult.RouteValues["Area"].ShouldEqual(areaName);
+        }
+
+        protected void AssertReadirectToAction(ActionResult actionResult, string actionName, string controllerName)
+        {
+            var redirectToRouteResult = actionResult as RedirectToRouteResult;
+            AssertReadirectToAction(actionResult, actionName);
+            redirectToRouteResult.RouteValues["Controller"].ShouldEqual(controllerName);
+        }
+
+        protected void AssertReadirectToAction(ActionResult actionResult, string actionName)
+        {
+            var redirectToRouteResult = actionResult as RedirectToRouteResult;
+            redirectToRouteResult.RouteValues["Action"].ShouldEqual(actionName);
+        }
+
 
         protected void AssertModelError(Controller controller, string propertyName, string errorMessage)
         {
@@ -48,6 +68,5 @@ namespace Gameo.Web.Tests
             actualBranches.Any(item => item.Text == "foo" && item.Value == "foo").ShouldBeTrue();
             actualBranches.Any(item => item.Text == "bar" && item.Value == "bar").ShouldBeTrue();
         }
-
     }
 }

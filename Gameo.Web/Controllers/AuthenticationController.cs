@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Services;
+using Gameo.Web.Models;
 using Gameo.Web.ViewModels;
 
 namespace Gameo.Web.Controllers
@@ -28,7 +29,15 @@ namespace Gameo.Web.Controllers
         {
             try
             {
-                authenticationService.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName);
+                var loggedUser = authenticationService.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName);
+                authenticationService.SetAuthCookie(loginViewModel.UserName);
+                HttpContext.User = new CustomUserPrinciple(new CustomUserIdentity(loggedUser));
+                if (loggedUser.IsAdmin)
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });    
+                }
+
+                return RedirectToAction("Index", "Game");
             }
             catch (Exception exception)
             {
@@ -36,7 +45,13 @@ namespace Gameo.Web.Controllers
                 ModelState.AddModelError("UserName", exception.Message);
                 return View(loginViewModel);
             }
-            return null;
+        }
+
+        public RedirectToRouteResult LogOff()
+        {
+            authenticationService.LogOff();
+
+            return RedirectToAction("Login");
         }
     }
 }

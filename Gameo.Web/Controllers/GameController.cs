@@ -2,7 +2,7 @@
 
 namespace Gameo.Web.Controllers
 {
-    public class HomeController : Controller
+    public class GameController : Controller
     {
         //
         // GET: /Home/

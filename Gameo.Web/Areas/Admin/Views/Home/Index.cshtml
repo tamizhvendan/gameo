@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+<ul style="margin: 50px">
+    <li class="active">@Html.ActionLink("Branch", "Index", "Branch", new { Area = "Admin" }, new { })</li>
+    <li class="active">@Html.ActionLink("Game Console", "Index", "GamingConsole", new { Area = "Admin" }, new { })</li>
+    <li class="active">@Html.ActionLink("User", "Index", "User", new { Area = "Admin" }, new { })</li>
+</ul>
