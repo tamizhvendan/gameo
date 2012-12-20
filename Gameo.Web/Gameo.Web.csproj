@@ -83,7 +83,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ApplicationControllerBase.cs" />
+    <Compile Include="Controllers\ApplicationControllerBase.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingConsoleController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
@@ -141,6 +141,10 @@
     <ProjectReference Include="..\Gameo.Domain\Gameo.Domain.csproj">
       <Project>{6C1430F5-F4B4-49E1-9699-17A389669124}</Project>
       <Name>Gameo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gameo.Services\Gameo.Services.csproj">
+      <Project>{2E2BF26D-592B-4523-8365-791DD7E8E9F1}</Project>
+      <Name>Gameo.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

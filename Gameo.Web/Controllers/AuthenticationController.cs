@@ -1,31 +1,42 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Gameo.DataAccess.Core;
+using Gameo.Services;
 using Gameo.Web.ViewModels;
 
 namespace Gameo.Web.Controllers
 {
-    public class AuthenticationController : Controller
+    public class AuthenticationController : ApplicationControllerBase
     {
+        private readonly IBranchRepository branchRepository;
+        private readonly IAuthenticationService authenticationService;
+
+        public AuthenticationController(IBranchRepository branchRepository, IAuthenticationService authenticationService)
+        {
+            this.branchRepository = branchRepository;
+            this.authenticationService = authenticationService;
+        }
 
         public ViewResult Login()
         {
-            var loginViewModel = new LoginViewModel
-                                     {
-                                        UserName = "", Password = "", 
-                                        BranchSelectListItems = new[]
-                                        {
-                                            new SelectListItem{ Selected = true, Text = "Select a branch", Value = "0" },
-                                            new SelectListItem {Selected = true, Text = "T.Nagar", Value = "1"}, 
-                                            new SelectListItem {Text = "Virugambakam", Value = "2"}
-                                        }
-                                     };
-            return View(loginViewModel);
+            ViewBag.Branches = MapBranchesToSelectListItems(branchRepository);
+            return View(new LoginViewModel());
         }
 
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-
-            return View(loginViewModel);
+            try
+            {
+                authenticationService.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName);
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Branches = MapBranchesToSelectListItems(branchRepository);
+                ModelState.AddModelError("UserName", exception.Message);
+                return View(loginViewModel);
+            }
+            return null;
         }
     }
 }

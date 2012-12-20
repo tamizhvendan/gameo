@@ -1,4 +1,5 @@
-﻿using Gameo.Domain;
+﻿using System;
+using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
@@ -70,6 +71,29 @@ namespace Gameo.DataAccess.Tests
             userRepository.ActivateUser(userToActivate.Id);
 
             AssertUpdatedEntity(userToActivate.Id, user => user.IsActive.ShouldBeTrue());
+        }
+
+        [Test]
+        public void Retrieves_user_by_username_with_case_ignored()
+        {
+            var user = CreateUser("user1", "password1");
+            AddEntityToDatabase(user);
+
+            var retrievedUser = userRepository.GetByUserName("uSEr1");
+
+            retrievedUser.Password.ShouldEqual(user.Password);
+            retrievedUser.Name.ShouldEqual(user.Name);
+            retrievedUser.Id.ShouldEqual(user.Id);
+        }
+
+        [Test]
+        public void Throws_Exception_if_username_not_exists_when_retriving_by_name()
+        {
+            var user = CreateUser("user1", "password1");
+            AddEntityToDatabase(user);
+
+            var argumentException = Assert.Throws<ArgumentException>(() => userRepository.GetByUserName("user2"));
+            argumentException.Message.ShouldEqual("Username not exists");
         }
     }
 }

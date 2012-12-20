@@ -1,5 +1,6 @@
 using Gameo.DataAccess;
 using Gameo.DataAccess.Core;
+using Gameo.Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Gameo.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Gameo.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -59,6 +60,7 @@ namespace Gameo.Web.App_Start
             kernel.Bind<IBranchRepository>().To<BranchRepository>();
             kernel.Bind<IGamingConsoleRepository>().To<GamingConsoleRepository>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
         }        
     }
 }

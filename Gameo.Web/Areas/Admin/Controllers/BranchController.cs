@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
+using Gameo.Web.Controllers;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {

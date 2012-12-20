@@ -32,5 +32,17 @@ namespace Gameo.DataAccess
             user.IsActive = isActive;
             Update(user);
         }
+
+        public User GetByUserName(string userName)
+        {
+            var retrievedUser = EntityCollection.AsQueryable().FirstOrDefault(user => user.Name.ToLowerInvariant() == userName.ToLowerInvariant());
+
+            if (retrievedUser == null)
+            {
+                throw new ArgumentException("Username not exists");
+            }
+
+            return retrievedUser;
+        }
     }
 }

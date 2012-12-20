@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
-using Gameo.Domain;
 
-namespace Gameo.Web.Areas.Admin.Controllers
+namespace Gameo.Web.Controllers
 {
     public class ApplicationControllerBase : Controller
     {

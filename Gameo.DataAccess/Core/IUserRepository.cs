@@ -8,5 +8,6 @@ namespace Gameo.DataAccess.Core
         bool IsUserNameExists(string userName, string branchName);
         void DeActivateUser(Guid id);
         void ActivateUser(Guid id);
+        User GetByUserName(string userName);
     }
 }
