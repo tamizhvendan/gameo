@@ -116,5 +116,23 @@ namespace Gameo.DataAccess.Tests
             isGamingConsole1Exists.ShouldBeFalse();
             isGamingConsole2Exists.ShouldBeFalse();
         }
+
+        [Test]
+        public void Retrieves_all_GamingConsoles_by_BranchName_with_case_ignored()
+        {
+            var gamingConsole1 = CreateGamingConsole("Console1", "Branch1");
+            var gamingConsole2 = CreateGamingConsole("Console2", "Branch1");
+            var gamingConsole3 = CreateGamingConsole("Console3", "Branch2");
+            AddEntityToDatabase(gamingConsole1, gamingConsole2, gamingConsole3);
+
+
+            var gamingConsolesInBranch1 = gamingConsoleRepository.GetGamingConsolesByBranchName("BrancH1").ToList();
+            var gamingConsolesInBranch2 = gamingConsoleRepository.GetGamingConsolesByBranchName("BRANCH2").ToList();
+
+            gamingConsolesInBranch1.ForEach(gamingConsole => gamingConsole.BranchName.ShouldEqual("Branch1"));
+            gamingConsolesInBranch2.ForEach(gamingConsole => gamingConsole.BranchName.ShouldEqual("Branch2"));
+            gamingConsolesInBranch1.Count.ShouldEqual(2);
+            gamingConsolesInBranch2.Count.ShouldEqual(1);
+        }
     }
 }
