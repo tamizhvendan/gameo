@@ -19,14 +19,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                                                                                                 class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </a><a class="brand" href="#">Gameo</a>
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                @{
+                    var homeUrl = User.IsInRole("admin")
+                                      ? Url.Action("Index", "Home", new {Area = "Admin"})
+                                      : Url.Action("Index", "Game");
+                }
+                </a><a class="brand" href="@homeUrl">Gameo</a>
                 <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="active">@Html.ActionLink("Branch", "Index", "Branch",new { Area = "Admin" }, new {})</li>
-                        <li class="active">@Html.ActionLink("Game Console", "Index", "GamingConsole",new { Area = "Admin" }, new {})</li>
-                        <li class="active">@Html.ActionLink("User", "Index", "User",new { Area = "Admin" }, new {})</li>
+                    <ul class="nav pull-right">
                         @Html.Partial("_LogonPartialView")
                     </ul>
                 </div>

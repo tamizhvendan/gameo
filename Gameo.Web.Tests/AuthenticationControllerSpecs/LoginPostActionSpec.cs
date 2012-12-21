@@ -11,11 +11,16 @@ namespace Gameo.Web.Tests.AuthenticationControllerSpecs
     public class LoginPostActionSpec : AuthenticationControllerSpecBase
     {
         private LoginViewModel loginViewModel;
+        private User user;
 
         [SetUp]
         public void SetUp()
         {
             loginViewModel = new LoginViewModel { BranchName = "", Password = "", UserName = ""};
+            user = new User();
+            AuthenticationServiceMock
+                .Setup(service => service.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName))
+                .Returns(user);
         }
 
         [Test]
@@ -36,6 +41,20 @@ namespace Gameo.Web.Tests.AuthenticationControllerSpecs
         }
 
         [Test]
+        public void If_user_is_not_active_render_login_view_with_model_error()
+        {
+            SetupBranchRepositoryToReturnSomeRandomBranches();
+            user.IsActive = false;
+
+            var viewResult = AuthenticationController.Login(loginViewModel) as ViewResult;
+
+            viewResult.ViewName.ShouldEqual(string.Empty);
+            viewResult.Model.ShouldEqual(loginViewModel);
+            AssertModelError(AuthenticationController, "UserName", "Username is deactivated");
+            AssertRandomBranchesPresentInViewBag(viewResult);
+        }
+
+        [Test]
         public void SetAuthCookie_upon_successful_authentication()
         {
             AuthenticationServiceMock.Setup(service => service.SetAuthCookie(loginViewModel.UserName)).Verifiable();
@@ -48,9 +67,7 @@ namespace Gameo.Web.Tests.AuthenticationControllerSpecs
         [Test]
         public void Redirect_to_Admin_Dashboard_if_logged_user_is_admin()
         {
-            AuthenticationServiceMock
-                .Setup(service => service.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName))
-                .Returns(new User{ IsAdmin = true });
+            user.IsAdmin = true;
 
             var actionResult = AuthenticationController.Login(loginViewModel) as RedirectToRouteResult;
             
@@ -58,12 +75,16 @@ namespace Gameo.Web.Tests.AuthenticationControllerSpecs
         }
 
         [Test]
+        public void Put_user_instance_in_session_after_successful_login()
+        {
+            AuthenticationController.Login(loginViewModel);
+
+            AuthenticationController.HttpContext.Session["logged_user"].ShouldEqual(user);
+        }
+
+        [Test]
         public void Redirect_to_Game_Dashboard_if_logged_user_is_non_admin()
         {
-            AuthenticationServiceMock
-                .Setup(service => service.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName))
-                .Returns(new User());
-
             var actionResult = AuthenticationController.Login(loginViewModel) as RedirectToRouteResult;
 
             AssertReadirectToAction(actionResult, "Index", "Game");

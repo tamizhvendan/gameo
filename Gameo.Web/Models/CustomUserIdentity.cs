@@ -31,5 +31,10 @@ namespace Gameo.Web.Models
         {
             get { return user.IsAdmin; }
         }
+
+        public string BranchName
+        {
+            get { return user.BranchName; }
+        }
     }
 }

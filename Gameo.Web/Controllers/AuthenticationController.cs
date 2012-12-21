@@ -41,6 +41,10 @@ namespace Gameo.Web.Controllers
             try
             {
                 var loggedUser = authenticationService.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName);
+                if (!loggedUser.IsActive)
+                {
+                    return HandleUserLoginError(loginViewModel, "Username is deactivated");
+                }
                 authenticationService.SetAuthCookie(loginViewModel.UserName);
                 Session["logged_user"] = loggedUser;
                 if (loggedUser.IsAdmin)
@@ -50,12 +54,17 @@ namespace Gameo.Web.Controllers
 
                 return RedirectToAction("Index", "Game");
             }
-            catch (Exception exception)
+            catch (ArgumentException exception)
             {
-                PutBranchesInViewBag();
-                ModelState.AddModelError("UserName", exception.Message);
-                return View(loginViewModel);
+                return HandleUserLoginError(loginViewModel, exception.Message);
             }
+        }
+
+        private ActionResult HandleUserLoginError(LoginViewModel loginViewModel, string modelErrorMessage)
+        {
+            PutBranchesInViewBag();
+            ModelState.AddModelError("UserName", modelErrorMessage);
+            return View(loginViewModel);
         }
 
         public RedirectToRouteResult LogOff()
