@@ -27,12 +27,10 @@
                         <li class="active">@Html.ActionLink("Branch", "Index", "Branch",new { Area = "Admin" }, new {})</li>
                         <li class="active">@Html.ActionLink("Game Console", "Index", "GamingConsole",new { Area = "Admin" }, new {})</li>
                         <li class="active">@Html.ActionLink("User", "Index", "User",new { Area = "Admin" }, new {})</li>
+                        @Html.Partial("_LogonPartialView")
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
-            </div>
-            <div id="logindisplay">
-                @Html.Partial("_LogonPartialView")
             </div>
         </div>
     </div>

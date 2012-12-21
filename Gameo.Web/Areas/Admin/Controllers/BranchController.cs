@@ -5,6 +5,7 @@ using Gameo.Web.Controllers;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class BranchController : ApplicationControllerBase
     {
         private readonly IBranchRepository branchRepository;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
@@ -8,6 +7,7 @@ using Gameo.Web.Controllers;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class GamingConsoleController : ApplicationControllerBase
     {
         private readonly IGamingConsoleRepository gamingConsoleRepository;

@@ -6,6 +6,7 @@ using Gameo.Web.Controllers;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UserController : ApplicationControllerBase
     {
         private readonly IUserRepository userRepository;

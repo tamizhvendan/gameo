@@ -1,8 +1,10 @@
 ﻿using System.Web.Mvc;
+using Gameo.Web.Controllers;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    [Authorize(Roles = "admin")]
+    public class HomeController : ApplicationControllerBase
     {
         public ViewResult Index()
         {

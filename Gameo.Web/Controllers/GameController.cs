@@ -2,11 +2,9 @@
 
 namespace Gameo.Web.Controllers
 {
-    public class GameController : Controller
+    [Authorize(Roles = "user")]
+    public class GameController : ApplicationControllerBase
     {
-        //
-        // GET: /Home/
-
         public ActionResult Index()
         {
             return View();
