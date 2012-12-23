@@ -13,7 +13,7 @@ namespace Gameo.Domain.Tests
         {
             game = new Game
                        {
-                           ConsoleName = "Console1", CustomerName = "Customer1",  InTime = DateTime.Now, OutTime = DateTime.Now.AddHours(1)
+                           ConsoleName = "Console1", CustomerName = "Customer1",  InTime = DateTime.Now, OutTime = DateTime.Now.AddHours(1), Price = 10
                        };
         }
 
@@ -53,27 +53,43 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
-        [TestCase(29)]
-        [TestCase(31)]
-        [TestCase(59)]
-        [TestCase(61)]
-        public void Difference_between_In_time_and_Out_time_should_be_in_multiples_of_30_minutes(int noOfMinutesToAdd)
+        [TestCase(29, false)]
+        [TestCase(30, true)]
+        [TestCase(31, false)]
+        [TestCase(59, false)]
+        [TestCase(60, true)]
+        [TestCase(61, false)]
+        public void Difference_between_In_time_and_Out_time_should_be_in_multiples_of_30_minutes(int noOfMinutesToAdd, bool isHappyPath)
         {
             game.InTime = DateTime.Now;
             game.OutTime = DateTime.Now.AddMinutes(noOfMinutesToAdd);
 
-            AssertEntityValidationError(game, "Difference between In Time and Out Time should be in multiples of half-hour.");
+            if (isHappyPath)
+            {
+                AssertZeroValidationError(game);
+            }
+            else
+            {
+                AssertEntityValidationError(game, "Difference between In Time and Out Time should be in multiples of half-hour.");    
+            }
         }
 
         [Test]
-        [TestCase(0)]
-        [TestCase(-4)]
-        [TestCase(-1)]
-        public void Price_should_be_greater_than_zero(decimal price)
+        [TestCase(0, false)]
+        [TestCase(10, true)]
+        [TestCase(-4, false)]
+        [TestCase(-1, false)]
+        public void Price_should_be_greater_than_zero(decimal price, bool isHappyPath = false)
         {
             game.Price = price;
-
-            AssertEntityValidationError(game, "Price should be greater than zero.");
+            if (isHappyPath)
+            {
+                AssertZeroValidationError(game);
+            }
+            else
+            {
+                AssertEntityValidationError(game, "Price should be greater than zero.");
+            }
         }
     }
 }

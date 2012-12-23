@@ -67,6 +67,8 @@
     <Compile Include="BranchControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="BranchControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="ControllerSpecBase.cs" />
+    <Compile Include="GameControllerSpecs\AssignConsoleGetActionSpec.cs" />
+    <Compile Include="GameControllerSpecs\GameControllerSpecBase.cs" />
     <Compile Include="GamingConsoleControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="GamingConsoleControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="GamingConsoleControllerSpecs\EditGetActionSpec.cs" />
