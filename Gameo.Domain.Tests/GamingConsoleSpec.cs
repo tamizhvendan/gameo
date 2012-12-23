@@ -23,14 +23,14 @@ namespace Gameo.Domain.Tests
         [Test]
         public void Name_should_not_be_empty()
         {
-           Validate(gamingConsole, "The Name field is required.");
+           AssertEntityValidationError(gamingConsole, "The Name field is required.");
         }
 
         [Test]
         public void BranchName_should_not_be_empty()
         {
             gamingConsole.Name = "foo";
-            Validate(gamingConsole, "The BranchName field is required.");
+            AssertEntityValidationError(gamingConsole, "The BranchName field is required.");
         }
     }
 }

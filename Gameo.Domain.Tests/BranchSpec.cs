@@ -17,7 +17,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void Branch_name_should_not_be_empty()
         {
-            Validate(branch, "The Name field is required.");
+            AssertEntityValidationError(branch, "The Name field is required.");
         }
 
         [Test]

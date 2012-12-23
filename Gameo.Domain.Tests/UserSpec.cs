@@ -11,7 +11,7 @@ namespace Gameo.Domain.Tests
         {
             var user = new User {Password = "foo"};
 
-            Validate(user, "The Name field is required.");
+            AssertEntityValidationError(user, "The Name field is required.");
         }
 
         [Test]
@@ -19,7 +19,7 @@ namespace Gameo.Domain.Tests
         {
             var user = new User {Name = "foo"};
 
-            Validate(user, "The Password field is required.");
+            AssertEntityValidationError(user, "The Password field is required.");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace Gameo.Domain.Tests
         {
             var user = new User {Name = "foo", IsAdmin = false, Password = "bar", BranchName = branchName};
 
-            Validate(user, "Branch Name field is required for a non-admin user");
+            AssertEntityValidationError(user, "Branch Name field is required for a non-admin user");
         }
 
         [Test]

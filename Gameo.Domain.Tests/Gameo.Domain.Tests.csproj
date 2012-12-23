@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BranchSpec.cs" />
     <Compile Include="EntitySpecBase.cs" />
+    <Compile Include="GameSpec.cs" />
     <Compile Include="GamingConsoleSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserSpec.cs" />
