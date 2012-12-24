@@ -7,13 +7,17 @@
     @foreach (var gameStatus in Model)
     {
         <h3>@gameStatus.GamingConsoleName &nbsp;&nbsp;
-            @{ var consoleAvailability = gameStatus.Players.Any() ? "In Use" : "Available"; }
+            @{
+                var isConsoleInUse = gameStatus.Players.Any();
+                var consoleAvailability = isConsoleInUse ? "In Use" : "Available";
+                var consoleStatusLabel = isConsoleInUse ? "label-info" : "label-success";
+            }
             <span
-                class="label label-info">
+                class="label @consoleStatusLabel">
                 @consoleAvailability
             </span>
         </h3>
-        if (gameStatus.Players.Any())
+        if (isConsoleInUse)
         {
             <table class="table table-striped">
                 <tr>
@@ -27,14 +31,14 @@
                         Out Time
                     </th>
                 </tr> 
-                @foreach (var player in gameStatus.Players)
+                @foreach (var player in gameStatus.Players.OrderBy(player => player.OutTime))
                 {
                     <tr>
                         <td>@player.CustomerName
                         </td>
-                        <td> @player.InTime.ToShortDateString() - @player.InTime.ToShortTimeString()
+                        <td> @player.InTime.ToLongDateString() - @player.InTime.ToShortTimeString()
                         </td>
-                        <td> @player.OutTime.ToShortDateString() - @player.OutTime.ToShortTimeString()
+                        <td> @player.OutTime.ToLongDateString() - @player.OutTime.ToShortTimeString()
                         </td>
                     </tr>
                 }

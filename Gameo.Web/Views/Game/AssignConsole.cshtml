@@ -1,4 +1,5 @@
-﻿@model List<Gameo.Domain.Game>
+﻿@using Gameo.Domain
+@model List<Gameo.Domain.Game>
 @{
     ViewBag.Title = "AssignConsole";
 }
@@ -21,7 +22,7 @@
                     Customer Name
                 </th>
                 <th>
-                    Contact Number
+                    Mobile #
                 </th>
                 <th>
                     In Time
@@ -46,7 +47,7 @@
                         @Html.TextBoxFor(model => model[i].CustomerName, new { @class = "input-medium" })
                     </td>
                     <td>
-                        @Html.TextBoxFor(model => model[i].CustomerContactNumber, new { @class = "input-medium" })
+                        @Html.TextBoxFor(model => model[i].CustomerContactNumber, new { @class = "input-small" })
                     </td>
                     <td>
                         @Html.TextBoxFor(model => model[i].InTime, new { @class = "input-medium time-picker" })
@@ -64,7 +65,9 @@
                         </div>
                     </td>
                     <td>
-                        @Html.CheckBoxFor(model => model[i].IsPackage)
+                        <select id="@string.Format("[{0}].PackageType", i)" name="@string.Format("[{0}].PackageType", i)">
+                            @RenderGameConsoleStatus(Model[i].PackageType)
+                        </select>
                     </td>
                 </tr>
             }
@@ -78,3 +81,12 @@
         </div>
     }
 </div>
+
+@helper RenderGameConsoleStatus(PackageType packageType) {
+    foreach (var packageTypeString in Enum.GetNames(typeof(PackageType)))
+    {
+        var packageTypeValue = (PackageType)Enum.Parse(typeof(PackageType), packageTypeString);
+        var selectedAttribute = packageTypeValue ==  packageType ? "selected=selected" : "";
+        <option value="@packageTypeValue" @selectedAttribute>@packageTypeString.Replace("_", " ")</option>
+    }
+}

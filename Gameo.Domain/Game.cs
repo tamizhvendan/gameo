@@ -14,7 +14,7 @@ namespace Gameo.Domain
         public decimal Price { get; set; }
         public string ConsoleName { get; set; }
         public GamePaymentType GamePaymentType { get; set; }
-        public bool IsPackage { get; set; }
+        public PackageType PackageType { get; set; }
 
         public Game()
         {
