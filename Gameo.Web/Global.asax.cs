@@ -32,6 +32,7 @@ namespace Gameo.Web
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            MongoDbMapping.Initialize();
             ModelBinders.Binders.Add(typeof(CustomUserIdentity), new CustomUserIdentityModelBinder());
         }
     }

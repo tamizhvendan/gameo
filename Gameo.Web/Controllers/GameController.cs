@@ -43,7 +43,7 @@ namespace Gameo.Web.Controllers
                 return RedirectToAction("Index");
             }
             RetrieveGamingConsolesAndPutItInViewBag(userIdentity.BranchName);
-            return View(games);
+            return View("AssignConsole", games);
         }
 
         [HttpPost]

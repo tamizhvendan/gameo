@@ -5,7 +5,6 @@
 <div class="container">
     @using (Html.BeginForm("Action", "Game", FormMethod.Post, new { @class = "form-horizontal" }))
     {
-        @Html.ValidationSummary(false)
         <div class="control-group pull-right">
             @if (Model.Count < 6)
             {
@@ -70,6 +69,7 @@
                 </tr>
             }
         </table>
+        @Html.ValidationSummary(false)
         <div class="form-actions pull-right">
             <button type="submit" class="btn btn-primary" name="assignConsole">
                 Assign Consoles</button>

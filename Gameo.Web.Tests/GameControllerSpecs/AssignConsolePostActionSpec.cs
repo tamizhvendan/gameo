@@ -25,7 +25,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
 
             var viewResult = GameController.AssignConsole(games, CustomUserIdentity) as ViewResult;
 
-            viewResult.ViewName.ShouldEqual(string.Empty);
+            viewResult.ViewName.ShouldEqual("AssignConsole");
             viewResult.Model.ShouldEqual(games);
         }
 
