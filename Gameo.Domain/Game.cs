@@ -9,13 +9,21 @@ namespace Gameo.Domain
         [Required(ErrorMessage = "Customer Name is required.")]
         public string CustomerName { get; set; }
         public string CustomerContactNumber { get; set; }
+        [DataType(DataType.Date)]
         public DateTime InTime { get; set; }
+        [DataType(DataType.Date)]
         public DateTime OutTime { get; set; }
         public decimal Price { get; set; }
         public string ConsoleName { get; set; }
         public GamePaymentType GamePaymentType { get; set; }
         public bool IsPackage { get; set; }
-        
+
+        public Game()
+        {
+            InTime = DateTime.Now;
+            OutTime = InTime.AddHours(1);
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (InTime == DateTime.MinValue)

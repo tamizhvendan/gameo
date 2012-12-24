@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Gameo.Domain;
@@ -10,13 +11,13 @@ using Should;
 
 namespace Gameo.DataAccess.Tests
 {
-    public abstract class RepositoryTestBase<T> where T : Entity
+    public abstract class RepositorySpecBase<T> where T : Entity
     {
         private readonly MongoDatabase gameoTestDatabase;
 
         private MongoCollection<T> collection;
 
-        protected RepositoryTestBase()
+        protected RepositorySpecBase()
         {
             var mongoClient = new MongoClient();
             var mongoServer = mongoClient.GetServer();
@@ -35,6 +36,11 @@ namespace Gameo.DataAccess.Tests
             collection.Count().ShouldEqual(1);
             actualEntitySaved.Id.ShouldNotEqual(Guid.Empty);
             assertEntityDelegate(actualEntitySaved);
+        }
+
+        protected void AssertNewlyAddedManyEntities(Action<IEnumerable<T>> assertEntitiesDelegate)
+        {
+            assertEntitiesDelegate(collection.FindAll());
         }
 
         protected void AssertDeletedEntity()

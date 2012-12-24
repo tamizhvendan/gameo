@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Should;
 
 namespace Gameo.Domain.Tests
 {
@@ -13,7 +14,7 @@ namespace Gameo.Domain.Tests
         {
             game = new Game
                        {
-                           ConsoleName = "Console1", CustomerName = "Customer1",  InTime = DateTime.Now, OutTime = DateTime.Now.AddHours(1), Price = 10
+                           ConsoleName = "Console1", CustomerName = "Customer1", Price = 10
                        };
         }
 
@@ -90,6 +91,29 @@ namespace Gameo.Domain.Tests
             {
                 AssertEntityValidationError(game, "Price should be greater than zero.");
             }
+        }
+
+        [Test]
+        public void By_default_InTime_should_be_current_time()
+        {
+            var currentTime = DateTime.Now;
+
+            AssertDateTimeEquality(game.InTime, currentTime);
+        }
+
+        private void AssertDateTimeEquality(DateTime actualTime, DateTime expectedTime)
+        {
+            actualTime.Minute.ShouldEqual(expectedTime.Minute);
+            actualTime.Hour.ShouldEqual(expectedTime.Hour);
+            actualTime.Day.ShouldEqual(expectedTime.Day);
+            actualTime.Month.ShouldEqual(expectedTime.Month);
+            actualTime.Year.ShouldEqual(expectedTime.Year);
+        }
+
+        [Test]
+        public void By_default_OutTime_should_be_One_Hour_greater_than_current_time()
+        {
+            AssertDateTimeEquality(game.OutTime, DateTime.Now.AddHours(1));
         }
     }
 }

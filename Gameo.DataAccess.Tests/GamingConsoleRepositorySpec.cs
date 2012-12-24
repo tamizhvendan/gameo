@@ -6,7 +6,7 @@ using Should;
 namespace Gameo.DataAccess.Tests
 {
     [TestFixture]
-    public class GamingConsoleRepositorySpec : RepositoryTestBase<GamingConsole>
+    public class GamingConsoleRepositorySpec : RepositorySpecBase<GamingConsole>
     {
         private GamingConsoleRepository gamingConsoleRepository;
 

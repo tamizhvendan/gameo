@@ -55,9 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BranchRepositorySpec.cs" />
+    <Compile Include="GameRepositorySpec.cs" />
     <Compile Include="GamingConsoleRepositorySpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryTestBase.cs" />
+    <Compile Include="RepositorySpecBase.cs" />
     <Compile Include="UserRepositorySpec.cs" />
   </ItemGroup>
   <ItemGroup>

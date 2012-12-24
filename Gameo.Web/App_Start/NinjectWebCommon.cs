@@ -60,6 +60,7 @@ namespace Gameo.Web.App_Start
             kernel.Bind<IBranchRepository>().To<BranchRepository>();
             kernel.Bind<IGamingConsoleRepository>().To<GamingConsoleRepository>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IGameRepository>().To<GameRepository>();
             kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
         }        
     }

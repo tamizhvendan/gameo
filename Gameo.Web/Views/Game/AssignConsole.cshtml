@@ -3,10 +3,19 @@
     ViewBag.Title = "AssignConsole";
 }
 <div class="container">
-    @using (Html.BeginForm("AssignConsole", "Game", FormMethod.Post, new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("Action", "Game", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.ValidationSummary(false)
-        
+        <div class="control-group pull-right">
+            @if (Model.Count < 6)
+            {
+                <input class="btn btn-primary" type="submit" name="addCustomer" value="Add Customer" />
+            }
+            @if(Model.Count > 1)
+            {
+                <input class="btn-primary btn" type="submit" name="removeCustomer" value="Remove Customer"/>    
+            }
+        </div>
         <table class="table table-bordered table-condensed table-striped">
             <tr>
                 <th>
@@ -41,10 +50,10 @@
                         @Html.TextBoxFor(model => model[i].CustomerContactNumber, new { @class = "input-medium" })
                     </td>
                     <td>
-                        @Html.TextBoxFor(model => model[i].InTime, new { @class = "input-medium" })
+                        @Html.TextBoxFor(model => model[i].InTime, new { @class = "input-medium time-picker" })
                     </td>
                     <td>
-                        @Html.TextBoxFor(model => model[i].OutTime, new { @class = "input-medium" })
+                        @Html.TextBoxFor(model => model[i].OutTime, new { @class = "input-medium time-picker" })
                     </td>
                     <td>
                         @Html.DropDownList(string.Format("[{0}].ConsoleName", i), ViewBag.GamingConsoles as IEnumerable<SelectListItem>)
@@ -52,7 +61,7 @@
                     <td>
                         <div class="input-prepend input-append">
                             <span class="add-on">Rs.</span>
-                             @Html.TextBoxFor(model => model[i].Price, new { @class = "span1" })
+                            @Html.TextBoxFor(model => model[i].Price, new { @class = "span1" })
                         </div>
                     </td>
                     <td>
@@ -62,7 +71,7 @@
             }
         </table>
         <div class="form-actions pull-right">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" name="assignConsole">
                 Assign Consoles</button>
             <button type="reset" class="btn">
                 Reset</button>

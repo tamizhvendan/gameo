@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Gameo.DataAccess;
 using Gameo.Web.Models;
 
 namespace Gameo.Web
@@ -21,7 +22,7 @@ namespace Gameo.Web
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Authentication", action = "Login", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Game", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }
@@ -29,7 +30,6 @@ namespace Gameo.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.Add(typeof(CustomUserIdentity), new CustomUserIdentityModelBinder());

@@ -32,6 +32,14 @@ namespace Gameo.DataAccess
             EntityCollection.Save(entity);
         }
 
+        public void AddMany(IEnumerable<T> entities)
+        {
+            foreach (var entity in entities)
+            {
+                Add(entity);
+            }
+        }
+
         public T GetById(Guid guid)
         {
             return EntityCollection.AsQueryable().First(entity => entity.Id == guid);

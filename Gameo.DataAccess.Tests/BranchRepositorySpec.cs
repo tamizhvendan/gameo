@@ -6,7 +6,7 @@ using Should;
 namespace Gameo.DataAccess.Tests
 {
     [TestFixture]
-    public class BranchRepositorySpec : RepositoryTestBase<Branch>
+    public class BranchRepositorySpec : RepositorySpecBase<Branch>
     {
         private BranchRepository branchRepository;
 

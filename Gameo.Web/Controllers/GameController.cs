@@ -10,10 +10,12 @@ namespace Gameo.Web.Controllers
     [Authorize(Roles = "user")]
     public class GameController : ApplicationControllerBase
     {
+        private readonly IGameRepository gameRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
 
-        public GameController(IGamingConsoleRepository gamingConsoleRepository)
+        public GameController(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository)
         {
+            this.gameRepository = gameRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
         }
 
@@ -22,15 +24,40 @@ namespace Gameo.Web.Controllers
             return View();
         }
 
+
         public ViewResult AssignConsole(CustomUserIdentity customUserIdentity)
         {
             RetrieveGamingConsolesAndPutItInViewBag(customUserIdentity.BranchName);
             var games = new List<Game>();
-            for (var i = 0; i < 6; i++)
+            games.Add(new Game());
+            return View(games);
+        }
+
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult AssignConsole(List<Game> games, CustomUserIdentity userIdentity)
+        {
+            if (ModelState.IsValid)
+            {
+                gameRepository.AddMany(games);
+                return RedirectToAction("Index");
+            }
+            RetrieveGamingConsolesAndPutItInViewBag(userIdentity.BranchName);
+            return View(games);
+        }
+
+        [HttpPost]
+        [HttpParamAction]
+        public ViewResult AddCustomer(List<Game> games, CustomUserIdentity userIdentity)
+        {
+            RetrieveGamingConsolesAndPutItInViewBag(userIdentity.BranchName);
+
+            if (ModelState.IsValid)
             {
                 games.Add(new Game());
+                return View("AssignConsole",games);
             }
-            return View(games);
+            return View("AssignConsole",games);
         }
 
         private void RetrieveGamingConsolesAndPutItInViewBag(string branchName)
@@ -38,6 +65,16 @@ namespace Gameo.Web.Controllers
             var gamingConsolesByBranchName = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
             ViewBag.GamingConsoles =
                 gamingConsolesByBranchName.Select(console => new SelectListItem {Text = console.Name, Value = console.Name});
+        }
+
+        [HttpParamAction]
+        [HttpPost]
+        public ViewResult RemoveCustomer(List<Game> games, CustomUserIdentity customUserIdentity)
+        {
+            RetrieveGamingConsolesAndPutItInViewBag(customUserIdentity.BranchName);
+            var lastAddedGame = games.Last();
+            games.Remove(lastAddedGame);
+            return View("AssignConsole", games);
         }
     }
 }

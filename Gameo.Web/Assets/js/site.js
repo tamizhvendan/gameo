@@ -30,5 +30,11 @@
         });
     });
 
-    $("input").eq(0).focus();
+    $("input[type=text]").eq(0).focus();
+
+    $(".time-picker").datetimepicker({
+        controlType: 'select',
+        dateFormat: 'dd-mm-yy',
+        timeFormat: "h:mm:ss TT"
+    });
 });
