@@ -43,7 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
+    <Compile Include="GameStatus.cs" />
+    <Compile Include="GameStatusService.cs" />
     <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="IGameStatusService.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

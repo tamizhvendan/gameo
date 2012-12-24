@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
+using Gameo.Services;
 using Gameo.Web.Models;
 
 namespace Gameo.Web.Controllers
@@ -12,16 +14,19 @@ namespace Gameo.Web.Controllers
     {
         private readonly IGameRepository gameRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
+        private readonly IGameStatusService gameStatusService;
 
-        public GameController(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository)
+        public GameController(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository, IGameStatusService gameStatusService)
         {
             this.gameRepository = gameRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
+            this.gameStatusService = gameStatusService;
         }
 
-        public ActionResult Index()
+        public ViewResult Index(CustomUserIdentity customUserIdentity)
         {
-            return View();
+            var nonCompletedGameStatuses = gameStatusService.GetNonCompletedGameStatuses(customUserIdentity.BranchName, DateTime.Now);
+            return View(nonCompletedGameStatuses);
         }
 
 

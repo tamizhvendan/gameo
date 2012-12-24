@@ -118,12 +118,19 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void Retrieves_all_GamingConsoles_by_BranchName_with_case_ignored()
+        public void Retrieves_all_working_GamingConsoles_by_BranchName_with_case_ignored()
         {
             var gamingConsole1 = CreateGamingConsole("Console1", "Branch1");
+            gamingConsole1.Status = Status.Working;
             var gamingConsole2 = CreateGamingConsole("Console2", "Branch1");
+            gamingConsole2.Status = Status.UnderMaintenance;
             var gamingConsole3 = CreateGamingConsole("Console3", "Branch2");
-            AddEntityToDatabase(gamingConsole1, gamingConsole2, gamingConsole3);
+            gamingConsole3.Status = Status.Unknown;
+            var gamingConsole4 = CreateGamingConsole("Console4", "Branch2");
+            gamingConsole4.Status = Status.Removed;
+            var gamingConsole5 = CreateGamingConsole("Console5", "Branch2");
+            gamingConsole5.Status = Status.Working;
+            AddEntityToDatabase(gamingConsole1, gamingConsole2, gamingConsole3, gamingConsole4, gamingConsole5);
 
 
             var gamingConsolesInBranch1 = gamingConsoleRepository.GetGamingConsolesByBranchName("BrancH1").ToList();
@@ -131,8 +138,10 @@ namespace Gameo.DataAccess.Tests
 
             gamingConsolesInBranch1.ForEach(gamingConsole => gamingConsole.BranchName.ShouldEqual("Branch1"));
             gamingConsolesInBranch2.ForEach(gamingConsole => gamingConsole.BranchName.ShouldEqual("Branch2"));
-            gamingConsolesInBranch1.Count.ShouldEqual(2);
+            gamingConsolesInBranch1.Count.ShouldEqual(1);
             gamingConsolesInBranch2.Count.ShouldEqual(1);
+            gamingConsolesInBranch1.First().Name.ShouldEqual("Console1");
+            gamingConsolesInBranch2.First().Name.ShouldEqual("Console5");
         }
     }
 }

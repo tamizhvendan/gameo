@@ -20,7 +20,8 @@ namespace Gameo.DataAccess
         {
             return EntityCollection
                     .AsQueryable()
-                    .Where(gamingConsole => gamingConsole.BranchName.ToLowerInvariant() == branchName.ToLowerInvariant());
+                    .Where(gamingConsole => gamingConsole.BranchName.ToLowerInvariant() == branchName.ToLowerInvariant())
+                    .Where(gamingConsole => gamingConsole.Status == Status.Working);
         }
     }
 }

@@ -1,6 +1,48 @@
-﻿@{
+﻿@model IEnumerable<Gameo.Services.GameStatus>
+@{
     ViewBag.Title = "Index";
 }
+<div class="container">
+    @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
+    @foreach (var gameStatus in Model)
+    {
+        <h3>@gameStatus.GamingConsoleName &nbsp;&nbsp;
+            @{ var consoleAvailability = gameStatus.Players.Any() ? "In Use" : "Available"; }
+            <span
+                class="label label-info">
+                @consoleAvailability
+            </span>
+        </h3>
+        if (gameStatus.Players.Any())
+        {
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Player Name
+                    </th>
+                    <th>
+                        In Time
+                    </th>
+                    <th>
+                        Out Time
+                    </th>
+                </tr> 
+                @foreach (var player in gameStatus.Players)
+                {
+                    <tr>
+                        <td>@player.CustomerName
+                        </td>
+                        <td> @player.InTime.ToShortDateString() - @player.InTime.ToShortTimeString()
+                        </td>
+                        <td> @player.OutTime.ToShortDateString() - @player.OutTime.ToShortTimeString()
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    }
+</div>
 
-<h2>Index</h2>
-@Html.ActionLink("Assign Console", "AssignConsole", "Game")
+<script type="text/javascript">
+    setInterval("window.location.reload()", 300000);
+</script>

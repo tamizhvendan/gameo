@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
+using Gameo.Services;
 using Gameo.Web.Controllers;
 using Gameo.Web.Models;
 using Moq;
@@ -19,13 +20,15 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         protected User User;
         protected List<Game> games;
         protected Mock<IGameRepository> GameRepositoryMock;
+        protected Mock<IGameStatusService> GameStatusServiceMock;
 
         [SetUp]
         public void GameControllerSpecSetUp()
         {
             GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
             GameRepositoryMock = new Mock<IGameRepository>();
-            GameController = new GameController(GameRepositoryMock.Object, GamingConsoleRepositoryMock.Object);
+            GameStatusServiceMock = new Mock<IGameStatusService>();
+            GameController = new GameController(GameRepositoryMock.Object, GamingConsoleRepositoryMock.Object, GameStatusServiceMock.Object);
             User = new User();
             CustomUserIdentity = new CustomUserIdentity(User);
             games = new List<Game>();
