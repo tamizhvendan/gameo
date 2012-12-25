@@ -3,22 +3,30 @@
     ViewBag.Title = "Index";
 }
 <div class="container">
+    <div class="control-group">
+        <div class="controls pull-left">
+            @Html.ActionLink("View By Console", "Index", "Game", new { @class = "btn btn-primary active" })
+            @Html.ActionLink("View By Players", "NonCompletedGames", "Game", new { @class = "btn btn-primary" })
+        </div>
+    </div>
     @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
-    @foreach (var gameStatus in Model)
-    {
-        <h3>@gameStatus.GamingConsoleName &nbsp;&nbsp;
-            @{
-                var isConsoleInUse = gameStatus.Players.Any();
-                var consoleAvailability = isConsoleInUse ? "In Use" : "Available";
-                var consoleStatusLabel = isConsoleInUse ? "label-info" : "label-success";
-            }
-            <span
-                class="label @consoleStatusLabel">
-                @consoleAvailability
-            </span>
-        </h3>
-        if (isConsoleInUse)
+    <p class="clearfix"></p>
+    <div class="container">
+        @foreach (var gameStatus in Model)
         {
+            <h3>@gameStatus.GamingConsoleName &nbsp;&nbsp;
+                @{
+            var isConsoleInUse = gameStatus.Players.Any();
+            var consoleAvailability = isConsoleInUse ? "In Use" : "Available";
+            var consoleStatusLabel = isConsoleInUse ? "label-info" : "label-success";
+                }
+                <span
+                class="label @consoleStatusLabel">
+                    @consoleAvailability
+                </span>
+            </h3>
+            if (isConsoleInUse)
+            {
             <table class="table table-striped">
                 <tr>
                     <th>
@@ -30,23 +38,25 @@
                     <th>
                         Out Time
                     </th>
-                </tr> 
+                </tr>
                 @foreach (var player in gameStatus.Players.OrderBy(player => player.OutTime))
                 {
                     <tr>
                         <td>@player.CustomerName
                         </td>
-                        <td> @player.InTime.ToLongDateString() - @player.InTime.ToShortTimeString()
+                        <td>
+                            @player.InTime.ToLongDateString() - @player.InTime.ToShortTimeString()
                         </td>
-                        <td> @player.OutTime.ToLongDateString() - @player.OutTime.ToShortTimeString()
+                        <td>
+                            @player.OutTime.ToLongDateString() - @player.OutTime.ToShortTimeString()
                         </td>
                     </tr>
                 }
             </table>
+            }
         }
-    }
+    </div>
 </div>
-
 <script type="text/javascript">
     setInterval("window.location.reload()", 300000);
 </script>

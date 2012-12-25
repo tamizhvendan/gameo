@@ -22,7 +22,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         {
             var currentTime = DateTime.Now;
             var gameStatuses = Enumerable.Empty<GameStatus>();
-            GameStatusServiceMock.Setup(service => service.GetNonCompletedGameStatuses(CustomUserIdentity.BranchName, currentTime))
+            GameServiceMock.Setup(service => service.GetNonCompletedGamesStatus(CustomUserIdentity.BranchName, currentTime))
                                  .Returns(gameStatuses);
 
             var viewResult = GameController.Index(CustomUserIdentity);

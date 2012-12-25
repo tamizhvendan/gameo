@@ -10,12 +10,12 @@ using Should;
 namespace Gameo.Services.Tests
 {
     [TestFixture]
-    public class GameStatusServiceSpec
+    public class GameServiceSpec
     {
         private Mock<IGamingConsoleRepository> gamingConsoleRepositoryMock;
         private Mock<IGameRepository> gameRepositoryMock;
         private DateTime currentTime;
-        private GameStatusService gameStatusService;
+        private GameService gameService;
         private string nameOfConsole1 = "Console1";
         private string nameOfConsole2 = "Console2";
         private string nameOfConsole3 = "Console3";
@@ -84,13 +84,13 @@ namespace Gameo.Services.Tests
             gameRepositoryMock
                 .Setup(repo => repo.GetNonCompletedGames(nameOfConsole4, currentTime)).Returns(Enumerable.Empty<Game>());
 
-            gameStatusService = new GameStatusService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object);
+            gameService = new GameService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object);
         }
 
         [Test]
         public void Retrieves_Status_of_all_non_completed_games_for_given_branch_name_Branch1()
         {
-            var nonCompletedGameStatuses = gameStatusService.GetNonCompletedGameStatuses("Branch1", currentTime);
+            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch1", currentTime);
 
             nonCompletedGameStatuses.Count().ShouldEqual(2);
             var gamesOnConsole1 = nonCompletedGameStatuses.First(status => status.GamingConsoleName == nameOfConsole1);
@@ -108,7 +108,7 @@ namespace Gameo.Services.Tests
         [Test]
         public void Retrieves_Status_of_all_non_completed_games_for_given_branch_name_Branch2()
         {
-            var nonCompletedGameStatuses = gameStatusService.GetNonCompletedGameStatuses("Branch2", currentTime);
+            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch2", currentTime);
 
             nonCompletedGameStatuses.Count().ShouldEqual(2);
             var gameOnConsole4 = nonCompletedGameStatuses.First(status => status.GamingConsoleName == nameOfConsole4);
@@ -121,6 +121,34 @@ namespace Gameo.Services.Tests
             playByBar.CustomerName.ShouldEqual("bar");
             playByBar.InTime.ShouldEqual(currentTime);
             playByBar.OutTime.ShouldEqual(currentTime.AddHours(2));
+        }
+
+        [Test]
+        public void Retrieves_all_non_completed_games_for_given_branch_name_Branch1()
+        {
+            var nonCompletedGames = gameService.GetNonCompletedGames("Branch1", currentTime).ToList();
+
+            nonCompletedGames.Count().ShouldEqual(2);
+            var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");
+            fooGame.InTime.ShouldEqual(currentTime);
+            fooGame.OutTime.ShouldEqual(currentTime.AddHours(1));
+            var barGame = nonCompletedGames.First(game => game.CustomerName == "bar");
+            barGame.InTime.ShouldEqual(currentTime);
+            barGame.OutTime.ShouldEqual(currentTime.AddHours(2));
+        }
+
+        [Test]
+        public void Retrieves_all_non_completed_games_for_given_branch_name_Branch2()
+        {
+            var nonCompletedGames = gameService.GetNonCompletedGames("Branch2", currentTime).ToList();
+
+            nonCompletedGames.Count().ShouldEqual(2);
+            var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");
+            fooGame.InTime.ShouldEqual(currentTime);
+            fooGame.OutTime.ShouldEqual(currentTime.AddHours(1));
+            var barGame = nonCompletedGames.First(game => game.CustomerName == "bar");
+            barGame.InTime.ShouldEqual(currentTime);
+            barGame.OutTime.ShouldEqual(currentTime.AddHours(2));
         }
     }
 }

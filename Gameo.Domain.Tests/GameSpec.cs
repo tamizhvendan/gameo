@@ -35,6 +35,14 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
+        public void ConsoleName_is_required()
+        {
+            game.ConsoleName = null;
+
+            AssertEntityValidationError(game, "Console Name is required.");
+        }
+
+        [Test]
         public void Out_time_is_required()
         {
             game.OutTime = DateTime.MinValue;

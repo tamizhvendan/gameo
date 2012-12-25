@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gameo.DataAccess.Core;
+using Gameo.Domain;
 
 namespace Gameo.Services
 {
-    public class GameStatusService : IGameStatusService
+    public class GameService : IGameService
     {
         private readonly IGameRepository gameRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
 
-        public GameStatusService(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository)
+        public GameService(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository)
         {
             this.gameRepository = gameRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
         }
 
-        public IEnumerable<GameStatus> GetNonCompletedGameStatuses(string branchName, DateTime currentTime)
+        public IEnumerable<GameStatus> GetNonCompletedGamesStatus(string branchName, DateTime currentTime)
         {
             var gamingConsoles = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
             foreach (var gamingConsole in gamingConsoles)
@@ -32,6 +33,17 @@ namespace Gameo.Services
                 }
                 yield return gameStatus;
             }
+        }
+
+        public IEnumerable<Game> GetNonCompletedGames(string branchName, DateTime currentTime)
+        {
+            var nonCompletedGames = new List<Game>();
+            var gamingConsoles = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
+            foreach (var gamingConsole in gamingConsoles)
+            {
+                nonCompletedGames.AddRange(gameRepository.GetNonCompletedGames(gamingConsole.Name, currentTime));
+            }
+            return nonCompletedGames;
         }
     }
 }

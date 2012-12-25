@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationServiceSpec.cs" />
-    <Compile Include="GameStatusServiceSpec.cs" />
+    <Compile Include="GameServiceSpec.cs" />
     <Compile Include="GameStatusSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

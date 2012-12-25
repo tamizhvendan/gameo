@@ -12,6 +12,7 @@ namespace Gameo.Domain
         public DateTime InTime { get; set; }
         public DateTime OutTime { get; set; }
         public decimal Price { get; set; }
+        [Required(ErrorMessage = "Console Name is required.")]
         public string ConsoleName { get; set; }
         public GamePaymentType GamePaymentType { get; set; }
         public PackageType PackageType { get; set; }

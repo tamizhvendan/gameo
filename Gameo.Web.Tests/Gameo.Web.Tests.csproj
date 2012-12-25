@@ -72,6 +72,7 @@
     <Compile Include="GameControllerSpecs\AssignConsolePostActionSpec.cs" />
     <Compile Include="GameControllerSpecs\GameControllerSpecBase.cs" />
     <Compile Include="GameControllerSpecs\IndexGetActionSpec.cs" />
+    <Compile Include="GameControllerSpecs\NonCompletedGamesGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\RemoveCustomerPostActionSpec.cs" />
     <Compile Include="GamingConsoleControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="GamingConsoleControllerSpecs\CreateGetActionSpec.cs" />

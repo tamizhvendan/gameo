@@ -20,15 +20,15 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         protected User User;
         protected List<Game> games;
         protected Mock<IGameRepository> GameRepositoryMock;
-        protected Mock<IGameStatusService> GameStatusServiceMock;
+        protected Mock<IGameService> GameServiceMock;
 
         [SetUp]
         public void GameControllerSpecSetUp()
         {
             GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
             GameRepositoryMock = new Mock<IGameRepository>();
-            GameStatusServiceMock = new Mock<IGameStatusService>();
-            GameController = new GameController(GameRepositoryMock.Object, GamingConsoleRepositoryMock.Object, GameStatusServiceMock.Object);
+            GameServiceMock = new Mock<IGameService>();
+            GameController = new GameController(GameRepositoryMock.Object, GamingConsoleRepositoryMock.Object, GameServiceMock.Object);
             User = new User();
             CustomUserIdentity = new CustomUserIdentity(User);
             games = new List<Game>();

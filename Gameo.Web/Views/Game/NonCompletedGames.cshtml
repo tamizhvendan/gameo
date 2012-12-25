@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Gameo.Domain.Game>
+@{
+    ViewBag.Title = "Non Completed Games";
+}
+<div class="container">
+    <p class="clearfix"></p>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <h4>
+                No Players are playing right now!</h4>
+            Only players who are all playing will be listed down here. Click @Html.ActionLink("here", "AssignConsole", "Game")
+            to add a new Player.
+        </div>
+    }
+    else
+    {
+        <div class="control-group">
+            <div class="controls pull-left">
+                @Html.ActionLink("View By Console", "Index", "Game", new { @class = "btn btn-primary" })
+                @Html.ActionLink("View By Players", "NonCompletedGames", "Game", new { @class = "btn btn-primary active" })
+            </div>
+        </div>
+        
+        @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
+        <p class="clearfix"></p>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Player Name
+                </th>
+                <th>
+                    Console Name
+                </th>
+                <th>
+                    In Time
+                </th>
+                <th>
+                    Out Time
+                </th>
+            </tr>
+            @foreach (var game in Model.OrderBy(game => game.OutTime))
+            {
+                <tr>
+                    <td>@game.CustomerName
+                    </td>
+                    <td>@game.ConsoleName
+                    </td>
+                    <td>@game.InTime.ToLongDateString() - @game.InTime.ToShortTimeString()
+                    </td>
+                    <td>@game.OutTime.ToLongDateString() - @game.OutTime.ToShortDateString()
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+<script type="text/javascript">
+    setInterval("window.location.reload()", 300000);
+</script>

@@ -14,18 +14,18 @@ namespace Gameo.Web.Controllers
     {
         private readonly IGameRepository gameRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
-        private readonly IGameStatusService gameStatusService;
+        private readonly IGameService gameService;
 
-        public GameController(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository, IGameStatusService gameStatusService)
+        public GameController(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository, IGameService gameService)
         {
             this.gameRepository = gameRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
-            this.gameStatusService = gameStatusService;
+            this.gameService = gameService;
         }
 
         public ViewResult Index(CustomUserIdentity customUserIdentity)
         {
-            var nonCompletedGameStatuses = gameStatusService.GetNonCompletedGameStatuses(customUserIdentity.BranchName, DateTime.Now);
+            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus(customUserIdentity.BranchName, DateTime.Now);
             return View(nonCompletedGameStatuses);
         }
 
@@ -80,6 +80,11 @@ namespace Gameo.Web.Controllers
             var lastAddedGame = games.Last();
             games.Remove(lastAddedGame);
             return View("AssignConsole", games);
+        }
+
+        public ViewResult NonCompletedGames(CustomUserIdentity customUserIdentity)
+        {
+            return View(gameService.GetNonCompletedGames(customUserIdentity.BranchName, DateTime.Now));
         }
     }
 }
