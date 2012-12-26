@@ -1,0 +1,36 @@
+﻿@model Gameo.Domain.DailySaleDetails
+
+@{
+    ViewBag.Title = "Close Daily Sales";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Create", "DailySaleDetails", FormMethod.Post, new { @class = "form-horizontal gameo-form form-gameconsole" }))
+    {
+        <div class="control-group">
+            <h4>
+                Close the Daily Sale</h4>
+            <label class="control-label" for="@Model.TotalCollection">
+                Total Collection</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.TotalCollection)
+                @Html.ValidationMessageFor(model => model.TotalCollection)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.EbMeterReading">
+                EB Meter Reading</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.EbMeterReading)
+                @Html.ValidationMessageFor(model => model.EbMeterReading)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Submit" class="btn btn-primary offset1" onclick="return confirm('Are you sure to close the daily sales details ?')"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </div>
+    }
+</div>
+

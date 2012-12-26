@@ -7,11 +7,13 @@ namespace Gameo.DataAccess.Core
 {
     public class DailySaleDetailsRepository : RepositoryBase<DailySaleDetails>, IDailySaleDetailsRepository
     {
-        public bool IsDailySaleClosed(DateTime dateTime)
+        public bool IsDailySaleClosed(DateTime dateTime, string branchName)
         {
             var givenDay = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day);
 
-            var currentSaleDetails = EntityCollection.AsQueryable().FirstOrDefault(dailySaleDetails => dailySaleDetails.DateTime == givenDay);
+            var currentSaleDetails = EntityCollection.AsQueryable()
+                                            .FirstOrDefault(dailySaleDetails => dailySaleDetails.DateTime == givenDay && 
+                                                                                        dailySaleDetails.BranchName == branchName);
 
             return currentSaleDetails != null;
         }

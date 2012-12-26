@@ -34,6 +34,7 @@
                         @if (User.IsInRole("user"))
                         {
                             <li>@Html.ActionLink("Usage Log", "CompletedGames", "Game")</li>
+                            <li>@Html.ActionLink("Close the Day Sale", "Index", "DailySaleDetails")</li>
                         }
                     </ul>
                     <ul class="nav pull-right">

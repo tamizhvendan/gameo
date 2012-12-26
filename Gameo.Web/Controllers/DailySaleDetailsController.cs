@@ -16,9 +16,9 @@ namespace Gameo.Web.Controllers
             this.dailySaleDetailsRepository = dailySaleDetailsRepository;
         }
 
-        public RedirectToRouteResult Index()
+        public RedirectToRouteResult Index(CustomUserIdentity customUserIdentity)
         {
-            if (!dailySaleDetailsRepository.IsDailySaleClosed(DateTime.Now))
+            if (!dailySaleDetailsRepository.IsDailySaleClosed(DateTime.Now, customUserIdentity.BranchName))
             {
                 return RedirectToAction("Create");
             }
@@ -30,6 +30,7 @@ namespace Gameo.Web.Controllers
             return View(new DailySaleDetails());
         }
 
+        [HttpPost]
         public ActionResult Create(DailySaleDetails dailySaleDetails, CustomUserIdentity customUserIdentity)
         {
             if (!ModelState.IsValid)
@@ -39,6 +40,11 @@ namespace Gameo.Web.Controllers
             dailySaleDetails.BranchName = customUserIdentity.BranchName;
             dailySaleDetailsRepository.Add(dailySaleDetails);
             return RedirectToAction("Index");
+        }
+
+        public ViewResult DailySaleClosed()
+        {
+            return View();
         }
     }
 }

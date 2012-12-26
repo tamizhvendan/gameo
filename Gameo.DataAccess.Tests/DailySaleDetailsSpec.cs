@@ -18,12 +18,12 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void IsDailySaleClosed_returs_true_if_the_daily_sale_Details_Exists_for_given_day()
+        public void IsDailySaleClosed_returs_true_if_the_daily_sale_Details_Exists_for_branch_on_given_day()
         {
             var dateTime = DateTime.Now;
-            AddEntityToDatabase(new DailySaleDetails());
+            AddEntityToDatabase(new DailySaleDetails { BranchName = "foo"});
 
-            var isDailySaleClosed = dailySaleDetailsRepository.IsDailySaleClosed(dateTime);
+            var isDailySaleClosed = dailySaleDetailsRepository.IsDailySaleClosed(dateTime, "foo");
 
             isDailySaleClosed.ShouldBeTrue();
         }
@@ -32,9 +32,9 @@ namespace Gameo.DataAccess.Tests
         public void IsDailySaleClosed_returs_false_if_the_daily_sale_Details_not_Exists_for_given_day()
         {
             var dateTime = DateTime.Now.AddDays(1);
-            AddEntityToDatabase(new DailySaleDetails());
+            AddEntityToDatabase(new DailySaleDetails { BranchName = "bar"});
 
-            var isDailySaleClosed = dailySaleDetailsRepository.IsDailySaleClosed(dateTime);
+            var isDailySaleClosed = dailySaleDetailsRepository.IsDailySaleClosed(dateTime, "bar");
 
             isDailySaleClosed.ShouldBeFalse();
         }

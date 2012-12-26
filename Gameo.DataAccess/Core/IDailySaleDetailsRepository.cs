@@ -5,6 +5,6 @@ namespace Gameo.DataAccess.Core
 {
     public interface IDailySaleDetailsRepository : IRepository<DailySaleDetails>
     {
-        bool IsDailySaleClosed(DateTime dateTime);
+        bool IsDailySaleClosed(DateTime dateTime, string branchName);
     }
 }

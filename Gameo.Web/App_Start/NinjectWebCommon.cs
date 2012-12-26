@@ -63,6 +63,7 @@ namespace Gameo.Web.App_Start
             kernel.Bind<IGameRepository>().To<GameRepository>();
             kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
             kernel.Bind<IGameService>().To<GameService>();
+            kernel.Bind<IDailySaleDetailsRepository>().To<DailySaleDetailsRepository>();
         }        
     }
 }
