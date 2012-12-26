@@ -54,7 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblySetUp.cs" />
     <Compile Include="BranchRepositorySpec.cs" />
+    <Compile Include="DailySaleDetailsSpec.cs" />
     <Compile Include="GameRepositorySpec.cs" />
     <Compile Include="GamingConsoleRepositorySpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

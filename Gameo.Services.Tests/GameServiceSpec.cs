@@ -20,49 +20,51 @@ namespace Gameo.Services.Tests
         private string nameOfConsole2 = "Console2";
         private string nameOfConsole3 = "Console3";
         private string nameOfConsole4 = "Console4";
+        private List<GamingConsole> gamingConsoles;
+        private List<Game> games;
 
         [SetUp]
         public void SetUp()
         {
             currentTime = DateTime.Now;
-            var gamingConsoles = new List<GamingConsole>
-                                     {
-                                         new GamingConsole {BranchName = "Branch1", Name = nameOfConsole1},
-                                         new GamingConsole {BranchName = "Branch2", Name = nameOfConsole2},
-                                         new GamingConsole {BranchName = "Branch1", Name = nameOfConsole3},
-                                         new GamingConsole {BranchName = "Branch2", Name = nameOfConsole4},
-                                     };
-            var games = new List<Game>
-                            {
-                                new Game
-                                    {
-                                        ConsoleName = nameOfConsole2,
-                                        InTime = currentTime,
-                                        OutTime = currentTime.AddHours(1),
-                                        CustomerName = "foo"
-                                    },
-                                new Game
-                                    {
-                                        ConsoleName = nameOfConsole2,
-                                        InTime = currentTime,
-                                        OutTime = currentTime.AddHours(2),
-                                        CustomerName = "bar"
-                                    },
-                                new Game
-                                    {
-                                        ConsoleName = nameOfConsole3,
-                                        InTime = currentTime,
-                                        OutTime = currentTime.AddHours(1),
-                                        CustomerName = "foo"
-                                    },
-                                new Game
-                                    {
-                                        ConsoleName = nameOfConsole3,
-                                        InTime = currentTime,
-                                        OutTime = currentTime.AddHours(2),
-                                        CustomerName = "bar"
-                                    }
-                            };
+            gamingConsoles = new List<GamingConsole>
+                                 {
+                                     new GamingConsole {BranchName = "Branch1", Name = nameOfConsole1},
+                                     new GamingConsole {BranchName = "Branch2", Name = nameOfConsole2},
+                                     new GamingConsole {BranchName = "Branch1", Name = nameOfConsole3},
+                                     new GamingConsole {BranchName = "Branch2", Name = nameOfConsole4},
+                                 };
+            games = new List<Game>
+                        {
+                            new Game
+                                {
+                                    ConsoleName = nameOfConsole2,
+                                    InTime = currentTime,
+                                    OutTime = currentTime.AddHours(1),
+                                    CustomerName = "foo"
+                                },
+                            new Game
+                                {
+                                    ConsoleName = nameOfConsole2,
+                                    InTime = currentTime,
+                                    OutTime = currentTime.AddHours(2),
+                                    CustomerName = "bar"
+                                },
+                            new Game
+                                {
+                                    ConsoleName = nameOfConsole3,
+                                    InTime = currentTime,
+                                    OutTime = currentTime.AddHours(1),
+                                    CustomerName = "foo"
+                                },
+                            new Game
+                                {
+                                    ConsoleName = nameOfConsole3,
+                                    InTime = currentTime,
+                                    OutTime = currentTime.AddHours(2),
+                                    CustomerName = "bar"
+                                }
+                        };
             gamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
             gameRepositoryMock = new Mock<IGameRepository>();
 
@@ -73,23 +75,17 @@ namespace Gameo.Services.Tests
                 .Setup(repo => repo.GetGamingConsolesByBranchName("Branch2"))
                 .Returns(gamingConsoles.Where(console => console.BranchName == "Branch2"));
 
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole3, currentTime)).Returns(
-                    games.Where(game => game.ConsoleName == nameOfConsole3));
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole2, currentTime)).Returns(
-                    games.Where(game => game.ConsoleName == nameOfConsole2));
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole4, currentTime)).Returns(Enumerable.Empty<Game>());
-
             gameService = new GameService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object);
         }
 
         [Test]
         public void Retrieves_Status_of_all_non_completed_games_for_given_branch_name_Branch1()
         {
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole3, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
+
             var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch1", currentTime);
 
             nonCompletedGameStatuses.Count().ShouldEqual(2);
@@ -108,6 +104,11 @@ namespace Gameo.Services.Tests
         [Test]
         public void Retrieves_Status_of_all_non_completed_games_for_given_branch_name_Branch2()
         {
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole2, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole2));
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole4, currentTime)).Returns(Enumerable.Empty<Game>());
+
             var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch2", currentTime);
 
             nonCompletedGameStatuses.Count().ShouldEqual(2);
@@ -126,6 +127,11 @@ namespace Gameo.Services.Tests
         [Test]
         public void Retrieves_all_non_completed_games_for_given_branch_name_Branch1()
         {
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole3, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
+
             var nonCompletedGames = gameService.GetNonCompletedGames("Branch1", currentTime).ToList();
 
             nonCompletedGames.Count().ShouldEqual(2);
@@ -140,7 +146,31 @@ namespace Gameo.Services.Tests
         [Test]
         public void Retrieves_all_non_completed_games_for_given_branch_name_Branch2()
         {
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole2, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole2));
+            gameRepositoryMock
+                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole4, currentTime)).Returns(Enumerable.Empty<Game>());
+
             var nonCompletedGames = gameService.GetNonCompletedGames("Branch2", currentTime).ToList();
+
+            nonCompletedGames.Count().ShouldEqual(2);
+            var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");
+            fooGame.InTime.ShouldEqual(currentTime);
+            fooGame.OutTime.ShouldEqual(currentTime.AddHours(1));
+            var barGame = nonCompletedGames.First(game => game.CustomerName == "bar");
+            barGame.InTime.ShouldEqual(currentTime);
+            barGame.OutTime.ShouldEqual(currentTime.AddHours(2));
+        }
+
+        [Test]
+        public void Retrieves_all_completed_games_within_the_given_day_for_given_branch_name_branch1()
+        {
+            gameRepositoryMock
+                .Setup(repo => repo.GetCompletedGamesWithinGivenDay(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
+            gameRepositoryMock
+                .Setup(repo => repo.GetCompletedGamesWithinGivenDay(nameOfConsole3, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
+
+            var nonCompletedGames = gameService.GetCompletedGamesWithinGivenDay("Branch1", currentTime).ToList();
 
             nonCompletedGames.Count().ShouldEqual(2);
             var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");

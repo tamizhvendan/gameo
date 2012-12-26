@@ -16,5 +16,14 @@ namespace Gameo.DataAccess
                 .Where(game => game.ConsoleName == gamingConsoleName)
                 .Where(game => game.OutTime > currentTime);
         }
+
+        public IEnumerable<Game> GetCompletedGamesWithinGivenDay(string gamingConsoleName, DateTime dateTime)
+        {
+            return EntityCollection
+                .AsQueryable()
+                .Where(game => game.OutTime < dateTime)
+                .Where(game => game.ConsoleName == gamingConsoleName)
+                .Where(game => game.InTime > new DateTime(dateTime.Year, dateTime.Month, dateTime.Day));
+        }
     }
 }

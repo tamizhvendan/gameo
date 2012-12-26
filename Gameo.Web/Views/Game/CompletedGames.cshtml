@@ -1,0 +1,53 @@
+﻿@using Gameo.Domain
+@model IEnumerable<Gameo.Domain.Game>
+
+@{
+    ViewBag.Title = "Daily Usage Log";
+}
+
+<div class="container">
+    <h3> Usage Log for @DateTime.Now.ToShortDateString() </h3>
+    
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <h4>No Usages Found!</h4>
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Customer Name
+                </th>
+                <th>
+                    Console Name
+                </th>
+                <th>
+                    In Time
+                </th>
+                <th>
+                    Out Time
+                </th>
+                <th>
+                    Payment Type
+                </th>
+                <th>
+                    Package
+                </th>
+            </tr>
+            @foreach(var game in Model.OrderByDescending(game => game.OutTime))
+            {
+                <tr>
+                    <td>@game.CustomerName</td>
+                    <td>@game.ConsoleName</td>
+                    <td>@game.InTime.ToShortDateString() - @game.InTime.ToShortTimeString()</td>
+                    <td>@game.OutTime.ToShortDateString() - @game.OutTime.ToShortTimeString()</td>
+                    <td>@Enum.GetName(typeof(GamePaymentType), @game.GamePaymentType)</td>
+                    <td>@Enum.GetName(typeof(PackageType), @game.PackageType).Replace("_", " ")</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

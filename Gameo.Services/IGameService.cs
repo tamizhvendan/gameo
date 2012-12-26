@@ -8,5 +8,6 @@ namespace Gameo.Services
     {
         IEnumerable<GameStatus> GetNonCompletedGamesStatus(string branchName, DateTime currentTime);
         IEnumerable<Game> GetNonCompletedGames(string branchName, DateTime currentTime);
+        IEnumerable<Game> GetCompletedGamesWithinGivenDay(string branchName, DateTime currentTime);
     }
 }

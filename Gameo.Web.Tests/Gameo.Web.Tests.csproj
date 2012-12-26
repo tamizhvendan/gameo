@@ -67,9 +67,14 @@
     <Compile Include="BranchControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="BranchControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="ControllerSpecBase.cs" />
+    <Compile Include="DailySaleDetailsControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="DailySaleDetailsControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="DailySaleDetailsControllerSpecs\DailySaleDetailsControllerSpecBase.cs" />
+    <Compile Include="DailySaleDetailsControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\AddCustomerPostActionSpec.cs" />
     <Compile Include="GameControllerSpecs\AssignConsoleGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\AssignConsolePostActionSpec.cs" />
+    <Compile Include="GameControllerSpecs\CompletedGamesGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\GameControllerSpecBase.cs" />
     <Compile Include="GameControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\NonCompletedGamesGetActionSpec.cs" />

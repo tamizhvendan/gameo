@@ -45,5 +45,16 @@ namespace Gameo.Services
             }
             return nonCompletedGames;
         }
+
+        public IEnumerable<Game> GetCompletedGamesWithinGivenDay(string branchName, DateTime currentTime)
+        {
+            var nonCompletedGames = new List<Game>();
+            var gamingConsoles = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
+            foreach (var gamingConsole in gamingConsoles)
+            {
+                nonCompletedGames.AddRange(gameRepository.GetCompletedGamesWithinGivenDay(gamingConsole.Name, currentTime));
+            }
+            return nonCompletedGames;
+        }
     }
 }

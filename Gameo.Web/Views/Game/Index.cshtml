@@ -3,14 +3,17 @@
     ViewBag.Title = "Index";
 }
 <div class="container">
+   <p class="clearfix"></p>
     <div class="control-group">
-        <div class="controls pull-left">
-            @Html.ActionLink("View By Console", "Index", "Game", new { @class = "btn btn-primary active" })
-            @Html.ActionLink("View By Players", "NonCompletedGames", "Game", new { @class = "btn btn-primary" })
+            <div class="controls pull-left">
+                @Html.ActionLink("View By Console", "Index", "Game", new { @class = "btn btn-primary" })
+                @Html.ActionLink("View By Players", "NonCompletedGames", "Game", new { @class = "btn btn-primary active" })
+            </div>
         </div>
-    </div>
-    @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
+        
+        @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
     <p class="clearfix"></p>
+
     <div class="container">
         @foreach (var gameStatus in Model)
         {

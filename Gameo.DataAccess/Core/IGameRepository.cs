@@ -7,5 +7,6 @@ namespace Gameo.DataAccess.Core
     public interface IGameRepository : IRepository<Game>
     {
         IEnumerable<Game> GetNonCompletedGames(string gamingConsoleName, DateTime currentTime);
+        IEnumerable<Game> GetCompletedGamesWithinGivenDay(string gamingConsoleName, DateTime dateTime);
     }
 }

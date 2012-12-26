@@ -86,5 +86,10 @@ namespace Gameo.Web.Controllers
         {
             return View(gameService.GetNonCompletedGames(customUserIdentity.BranchName, DateTime.Now));
         }
+
+        public ViewResult CompletedGames(CustomUserIdentity customUserIdentity)
+        {
+            return View(gameService.GetCompletedGamesWithinGivenDay(customUserIdentity.BranchName, DateTime.Now));
+        }
     }
 }
