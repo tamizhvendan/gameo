@@ -6,6 +6,11 @@ namespace Gameo.Domain
 {
     public class Game : Entity, IValidatableObject
     {
+        public double HoursPlayed
+        {
+            get { return Math.Round((OutTime - InTime).TotalHours, 1); }
+        }
+
         [Required(ErrorMessage = "Customer Name is required.")]
         public string CustomerName { get; set; }
         public string CustomerContactNumber { get; set; }

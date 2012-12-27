@@ -103,10 +103,16 @@ namespace Gameo.DataAccess.Tests
             AddEntityToDatabase(completedGameOnConsole1, yesterDayCompletedGameOnConsole1, nonCompletedGameOnConsole1, gameOnConsole2);
 
             var completedGames = gameRepository.GetCompletedGamesWithinGivenDay(consoleName, currentDateTime).ToList();
-
-            completedGames.Count().ShouldEqual(1);
-            completedGames.First().ConsoleName.ShouldEqual(consoleName);
-            completedGames.First().CustomerName.ShouldEqual("foo");
+            if (currentDateTime.Day == completedGameOnConsole1.OutTime.Day)
+            {
+                completedGames.Count().ShouldEqual(1);
+                completedGames.First().ConsoleName.ShouldEqual(consoleName);
+                completedGames.First().CustomerName.ShouldEqual("foo");
+            }
+            else
+            {
+                completedGames.Count().ShouldEqual(0);
+            }
         }
     }
 

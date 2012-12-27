@@ -132,5 +132,14 @@ namespace Gameo.Domain.Tests
 
             AssertEntityValidationError(game, "In Time should not be greater than current time.");
         }
+
+        [Test]
+        public void HoursPlayed_should_be_the_difference_of_InTime_and_OutTime()
+        {
+            game.HoursPlayed.ShouldEqual(1);
+
+            game.InTime = DateTime.Now.AddMinutes(30);
+            game.HoursPlayed.ShouldEqual(0.5);
+        }
     }
 }

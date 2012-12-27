@@ -23,7 +23,7 @@ namespace Gameo.DataAccess
                 .AsQueryable()
                 .Where(game => game.OutTime < dateTime)
                 .Where(game => game.ConsoleName == gamingConsoleName)
-                .Where(game => game.InTime > new DateTime(dateTime.Year, dateTime.Month, dateTime.Day));
+                .Where(game => game.InTime > DateTime.Today);
         }
     }
 }

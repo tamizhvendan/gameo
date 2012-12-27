@@ -31,19 +31,16 @@ namespace Gameo.DataAccess
                                                           {
                                                               classMap.AutoMap();
                                                               classMap.MapProperty(membership => membership.Games);
-                                                              classMap.MapProperty(membership => membership.MemberShipRefills);
+                                                              classMap.MapProperty(membership => membership.ReCharges);
                                                               classMap.GetMemberMap(membership => membership.IssuedOn)
-                                                                        .SetSerializationOptions(dateTimeSerializationOptions);
-                                                              classMap.GetMemberMap(membership => membership.ExpiresOn)
-                                                                        .SetSerializationOptions(dateTimeSerializationOptions);
-                                                              classMap.GetMemberMap(membership => membership.LastUsedOn)
-                                                                        .SetSerializationOptions(dateTimeSerializationOptions);
+                                                                  .SetSerializationOptions(dateTimeSerializationOptions);
+                                                             
                                                           });
 
-            BsonClassMap.RegisterClassMap<MembershipRefill>(classMap =>
+            BsonClassMap.RegisterClassMap<MembershipReCharge>(classMap =>
                                                                 {
                                                                     classMap.AutoMap();
-                                                                    classMap.GetMemberMap(membershipRefil => membershipRefil.RefilledOn)
+                                                                    classMap.GetMemberMap(membershipRefil => membershipRefil.RechargedOn)
                                                                         .SetSerializationOptions(dateTimeSerializationOptions);
                                                                 });
         }
