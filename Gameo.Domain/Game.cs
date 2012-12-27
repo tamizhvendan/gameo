@@ -16,7 +16,6 @@ namespace Gameo.Domain
         public string ConsoleName { get; set; }
         public GamePaymentType GamePaymentType { get; set; }
         public PackageType PackageType { get; set; }
-
         public Game()
         {
             InTime = DateTime.Now;
@@ -49,6 +48,11 @@ namespace Gameo.Domain
             {
                 yield return new ValidationResult("Price should be greater than zero.");
 
+            }
+
+            if (InTime > DateTime.Now)
+            {
+                yield return new ValidationResult("In Time should not be greater than current time.");
             }
         }
     }

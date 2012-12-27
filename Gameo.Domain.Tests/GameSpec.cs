@@ -123,5 +123,14 @@ namespace Gameo.Domain.Tests
         {
             AssertDateTimeEquality(game.OutTime, DateTime.Now.AddHours(1));
         }
+
+        [Test]
+        public void In_time_should_not_be_a_time_at_future()
+        {
+            game.InTime = DateTime.Now.AddHours(1);
+            game.OutTime = DateTime.Now.AddHours(3);
+
+            AssertEntityValidationError(game, "In Time should not be greater than current time.");
+        }
     }
 }

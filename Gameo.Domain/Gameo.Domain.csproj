@@ -47,6 +47,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="GamePaymentType.cs" />
     <Compile Include="GamingConsole.cs" />
+    <Compile Include="Membership.cs" />
+    <Compile Include="MemberShipRefill.cs" />
     <Compile Include="PackageType.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
