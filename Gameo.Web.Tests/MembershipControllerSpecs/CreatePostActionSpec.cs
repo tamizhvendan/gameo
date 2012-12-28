@@ -28,7 +28,18 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         }
 
         [Test]
-        public void Add_Membership_to_the_repository_if_model_state_is_valid()
+        public void Returns_Create_View_with_model_error_if_customer1contactnumber_already_exists()
+        {
+            MembershipRepositoryMock.Setup(repo => repo.IsCustomer1ContactNumberExists(membership.Customer1ContactNumber)).Returns(true);
+
+            var viewResult = MembershipController.Create(membership);
+            viewResult.ViewName.ShouldEqual(string.Empty);
+            viewResult.Model.ShouldEqual(membership);
+            AssertModelError(MembershipController, "Customer1ContactNumber", "Customer 1 Contact Number already exists.");
+        }
+
+        [Test]
+        public void Add_Membership_to_the_repository_if_model_state_is_valid_and_cutomer1contactnumber_not_exists()
         {
             MembershipRepositoryMock.Setup(repo => repo.Add(membership)).Verifiable();
 

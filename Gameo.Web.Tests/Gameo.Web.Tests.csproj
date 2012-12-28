@@ -88,6 +88,8 @@
     <Compile Include="GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="MembershipControllerSpecs\MembershipDetailGetActionSpec.cs" />
+    <Compile Include="MembershipControllerSpecs\MembershipDetailPostActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\MemebershipControllerSpecBase.cs" />
     <Compile Include="ModelSpecs\CustomUserIdentitySpec.cs" />
     <Compile Include="ModelSpecs\CustomUserPrincipleSpec.cs" />

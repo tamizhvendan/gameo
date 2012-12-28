@@ -59,6 +59,7 @@
     <Compile Include="DailySaleDetailsSpec.cs" />
     <Compile Include="GameRepositorySpec.cs" />
     <Compile Include="GamingConsoleRepositorySpec.cs" />
+    <Compile Include="MembershipRepositorySpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorySpecBase.cs" />
     <Compile Include="UserRepositorySpec.cs" />

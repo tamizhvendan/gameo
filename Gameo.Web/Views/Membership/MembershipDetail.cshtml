@@ -1,0 +1,51 @@
+﻿@model MembershipDetaiRequestViewModel
+@{
+    ViewBag.Title = "MembershipDetail";
+    Layout = "~/Views/Shared/_membership.cshtml";
+}
+<div class="container">
+    @using (Html.BeginForm("MembershipDetail", "Membership", FormMethod.Post, new { @class = "form-search" }))
+    {
+        @Html.TextBoxFor(model => model.MembershipId, new { @class = "input-large search-query", placeholder = "Membership Id" })
+        <span>(or) </span>
+        @Html.TextBoxFor(model => model.Customer1ContactNumber, new { @class = "input-large search-query", placeholder = "Customer Contact Number" })
+
+        <button type="submit" class="btn">
+            Find</button>
+    }
+    @if (Model.Membership != null)
+    {
+        <div class="row" style="padding-left: 5px">
+            <div class="well">
+                <p>
+                    Membership Id : <b>@Model.Membership.MembershipId</b>
+                </p>
+                <p>
+                    Customer1 Name : <b>@Model.Membership.Customer1Name</b>
+                </p>
+                <p>
+                    Customer1 ContactNumber : <b>@Model.Customer1ContactNumber</b>
+                </p>
+                <p>
+                    Customer2 Name : <b>@Model.Membership.Customer2Name</b>
+                </p>
+                <p>
+                    Customer2 ContactNumber : <b>@Model.Membership.Customer2ContactNumber</b>
+                </p>
+                <p>
+                    Remaining Hours : <b>@Model.Membership.RemainingHours</b>
+                </p>
+                <p>
+                    Membership Expires On : <b>@Model.Membership.ExpiresOn.ToString("D")</b>
+                </p>
+            </div>
+        </div>    
+    }
+    else if (!string.IsNullOrEmpty(Model.MembershipId) || !string.IsNullOrEmpty(Model.Customer1ContactNumber))
+    {
+        <div class="alert alert-info">
+            <h4>
+                No Membership information found!</h4>
+        </div>
+    }
+</div>
