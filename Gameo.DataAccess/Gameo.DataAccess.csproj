@@ -52,8 +52,10 @@
     <Compile Include="Core\IBranchRepository.cs" />
     <Compile Include="Core\IDailySaleDetailsRepository.cs" />
     <Compile Include="Core\IGameRepository.cs" />
+    <Compile Include="Core\IMembershipRepository.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IUserRepository.cs" />
+    <Compile Include="MembershipRepository.cs" />
     <Compile Include="GameRepository.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="UserRepository.cs" />

@@ -34,9 +34,6 @@
                 <th>
                     User Status
                 </th>
-                <th>
-                    
-                </th>
             </tr>
             @for (var i = 0; i < Model.Count(); i++)
             {
@@ -69,9 +66,6 @@
                             <span class="icon-remove"></span>
                             @Html.ActionLink("Activate", "Activate", "User", new { id = Model.ElementAt(i).Id }, new { @class = "link" })
                         }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit Status", "Edit", "GamingConsole", new { id = @Model.ElementAt(i).Id }, new { @class = "btn btn-link" })
                     </td>
                 </tr>
             }

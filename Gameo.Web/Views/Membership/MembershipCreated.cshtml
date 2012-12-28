@@ -1,0 +1,24 @@
+﻿@model Gameo.Domain.Membership
+@{
+    ViewBag.Title = "Membership Created Successfully";
+    Layout = "~/Views/Shared/_membership.cshtml";
+}
+
+
+<div class="container">
+    <div class="alert alert-success">
+        <h4>Membership Created Successfully!</h4>
+        Note down the below details
+    </div>
+    <div class="well">
+        <p>
+            Membership Id           : <b>@Model.MembershipId</b>
+        </p>
+        <p>
+            Customer1 Name          : <b>@Model.Customer1Name</b>
+        </p>
+        <p>
+            Customer1 ContactNumber : <b>@Model.Customer1ContactNumber</b>
+        </p>
+    </div>
+</div>

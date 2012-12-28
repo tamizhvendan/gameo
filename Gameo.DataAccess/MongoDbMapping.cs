@@ -25,11 +25,17 @@ namespace Gameo.DataAccess
                                                             .SetSerializationOptions(dateTimeSerializationOptions);
                                                         classMap.GetMemberMap(game => game.OutTime)
                                                             .SetSerializationOptions(dateTimeSerializationOptions);
+                                                        classMap.UnmapProperty(game => game.HoursPlayed);
                                                     });
 
             BsonClassMap.RegisterClassMap<Membership>(classMap =>
                                                           {
                                                               classMap.AutoMap();
+                                                              classMap.UnmapProperty(membership => membership.ExpiresOn);
+                                                              classMap.UnmapProperty(membership => membership.RemainingHours);
+                                                              classMap.UnmapProperty(membership => membership.RemainingHours);
+                                                              classMap.UnmapProperty(membership => membership.MembershipId);
+                                                              classMap.UnmapProperty(membership => membership.ExpiresOn);
                                                               classMap.MapProperty(membership => membership.Games);
                                                               classMap.MapProperty(membership => membership.ReCharges);
                                                               classMap.GetMemberMap(membership => membership.IssuedOn)

@@ -68,6 +68,12 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
+        public void ExpiresOn_should_be_min_DateTime_value_if_no_recharge_done()
+        {
+            membership.ExpiresOn.ShouldEqual(DateTime.MinValue);
+        }
+
+        [Test]
         public void IsExpired_should_be_true_if_ExpiresOn_is_less_than_current_day()
         {
             membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now.Subtract(new TimeSpan(230,0,0,0))});

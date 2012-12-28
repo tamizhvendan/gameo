@@ -5,11 +5,13 @@
     background-color: #f5f5f5;
 }
 
-.body-content {
-    margin-top: 50px;    
+.body-content
+{
+    margin-top: 50px;
 }
 
-.gameo-form {
+.gameo-form
+{
     padding: 19px 29px 29px;
     margin: auto;
     background-color: #fff;
@@ -23,40 +25,110 @@
 }
 
 
-.form-branch, .form-gameconsole {
+.form-branch, .form-gameconsole
+{
     width: 500px;
 }
 
-.table-branch {
+.form-membership {
+    padding: 19px 29px 29px;
+    width: 600px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.table-branch
+{
     width: 800px;
     margin: auto;
 }
 
-.working-status {    
+.working-status
+{
     width: 150px;
     border: 1px solid #FBEED5;
     text-align: center;
     padding: 3px 5px;
 }
 
-.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
-.ui-timepicker-div dl{ text-align: left; }
-.ui-timepicker-div dl dt{ height: 25px; }
-.ui-timepicker-div dl dd{ margin: -25px 10px 10px 65px; }
-.ui-timepicker-div td { font-size: 90%; }
-
-.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
-
-.ui-timepicker-rtl{ direction: rtl; }
-.ui-timepicker-rtl dl { text-align: right; }
-.ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
-.ui-timepicker-select { width: 100px; }
-
-.validation-summary-errors ul {
-  background-color: #fcf8e3;
-  border-color: #c09853;
+.ui-timepicker-div .ui-widget-header
+{
+    margin-bottom: 8px;
+}
+.ui-timepicker-div dl
+{
+    text-align: left;
+}
+.ui-timepicker-div dl dt
+{
+    height: 25px;
+}
+.ui-timepicker-div dl dd
+{
+    margin: -25px 10px 10px 65px;
+}
+.ui-timepicker-div td
+{
+    font-size: 90%;
 }
 
-.validation-summary-errors ul li {
+.ui-tpicker-grid-label
+{
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-timepicker-rtl
+{
+    direction: rtl;
+}
+.ui-timepicker-rtl dl
+{
+    text-align: right;
+}
+.ui-timepicker-rtl dl dd
+{
+    margin: 0 65px 10px 10px;
+}
+.ui-timepicker-select
+{
+    width: 100px;
+}
+
+.validation-summary-errors ul
+{
+    background-color: #fcf8e3;
+    border-color: #c09853;
+}
+
+.validation-summary-errors ul li
+{
     color: #b94a48;
+}
+.bs-docs-sidenav
+{
+    width: 258px;
+    width: 228px;
+    margin: 30px 0 0;
+    padding: 0;
+    background-color: white;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+}
+
+.bs-docs-sidenav.affix
+{
+    top: 40px;
 }

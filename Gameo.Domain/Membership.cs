@@ -37,7 +37,11 @@ namespace Gameo.Domain
         {
             get
             {
-                return reCharges.Last().RechargedOn.AddMonths(6);
+                if (reCharges.Any())
+                {
+                    return reCharges.Last().RechargedOn.AddMonths(6);
+                }
+                return DateTime.MinValue;
             }
         }
 
@@ -77,5 +81,7 @@ namespace Gameo.Domain
             game.GamePaymentType = GamePaymentType.Membership;
             games.Add(game);
         }
+
+        public string BranchName { get; set; }
     }
 }

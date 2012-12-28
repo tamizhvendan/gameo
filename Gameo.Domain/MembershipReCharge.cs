@@ -9,6 +9,7 @@ namespace Gameo.Domain
         public DateTime RechargedOn { get; set; }
         public decimal Price { get; set; }
         public int Hours { get; set; }
+        public string BranchName { get; set; }
 
         public MembershipReCharge()
         {

@@ -1,0 +1,56 @@
+﻿@model Gameo.Domain.Membership
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_membership.cshtml";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Create", "Membership", FormMethod.Post, new { @class = "form-horizontal form-membership" }))
+    {
+        <div class="control-group">
+            <h4>
+                Create New Membership</h4>
+            <label class="control-label" for="@Model.Customer1Name">
+                Customer1 Name </label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Customer1Name)
+                @Html.ValidationMessageFor(model => model.Customer1Name)
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.BranchName)
+        <div class="control-group">
+            <label class="control-label" for="@Model.Customer1ContactNumber">
+                Custome1 Contact Number</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Customer1ContactNumber)
+                @Html.ValidationMessageFor(model => model.Customer1ContactNumber)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="@Model.Customer2Name">
+                Customer2 Name </label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Customer2Name)
+                @Html.ValidationMessageFor(model => model.Customer2Name)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="@Model.Customer1ContactNumber">
+                Custome2 Contact Number</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Customer2ContactNumber)
+                @Html.ValidationMessageFor(model => model.Customer2ContactNumber)
+            </div>
+        </div>
+       
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Submit" class="btn btn-primary offset1"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </div>
+    }
+</div>
