@@ -91,6 +91,8 @@
     <Compile Include="MembershipControllerSpecs\MembershipDetailGetActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\MembershipDetailPostActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\MemebershipControllerSpecBase.cs" />
+    <Compile Include="MembershipControllerSpecs\RechargeGetActionSpec.cs" />
+    <Compile Include="MembershipControllerSpecs\RechargePostActionSpec.cs" />
     <Compile Include="ModelSpecs\CustomUserIdentitySpec.cs" />
     <Compile Include="ModelSpecs\CustomUserPrincipleSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

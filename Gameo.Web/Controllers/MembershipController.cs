@@ -66,5 +66,33 @@ namespace Gameo.Web.Controllers
             }
             return View(membershipDetaiRequestViewModel);
         }
+
+        public ViewResult Recharge(CustomUserIdentity customUserIdentity)
+        {
+            var membershipReCharge = new MembershipReCharge {BranchName = customUserIdentity.BranchName};
+
+            return View(membershipReCharge);
+        }
+
+        [HttpPost]
+        public ViewResult Recharge(string membershipId, MembershipReCharge membershipReCharge)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(membershipReCharge);
+            }
+
+            if (membershipRepository.FindByMembershipId(membershipId) == null)
+            {
+                ModelState.AddModelError("membershipId", "Membership Id not exists.");
+                return View(membershipReCharge);
+            }
+
+            membershipRepository.Recharge(membershipId, membershipReCharge);
+
+            ViewBag.MembershipId = membershipId;
+            return View("RechargeSuccess", membershipReCharge);
+
+        }
     }
 }
