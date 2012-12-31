@@ -19,7 +19,7 @@ namespace Gameo.Domain
         {
             get
             {
-                return Math.Round(reCharges.Sum(reCharge => reCharge.Hours) - games.Sum(game => game.HoursPlayed), 1);
+                return Math.Round(ReCharges.Sum(reCharge => reCharge.Hours) - Games.Sum(game => game.HoursPlayed), 1);
             }
         }
 
@@ -37,9 +37,9 @@ namespace Gameo.Domain
         {
             get
             {
-                if (reCharges.Any())
+                if (ReCharges.Any())
                 {
-                    return reCharges.Last().RechargedOn.AddMonths(6);
+                    return ReCharges.Last().RechargedOn.AddDays(180);
                 }
                 return DateTime.MinValue;
             }
@@ -49,7 +49,7 @@ namespace Gameo.Domain
         {
             get
             {
-                if (reCharges.Any())
+                if (ReCharges.Any())
                 {
                     return ExpiresOn < DateTime.Now;
                 }
@@ -57,31 +57,34 @@ namespace Gameo.Domain
             }
         }
 
-        private readonly List<Game> games;
-        private readonly List<MembershipReCharge> reCharges;
-
-        public IEnumerable<Game> Games { get { return games; } }
-
-        public IEnumerable<MembershipReCharge> ReCharges { get { return reCharges; } }
+        public ICollection<Game> Games { get; internal set; }
+        public ICollection<MembershipReCharge> ReCharges { get; internal set; }
 
         public Membership()
         {
-            games = new List<Game>();
-            reCharges = new List<MembershipReCharge>();
+            Games = new List<Game>();
+            ReCharges = new List<MembershipReCharge>();
             IssuedOn = DateTime.Now;
         }
 
         public void Recharge(MembershipReCharge membershipReCharge)
         {
-            reCharges.Add(membershipReCharge);
+            ReCharges.Add(membershipReCharge);
         }
 
         public void AddGame(Game game)
         {
             game.GamePaymentType = GamePaymentType.Membership;
-            games.Add(game);
+            Games.Add(game);
         }
 
         public string BranchName { get; set; }
+
+        public IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime dateTime)
+        {
+            return
+                ReCharges
+                .Where(recharge => recharge.BranchName == branchName && recharge.RechargedOn.Date == dateTime.Date);
+        }
     }
 }

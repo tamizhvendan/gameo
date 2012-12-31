@@ -52,7 +52,7 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
-        public void ExpiresOn_should_be_6_months_after_the_last_membership_recharge_date()
+        public void ExpiresOn_should_be_180_days_after_the_last_membership_recharge_date()
         {
             var dateTime = DateTime.Now;
             var membershipReCharges = new List<MembershipReCharge>
@@ -64,7 +64,7 @@ namespace Gameo.Domain.Tests
                                           };
             membershipReCharges.ForEach(membershipReCharge => membership.Recharge(membershipReCharge));
 
-            membership.ExpiresOn.ShouldEqual(dateTime.AddMonths(8));
+            membership.ExpiresOn.ShouldEqual(membershipReCharges.Last().RechargedOn.AddDays(180));
         }
 
         [Test]
@@ -142,6 +142,27 @@ namespace Gameo.Domain.Tests
             membership.AddGame(game2);
 
             membership.RemainingHours.ShouldEqual(2.5);
+        }
+
+        [Test]
+        public void Filters_recharges_by_branch_name_and_issued_date()
+        {
+            var rechargedOn = DateTime.Now;
+            var reCharge1 = new MembershipReCharge {BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn};
+            var reCharge2 = new MembershipReCharge {BranchName = "foo", Hours = 5, Price = 50, RechargedOn = rechargedOn};
+            var yesterdayDateTime = rechargedOn.Subtract(new TimeSpan(1, 0, 0, 0));
+            var reCharge3 = new MembershipReCharge {BranchName = "foo", Hours = 3, Price = 30, RechargedOn = yesterdayDateTime};
+            var reCharge4 = new MembershipReCharge {BranchName = "bar", Hours = 4, Price = 40, RechargedOn = rechargedOn};
+            membership.Recharge(reCharge1);
+            membership.Recharge(reCharge2);
+            membership.Recharge(reCharge3);
+            membership.Recharge(reCharge4);
+
+            var membershipReCharges = membership.GetRecharges("foo", rechargedOn).ToList();
+
+            membershipReCharges.Count().ShouldEqual(2);
+            membershipReCharges.Sum(r => r.Hours).ShouldEqual(7);
+            membershipReCharges.Sum(r => r.Price).ShouldEqual(70);
         }
     }
 }

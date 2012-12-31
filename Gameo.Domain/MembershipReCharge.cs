@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gameo.Domain
 {
-    public class MembershipReCharge : Entity, IValidatableObject
+    public class MembershipReCharge : IValidatableObject
     {
         public DateTime RechargedOn { get; set; }
         public decimal Price { get; set; }

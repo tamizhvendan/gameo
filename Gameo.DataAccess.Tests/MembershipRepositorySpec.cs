@@ -1,4 +1,6 @@
-﻿using Gameo.Domain;
+﻿using System;
+using System.Linq;
+using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
@@ -8,37 +10,34 @@ namespace Gameo.DataAccess.Tests
     public class MembershipRepositorySpec : RepositorySpecBase<Membership>
     {
         private MembershipRepository membershipRepository;
+        private Membership membership;
+        private MembershipReCharge membershipReCharge;
 
         [SetUp]
         public void SetUp()
         {
             membershipRepository = new MembershipRepository();
+            membership = new Membership { Customer1ContactNumber = "99889" };
+            membershipReCharge = new MembershipReCharge { BranchName = "foo", Hours = 5, Price = 50 };
+            AddEntityToDatabase(membership);
+
         }
 
         [Test]
         public void IsCustomer1ContactNumberExists_returns_true_if_contact_number_of_customer1_exists()
         {
-            var membership = new Membership {Customer1ContactNumber = "9988"};
-            AddEntityToDatabase(membership);
-
-            membershipRepository.IsCustomer1ContactNumberExists("9988").ShouldBeTrue();
+            membershipRepository.IsCustomer1ContactNumberExists("99889").ShouldBeTrue();
         }
 
         [Test]
         public void IsCustomer1ContactNumberExists_returns_false_if_contact_number_of_customer1__not_exists()
         {
-            var membership = new Membership { Customer1ContactNumber = "99889" };
-            AddEntityToDatabase(membership);
-
             membershipRepository.IsCustomer1ContactNumberExists("9988").ShouldBeFalse();
         }
 
         [Test]
         public void FindByMembershipId_return_Membership_if_membershipid_exists()
         {
-            var membership = new Membership { Customer1ContactNumber = "99889" };
-            AddEntityToDatabase(membership);
-
             var actualMembership = membershipRepository.FindByMembershipId(membership.MembershipId);
 
             actualMembership.Customer1ContactNumber.ShouldEqual(membership.Customer1ContactNumber);
@@ -47,20 +46,16 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void FindByMembershipId_return_null_if_membershipid_not_exists()
         {
-            var membership = new Membership { Customer1ContactNumber = "99889" };
-            AddEntityToDatabase(membership);
-
             var actualMembership = membershipRepository.FindByMembershipId("foo");
 
             actualMembership.ShouldBeNull();
         }
 
+
+
         [Test]
         public void FindByCustomer1ContactNumber_return_Membership_if_contactnumber_of_customer1_exists()
         {
-            var membership = new Membership { Customer1ContactNumber = "99889" };
-            AddEntityToDatabase(membership);
-
             var actualMembership = membershipRepository.FindByCustomer1ContactNumber(membership.Customer1ContactNumber);
 
             actualMembership.Customer1ContactNumber.ShouldEqual(membership.Customer1ContactNumber);
@@ -69,12 +64,45 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void FindByCustomer1ContactNumber_return_null_if_contactnumber_of_customer1_not_exists()
         {
-            var membership = new Membership { Customer1ContactNumber = "99889" };
-            AddEntityToDatabase(membership);
-
             var actualMembership = membershipRepository.FindByCustomer1ContactNumber("foo");
 
             actualMembership.ShouldBeNull();
+        }
+
+        [Test]
+        public void Recharges_by_retrieving_the_membership_and_adding_the_recharge_to_it()
+        {
+            membershipRepository.Recharge(membership.MembershipId, membershipReCharge);
+
+            AssertUpdatedEntity(membership.Id, actualMembership =>
+                                                   {
+                                                       actualMembership.RemainingHours.ShouldEqual(5);
+                                                       var reCharge = actualMembership.ReCharges.First();
+                                                       reCharge.BranchName.ShouldEqual(membershipReCharge.BranchName);
+                                                       reCharge.Hours.ShouldEqual(membershipReCharge.Hours);
+                                                       reCharge.Price.ShouldEqual(membershipReCharge.Price);
+                                                   });
+        }
+
+        [Test]
+        public void GetRecharges_Returns_the_recharges_for_given_day_and_given_branch_name()
+        {
+            var membership2 = new Membership {Customer1ContactNumber = "626262"};
+            var rechargedOn = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0));
+            var reCharge = new MembershipReCharge
+                               {
+                                   BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn
+                               };
+            AddEntityToDatabase(membership2);
+            membershipRepository.Recharge(membership.MembershipId, membershipReCharge);
+            membershipRepository.Recharge(membership.MembershipId, reCharge);
+            membershipRepository.Recharge(membership2.MembershipId, membershipReCharge);
+            membershipRepository.Recharge(membership2.MembershipId, reCharge);
+
+            var membershipReCharges = membershipRepository.GetRecharges("foo", DateTime.Now);
+            membershipReCharges.Count().ShouldEqual(2);
+            membershipReCharges.Sum(m => m.Hours).ShouldEqual(10);
+            membershipReCharges.Sum(m => m.Price).ShouldEqual(100);
         }
     }
 }
