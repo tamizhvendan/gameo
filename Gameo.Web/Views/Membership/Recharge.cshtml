@@ -1,0 +1,52 @@
+﻿@model Gameo.Domain.MembershipReCharge
+@{
+    ViewBag.Title = "Recharge";
+    Layout = "~/Views/Shared/_membership.cshtml";
+}
+<div class="container">
+    @using (Html.BeginForm("Recharge", "Membership", FormMethod.Post, new { @class = "form-horizontal form-membership" }))
+    {
+        <div class="control-group">
+            <h4>Recharge</h4>
+            <label class="control-label" for="membershipId">
+                Membership Id</label>
+            <div class="controls">
+                @Html.TextBox("membershipId")
+                @Html.ValidationMessage("membershipId")
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.Hours">
+                Hours</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Hours)
+                @Html.ValidationMessageFor(model => model.Hours)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.Price">
+                Price</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.BranchName)
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Recharge" class="btn btn-primary offset1"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('form').submit(function () {
+            var confirmMsg = "Hours : " + $("#Hours").val() + "\r\n Price : " + $("#Price").val() + "\r\n Are you sure to recharge ?";
+            return confirm(confirmMsg);
+        });
+    });
+</script>
+

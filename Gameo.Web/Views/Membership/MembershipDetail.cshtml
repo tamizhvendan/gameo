@@ -3,7 +3,7 @@
     ViewBag.Title = "MembershipDetail";
     Layout = "~/Views/Shared/_membership.cshtml";
 }
-<div class="container">
+<div class="container span10">
     @using (Html.BeginForm("MembershipDetail", "Membership", FormMethod.Post, new { @class = "form-search" }))
     {
         @Html.TextBoxFor(model => model.MembershipId, new { @class = "input-large search-query", placeholder = "Membership Id" })
@@ -15,7 +15,7 @@
     }
     @if (Model.Membership != null)
     {
-        <div class="row" style="padding-left: 5px">
+        <div class="row span8">
             <div class="well">
                 <p>
                     Membership Id : <b>@Model.Membership.MembershipId</b>
@@ -38,6 +38,57 @@
                 <p>
                     Membership Expires On : <b>@Model.Membership.ExpiresOn.ToString("D")</b>
                 </p>
+                <div class="accordion" id="accordion1">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                                Recharge History </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                @if (!Model.Membership.ReCharges.Any())
+                                {
+                                    <span>No Recharges Found! </span>
+                                }
+                                else
+                                {
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th>
+                                                Recharged On
+                                            </th>
+                                            <th>
+                                                Price
+                                            </th>
+                                            <th>
+                                                Hours
+                                            </th>
+                                            <th>
+                                                Branch Name
+                                            </th>
+                                        </tr>
+                                        @foreach (var recharge in Model.Membership.ReCharges.OrderByDescending(recharge => recharge.RechargedOn))
+                                        {
+                                            <tr>
+                                                <td>@recharge.RechargedOn.ToString("D")
+                                                </td>
+                                                <td>
+                                                    @recharge.Price
+                                                </td>
+                                                <td>
+                                                    @recharge.Hours
+                                                </td>
+                                                <td>
+                                                    @recharge.BranchName
+                                                </td>
+                                            </tr>
+                                        }
+                                    </table>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>    
     }

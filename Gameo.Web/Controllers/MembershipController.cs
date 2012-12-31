@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
 using Gameo.Web.Models;
