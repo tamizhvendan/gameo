@@ -97,9 +97,11 @@ namespace Gameo.Domain.Tests
         [TestCase(10, true)]
         [TestCase(-4, false)]
         [TestCase(-1, false)]
-        public void Price_should_be_greater_than_zero(decimal price, bool isHappyPath = false)
+        public void Price_should_be_greater_than_zero_if_the_payment_type_is_one_time(decimal price, bool isHappyPath = false)
         {
+            game.GamePaymentType = GamePaymentType.OneTime;
             game.Price = price;
+
             if (isHappyPath)
             {
                 AssertZeroValidationError(game);
@@ -108,6 +110,16 @@ namespace Gameo.Domain.Tests
             {
                 AssertEntityValidationError(game, "Price should be greater than zero.");
             }
+        }
+
+        [Test]
+        public void Price_can_be_zero_if_the_payment_type_is_membership()
+        {
+            game.GamePaymentType = GamePaymentType.Membership;
+            game.Price = 0;
+
+            AssertZeroValidationError(game);
+
         }
 
         [Test]

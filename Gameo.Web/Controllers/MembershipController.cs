@@ -120,7 +120,11 @@ namespace Gameo.Web.Controllers
 
             RetrieveGamingConsolesAndPutItInViewBag(customUserIdentity.BranchName);
 
-            return View("AssignConsole", new MembershipAssignConsoleViewModel{ Membership = membership });
+            return View("AssignConsole", 
+                new MembershipAssignConsoleViewModel
+                    {
+                        Membership = membership, Game = new Game { GamePaymentType = GamePaymentType.Membership}
+                    });
         }
 
         [HttpPost]

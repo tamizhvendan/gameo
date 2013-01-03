@@ -51,7 +51,7 @@ namespace Gameo.Domain
                 yield return new ValidationResult("Difference between In Time and Out Time should be in multiples of half-hour.");
             }
 
-            if (Price <= 0)
+            if (GamePaymentType == GamePaymentType.OneTime && Price <= 0)
             {
                 yield return new ValidationResult("Price should be greater than zero.");
 
