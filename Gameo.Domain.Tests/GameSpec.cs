@@ -84,6 +84,15 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
+        public void Validates_the_difference_in_seconds_of_InTime_and_OutTime()
+        {
+            game.InTime = DateTime.Now;
+            game.OutTime = game.InTime.AddSeconds(5);
+
+            AssertEntityValidationError(game, "Difference between In Time and Out Time should be in multiples of half-hour."); 
+        }
+
+        [Test]
         [TestCase(0, false)]
         [TestCase(10, true)]
         [TestCase(-4, false)]

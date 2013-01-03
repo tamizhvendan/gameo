@@ -44,7 +44,8 @@ namespace Gameo.Domain
                 yield return new ValidationResult("Out time should be greater than in time.");
             }
 
-            if (((int)OutTime.Subtract(InTime).TotalMinutes) % 30 != 0)
+            var differenceBetweenInTimeAndOutTimeInMinutes = ((int) OutTime.Subtract(InTime).TotalMinutes);
+            if (differenceBetweenInTimeAndOutTimeInMinutes == 0 || differenceBetweenInTimeAndOutTimeInMinutes % 30 != 0)
             {
                 yield return new ValidationResult("Difference between In Time and Out Time should be in multiples of half-hour.");
             }

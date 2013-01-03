@@ -16,9 +16,9 @@ namespace Gameo.Web.Controllers
             this.membershipRepository = membershipRepository;
         }
 
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("MembershipDetail");
         }
 
         public ViewResult Create(CustomUserIdentity customUserIdentity)
