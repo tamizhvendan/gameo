@@ -1,4 +1,5 @@
-﻿using Gameo.Domain;
+﻿using System.Web.Mvc;
+using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
@@ -21,7 +22,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         {
             MembershipController.ModelState.AddModelError("foo", "bar");
 
-            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge);
+            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge) as ViewResult;
 
             viewResult.ViewName.ShouldEqual(string.Empty);
             viewResult.Model.ShouldEqual(membershipReCharge);
@@ -33,7 +34,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
             Membership membership = null;
             MembershipRepositoryMock.Setup(repo => repo.FindByMembershipId(MembershipId)).Returns(membership);
 
-            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge);
+            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge) as ViewResult;
 
             viewResult.ViewName.ShouldEqual(string.Empty);
             AssertModelError(MembershipController, "membershipId", "Membership Id not exists.");
@@ -52,15 +53,14 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         }
 
         [Test]
-        public void Returns_Recharge_Success_View_upon_successful_recharge()
+        public void Redirect_to_Recharge_Success_upon_successful_recharge()
         {
             MembershipRepositoryMock.Setup(repo => repo.FindByMembershipId(MembershipId)).Returns(new Membership());
 
-            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge);
+            var actionResult = MembershipController.Recharge(MembershipId, membershipReCharge);
 
-            viewResult.ViewName.ShouldEqual("RechargeSuccess");
-            viewResult.Model.ShouldEqual(membershipReCharge);
-            var membershipId = viewResult.ViewBag.MembershipId as string;
+            AssertReadirectToAction(actionResult, "RechargeSuccess");
+            var membershipId = MembershipController.TempData["MembershipId"] as string;
             membershipId.ShouldEqual(MembershipId);
         }
 

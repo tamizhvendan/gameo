@@ -13,7 +13,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         {
             SetUpRepositoryWithGamingConsoles();
 
-            var viewResult = GameController.AddCustomer(games, CustomUserIdentity);
+            var viewResult = GameController.AddCustomer(Games, CustomUserIdentity);
 
             AssertGamingConsolesInViewBag(viewResult);
         }
@@ -21,7 +21,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         [Test]
         public void Adds_one_more_game_instance_in_the_games_list_pass_it_as_view_model()
         {
-            var viewResult = GameController.AddCustomer(games, CustomUserIdentity);
+            var viewResult = GameController.AddCustomer(Games, CustomUserIdentity);
 
             var actualGames = viewResult.Model as List<Game>;
             actualGames.Count.ShouldEqual(1);
@@ -30,7 +30,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         [Test]
         public void Returns_Assign_Console_View()
         {
-            var viewResult = GameController.AddCustomer(games, CustomUserIdentity);
+            var viewResult = GameController.AddCustomer(Games, CustomUserIdentity);
 
             viewResult.ViewName.ShouldEqual("AssignConsole");
         }
@@ -40,10 +40,10 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         {
             GameController.ModelState.AddModelError("foo", "bar");
 
-            var viewResult = GameController.AddCustomer(games, CustomUserIdentity);
+            var viewResult = GameController.AddCustomer(Games, CustomUserIdentity);
 
             viewResult.ViewName.ShouldEqual("AssignConsole");
-            viewResult.Model.ShouldEqual(games);
+            viewResult.Model.ShouldEqual(Games);
         }
     }
 }

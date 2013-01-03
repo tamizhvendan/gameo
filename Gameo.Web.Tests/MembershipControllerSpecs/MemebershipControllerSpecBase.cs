@@ -11,14 +11,15 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
     {
         protected MembershipController MembershipController;
         protected Mock<IMembershipRepository> MembershipRepositoryMock;
-        protected CustomUserIdentity CustomUserIdentity;
-
+        
         [SetUp]
         public void MemebershipControllerSpecSetUp()
         {
-            CustomUserIdentity = new CustomUserIdentity(new User { BranchName = "foo"});
+            User = new User {BranchName = "foo"};
+            CustomUserIdentity = new CustomUserIdentity(User);
             MembershipRepositoryMock = new Mock<IMembershipRepository>();
-            MembershipController = new MembershipController(MembershipRepositoryMock.Object);
+            GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
+            MembershipController = new MembershipController(MembershipRepositoryMock.Object, GamingConsoleRepositoryMock.Object);
         }
     }
 }

@@ -13,11 +13,11 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         {
             var currentTime = DateTime.Now;
             GameServiceMock.Setup(service => service.GetNonCompletedGames(CustomUserIdentity.BranchName, currentTime))
-                                .Returns(games);
+                                .Returns(Games);
 
             var viewResult = GameController.NonCompletedGames(CustomUserIdentity);
 
-            viewResult.Model.ShouldEqual(games);
+            viewResult.Model.ShouldEqual(Games);
             viewResult.ViewName.ShouldEqual(string.Empty);
         }
     }

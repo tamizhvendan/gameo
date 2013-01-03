@@ -13,7 +13,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
             GameController.ModelState.AddModelError("foo", "bar");
             SetUpRepositoryWithGamingConsoles();
 
-            var viewResult = GameController.AssignConsole(games, CustomUserIdentity) as ViewResult;
+            var viewResult = GameController.AssignConsole(Games, CustomUserIdentity) as ViewResult;
 
             AssertGamingConsolesInViewBag(viewResult);
         }
@@ -23,26 +23,26 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         {
             GameController.ModelState.AddModelError("foo", "bar");
 
-            var viewResult = GameController.AssignConsole(games, CustomUserIdentity) as ViewResult;
+            var viewResult = GameController.AssignConsole(Games, CustomUserIdentity) as ViewResult;
 
             viewResult.ViewName.ShouldEqual("AssignConsole");
-            viewResult.Model.ShouldEqual(games);
+            viewResult.Model.ShouldEqual(Games);
         }
 
         [Test]
         public void If_Model_state_is_Valid_Add_Games_using_Game_Repository()
         {
-            GameRepositoryMock.Setup(repo => repo.AddMany(games)).Verifiable();
+            GameRepositoryMock.Setup(repo => repo.AddMany(Games)).Verifiable();
 
-            GameController.AssignConsole(games, CustomUserIdentity);
+            GameController.AssignConsole(Games, CustomUserIdentity);
 
-            GameRepositoryMock.Verify(repo => repo.AddMany(games));
+            GameRepositoryMock.Verify(repo => repo.AddMany(Games));
         }
 
         [Test]
         public void After_adds_the_game_in_repository_redirects_to_index_action()
         {
-            var actionResult = GameController.AssignConsole(games, CustomUserIdentity);
+            var actionResult = GameController.AssignConsole(Games, CustomUserIdentity);
             AssertReadirectToIndexAction(actionResult);
         }
     }

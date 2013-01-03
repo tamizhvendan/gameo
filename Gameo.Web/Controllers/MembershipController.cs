@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
 using Gameo.Web.Models;
@@ -10,10 +11,12 @@ namespace Gameo.Web.Controllers
     public class MembershipController : ApplicationControllerBase
     {
         private readonly IMembershipRepository membershipRepository;
+        private readonly IGamingConsoleRepository gamingConsoleRepository;
 
-        public MembershipController(IMembershipRepository membershipRepository)
+        public MembershipController(IMembershipRepository membershipRepository, IGamingConsoleRepository gamingConsoleRepository)
         {
             this.membershipRepository = membershipRepository;
+            this.gamingConsoleRepository = gamingConsoleRepository;
         }
 
         public ActionResult Index()
@@ -74,7 +77,7 @@ namespace Gameo.Web.Controllers
         }
 
         [HttpPost]
-        public ViewResult Recharge(string membershipId, MembershipReCharge membershipReCharge)
+        public ActionResult Recharge(string membershipId, MembershipReCharge membershipReCharge)
         {
             if (!ModelState.IsValid)
             {
@@ -88,10 +91,56 @@ namespace Gameo.Web.Controllers
             }
 
             membershipRepository.Recharge(membershipId, membershipReCharge);
+            TempData["MembershipId"] = membershipId;
 
-            ViewBag.MembershipId = membershipId;
-            return View("RechargeSuccess", membershipReCharge);
+            return RedirectToAction("RechargeSuccess");
+        }
 
+        public ViewResult Membership()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult Membership(string membershipId,CustomUserIdentity customUserIdentity)
+        {
+            var membership = membershipRepository.FindByMembershipId(membershipId);
+
+            if (membership == null)
+            {
+                ModelState.AddModelError("membershipId", "Membership Id doesn't exists.");
+                return View();
+            }
+
+            if (membership.IsExpired)
+            {
+                ModelState.AddModelError("membershipId", "Membership Id is expired. Kindly recharge.");
+                return View();
+            }
+
+            RetrieveGamingConsolesAndPutItInViewBag(customUserIdentity.BranchName);
+
+            return View("AssignConsole", new MembershipAssignConsoleViewModel{ Membership = membership });
+        }
+
+        [HttpPost]
+        public ViewResult AssignConsole(MembershipAssignConsoleViewModel membershipAssignConsoleViewModel)
+        {
+            
+            return View();
+        }
+
+        public ViewResult RechargeSuccess()
+        {
+            ViewBag.MembershipId = TempData["MembershipId"];
+            return View();
+        }
+
+        private void RetrieveGamingConsolesAndPutItInViewBag(string branchName)
+        {
+            var gamingConsolesByBranchName = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
+            ViewBag.GamingConsoles =
+                gamingConsolesByBranchName.Select(console => new SelectListItem { Text = console.Name, Value = console.Name });
         }
     }
 }

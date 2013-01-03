@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
+using Gameo.Web.Models;
 using Moq;
 using NUnit.Framework;
 using Should;
@@ -12,11 +13,17 @@ namespace Gameo.Web.Tests
     public abstract class ControllerSpecBase
     {
         protected Mock<IBranchRepository> BranchRepositoryMock;
+        protected Mock<IGamingConsoleRepository> GamingConsoleRepositoryMock;
+        protected CustomUserIdentity CustomUserIdentity;
+        protected User User;
 
         [SetUp]
         public void ControllerSpecSetUp()
         {
             BranchRepositoryMock = new Mock<IBranchRepository>();
+            GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
+            User = new User();
+            CustomUserIdentity = new CustomUserIdentity(User);
         }
 
 
@@ -67,6 +74,28 @@ namespace Gameo.Web.Tests
             actualBranches.Count().ShouldEqual(2);
             actualBranches.Any(item => item.Text == "foo" && item.Value == "foo").ShouldBeTrue();
             actualBranches.Any(item => item.Text == "bar" && item.Value == "bar").ShouldBeTrue();
+        }
+
+        protected void SetUpRepositoryWithGamingConsoles()
+        {
+            User.BranchName = "Branch1";
+            var gamingConsoles = new List<GamingConsole>
+                                     {
+                                         new GamingConsole
+                                             {
+                                                 Name = "Console1",
+                                             }
+                                     };
+            GamingConsoleRepositoryMock.Setup(repo => repo.GetGamingConsolesByBranchName(User.BranchName))
+                .Returns(gamingConsoles);
+        }
+
+        protected static void AssertGamingConsolesInViewBag(ViewResult viewResult)
+        {
+            var selectListItems = viewResult.ViewBag.GamingConsoles as IEnumerable<SelectListItem>;
+            selectListItems.Count().ShouldEqual(1);
+            selectListItems.First().Text.ShouldEqual("Console1");
+            selectListItems.First().Value.ShouldEqual("Console1");
         }
     }
 }

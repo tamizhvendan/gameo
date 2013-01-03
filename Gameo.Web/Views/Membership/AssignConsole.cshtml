@@ -1,0 +1,79 @@
+﻿@model Gameo.Web.ViewModels.MembershipAssignConsoleViewModel
+@{
+    ViewBag.Title = "AssignConsole";
+    Layout = "~/Views/Shared/_membership.cshtml";
+}
+<div class="container">
+    @using (Html.BeginForm("AssignConsole", "Membership", FormMethod.Post, new { @class = "form-horizontal form-membership" }))
+    {
+        <div class="control-group">
+            <h4>
+                Assign Console</h4>
+            <label class="control-label" for="@Model.Game.CustomerName">
+                Customer Name
+            </label>
+            <div class="controls">
+                <select id="Game_CustomerName" name="Game.CustomerName">
+                    <option value="@Model.Membership.Customer1Name">@Model.Membership.Customer1Name</option>
+                    @if (!string.IsNullOrEmpty(Model.Membership.Customer2Name))
+                    {
+                        <option value="@Model.Membership.Customer1Name">@Model.Membership.Customer2Name</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.Game.CustomerName)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="Game.CustomerContactNumber">
+                Customer Contact Number
+            </label>
+            <div class="controls">
+                <select id="Game_CustomerContactNumber" name="Game.CustomerContactNumber">
+                    <option value="@Model.Membership.Customer1ContactNumber">@Model.Membership.Customer1ContactNumber</option>
+                    @if (!string.IsNullOrEmpty(Model.Membership.Customer2Name))
+                    {
+                        <option value="@Model.Membership.Customer2ContactNumber">@Model.Membership.Customer2ContactNumber</option>
+                    }
+                </select>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="Game.InTime">In Time</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Game.InTime, new { @class = "input-medium time-picker" })
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="Game.InTime">Out Time</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Game.OutTime, new { @class = "input-medium time-picker" })
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="Game.ConsoleName">Console Name</label>
+            <div class="controls">
+                <select id="Game_ConsoleName" name="Game.ConsoleName">
+                    @foreach (var gamingConsole in ViewBag.GamingConsoles as IEnumerable<SelectListItem>)
+                    {
+                        <option value="@gamingConsole.Value">@gamingConsole.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+        
+        @Html.HiddenFor(model => model.Membership.IssuedOn)
+        @Html.HiddenFor(model => model.Membership.Customer1ContactNumber)
+        @Html.HiddenFor(model => model.Game.GamePaymentType)
+        @Html.HiddenFor(model => model.Membership.Customer1Name)
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Submit" class="btn btn-primary offset1" />
+                <input type="reset" value="Reset" class="btn" />
+            </div>
+        </div>
+    }
+</div>

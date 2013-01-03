@@ -12,12 +12,12 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         {
             var dateTime = DateTime.Now;
             GameServiceMock.Setup(service => service.GetCompletedGamesWithinGivenDay(CustomUserIdentity.BranchName, dateTime))
-                            .Returns(games);
+                            .Returns(Games);
 
             var viewResult = GameController.CompletedGames(CustomUserIdentity);
 
             viewResult.ViewName.ShouldEqual(string.Empty);
-            viewResult.Model.ShouldEqual(games);
+            viewResult.Model.ShouldEqual(Games);
         }
     }
 }

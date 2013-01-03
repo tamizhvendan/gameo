@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Membership";
+    Layout = "~/Views/Shared/_membership.cshtml";
+}
+
+@using (Html.BeginForm("Membership", "Membership", FormMethod.Post, new { @class = "form-inline" }))
+{
+    @Html.Label("membershipId", "Membership Id : ")
+    @Html.TextBox("membershipId", "", new { @class = "input-large" })
+    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    @Html.ValidationMessage("membershipId")
+}

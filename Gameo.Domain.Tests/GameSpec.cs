@@ -150,5 +150,11 @@ namespace Gameo.Domain.Tests
             game.InTime = DateTime.Now.AddMinutes(30);
             game.HoursPlayed.ShouldEqual(0.5);
         }
+
+        [Test]
+        public void PaymentType_should_Be_one_time_by_default()
+        {
+            game.GamePaymentType.ShouldEqual(GamePaymentType.OneTime);
+        }
     }
 }
