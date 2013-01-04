@@ -22,7 +22,7 @@ namespace Gameo.Web.Tests
         {
             BranchRepositoryMock = new Mock<IBranchRepository>();
             GamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
-            User = new User();
+            User = new User { BranchName = "branch1" };
             CustomUserIdentity = new CustomUserIdentity(User);
         }
 

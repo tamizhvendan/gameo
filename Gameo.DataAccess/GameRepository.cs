@@ -9,20 +9,20 @@ namespace Gameo.DataAccess
 {
     public class GameRepository : RepositoryBase<Game>, IGameRepository
     {
-        public IEnumerable<Game> GetNonCompletedGames(string gamingConsoleName, DateTime currentTime)
+        public IEnumerable<Game> GetNonCompletedGames(string branchName, DateTime currentTime)
         {
             return EntityCollection
                 .AsQueryable()
-                .Where(game => game.ConsoleName == gamingConsoleName)
+                .Where(game => game.BranchName == branchName)
                 .Where(game => game.OutTime > currentTime);
         }
 
-        public IEnumerable<Game> GetCompletedGamesWithinGivenDay(string gamingConsoleName, DateTime dateTime)
+        public IEnumerable<Game> GetCompletedGamesWithinGivenDay(string branchName, DateTime dateTime)
         {
             return EntityCollection
                 .AsQueryable()
                 .Where(game => game.OutTime < dateTime)
-                .Where(game => game.ConsoleName == gamingConsoleName)
+                .Where(game => game.BranchName == branchName)
                 .Where(game => game.InTime > DateTime.Today);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Gameo.Domain;
 using NUnit.Framework;
 using Should;
@@ -26,6 +27,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
             viewResult.ViewName.ShouldEqual(string.Empty);
             var games = viewResult.Model as List<Game>;
 
+            games.First().BranchName.ShouldEqual(CustomUserIdentity.BranchName);
             games.Count.ShouldEqual(1);
         }
     }

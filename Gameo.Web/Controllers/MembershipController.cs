@@ -102,7 +102,7 @@ namespace Gameo.Web.Controllers
         }
 
         [HttpPost]
-        public ViewResult Membership(string membershipId,CustomUserIdentity customUserIdentity)
+        public ViewResult Membership(string membershipId, CustomUserIdentity customUserIdentity)
         {
             var membership = membershipRepository.FindByMembershipId(membershipId);
 
@@ -128,9 +128,13 @@ namespace Gameo.Web.Controllers
         }
 
         [HttpPost]
-        public ViewResult AssignConsole(MembershipAssignConsoleViewModel membershipAssignConsoleViewModel)
+        public ActionResult AssignConsole(MembershipAssignConsoleViewModel membershipAssignConsoleViewModel)
         {
-            
+            if (!ModelState.IsValid)
+            {
+                //RetrieveGamingConsolesAndPutItInViewBag(membershipAssignConsoleViewModel.Game.);
+                return View(membershipAssignConsoleViewModel);
+            }
             return View();
         }
 

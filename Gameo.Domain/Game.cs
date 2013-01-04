@@ -19,6 +19,8 @@ namespace Gameo.Domain
         public decimal Price { get; set; }
         [Required(ErrorMessage = "Console Name is required.")]
         public string ConsoleName { get; set; }
+        [Required(ErrorMessage = "Branch Name is required.")]
+        public string BranchName { get; set; }
         public GamePaymentType GamePaymentType { get; set; }
         public PackageType PackageType { get; set; }
         public Game()

@@ -47,66 +47,66 @@ namespace Gameo.DataAccess.Tests
         public void Retrieves_Non_Completed_Games_of_given_console()
         {
             var currentTime = DateTime.Now;
-            var fooGame = new Game { ConsoleName = "Console1", InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
-            var fooGameOnConsole2 = new Game { ConsoleName = "Console2", CustomerName = "foo" };
-            var barGame = new Game
+            var fooGameOnBranch1 = new Game { BranchName = "Branch1", InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
+            var fooGameOnBranch2 = new Game { BranchName = "Branch2", CustomerName = "foo" };
+            var barGameOnBranch1 = new Game
                               {
-                                  ConsoleName = "Console1",
+                                  BranchName = "Branch1",
                                   InTime = currentTime.Subtract(new TimeSpan(0, 2, 0)),
                                   OutTime = currentTime.Subtract(new TimeSpan(0, 1, 0)),
                                   CustomerName = "bar"
                               };
-            var fooBarGame = new Game
+            var fooBarGameOnBranch1 = new Game
                                  {
-                                     ConsoleName = "Console1",
+                                     BranchName = "Branch1",
                                      CustomerName = "foobar",
                                      InTime = currentTime.Subtract(new TimeSpan(0, 1, 0)),
                                      OutTime = currentTime.AddMinutes(30)
                                  };
-            AddEntityToDatabase(barGame, fooBarGame, fooGameOnConsole2, fooGame);
+            AddEntityToDatabase(barGameOnBranch1, fooBarGameOnBranch1, fooGameOnBranch2, fooGameOnBranch1);
 
-            var nonCompletedGamesInConsole1 = gameRepository.GetNonCompletedGames("Console1", currentTime);
-            var nonCompletedGamesInConsole2 = gameRepository.GetNonCompletedGames("Console2", currentTime);
+            var nonCompletedGamesInBranch1 = gameRepository.GetNonCompletedGames("Branch1", currentTime);
+            var nonCompletedGamesInBranch2 = gameRepository.GetNonCompletedGames("Branch2", currentTime);
 
-            nonCompletedGamesInConsole1.Count().ShouldEqual(2);
-            nonCompletedGamesInConsole2.Count().ShouldEqual(1);
-            nonCompletedGamesInConsole2.First().CustomerName.ShouldEqual(fooGameOnConsole2.CustomerName);
-            nonCompletedGamesInConsole1.Any(game => game.CustomerName == fooGame.CustomerName).ShouldBeTrue();
-            nonCompletedGamesInConsole1.Any(game => game.CustomerName == fooBarGame.CustomerName).ShouldBeTrue();
+            nonCompletedGamesInBranch1.Count().ShouldEqual(2);
+            nonCompletedGamesInBranch2.Count().ShouldEqual(1);
+            nonCompletedGamesInBranch2.First().CustomerName.ShouldEqual(fooGameOnBranch2.CustomerName);
+            nonCompletedGamesInBranch1.Any(game => game.CustomerName == fooGameOnBranch1.CustomerName).ShouldBeTrue();
+            nonCompletedGamesInBranch1.Any(game => game.CustomerName == fooBarGameOnBranch1.CustomerName).ShouldBeTrue();
         }
 
         [Test]
-        public void Retrieves_Completed_Games_Within_given_day_for_given_console()
+        public void Retrieves_Completed_Games_Within_given_day_for_given_branch()
         {
             var currentDateTime = DateTime.Now;
-            var consoleName = "Console1";
-            var completedGameOnConsole1 = new Game
+            var branchName = "branch1";
+            var completedGameOnBranch1 = new Game
                                               {
-                                                  ConsoleName = consoleName,
+                                                  BranchName = branchName,
                                                   CustomerName = "foo",
                                                   InTime = currentDateTime.Subtract(new TimeSpan(0, 2, 0, 0)),
                                                   OutTime = currentDateTime.Subtract(new TimeSpan(0, 1, 0, 0))
                                               };
-            var yesterDayCompletedGameOnConsole1 = new Game
+            var yesterDayCompletedGameOnBranch1 = new Game
                                                        {
-                                                           ConsoleName = consoleName,
+                                                           BranchName = branchName,
                                                            InTime = currentDateTime.Subtract(new TimeSpan(1, 4, 0, 0)),
                                                            OutTime = currentDateTime.Subtract(new TimeSpan(1, 3, 0, 0))
                                                        };
-            var nonCompletedGameOnConsole1 = new Game
+            var nonCompletedGameOnBranch1 = new Game
                                                  {
-                                                     ConsoleName = consoleName,
+                                                     BranchName = branchName,
                                                      InTime = currentDateTime,
                                                      OutTime = currentDateTime.AddHours(3)
                                                  };
-            var gameOnConsole2 = new Game {ConsoleName = "Console2"};
-            AddEntityToDatabase(completedGameOnConsole1, yesterDayCompletedGameOnConsole1, nonCompletedGameOnConsole1, gameOnConsole2);
+            var gameOnBranch2 = new Game {BranchName = "Branch2"};
+            AddEntityToDatabase(completedGameOnBranch1, yesterDayCompletedGameOnBranch1, nonCompletedGameOnBranch1, gameOnBranch2);
 
-            var completedGames = gameRepository.GetCompletedGamesWithinGivenDay(consoleName, currentDateTime).ToList();
-            if (currentDateTime.Day == completedGameOnConsole1.OutTime.Day)
+            var completedGames = gameRepository.GetCompletedGamesWithinGivenDay(branchName, currentDateTime).ToList();
+            if (currentDateTime.Day == completedGameOnBranch1.OutTime.Day)
             {
                 completedGames.Count().ShouldEqual(1);
-                completedGames.First().ConsoleName.ShouldEqual(consoleName);
+                completedGames.First().BranchName.ShouldEqual(branchName);
                 completedGames.First().CustomerName.ShouldEqual("foo");
             }
             else

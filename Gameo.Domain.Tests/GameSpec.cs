@@ -51,6 +51,14 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
+        public void Branch_Name_is_required()
+        {
+            game.BranchName = null;
+
+            AssertEntityValidationError(game, "Branch Name is required.");
+        }
+
+        [Test]
         public void Out_time_should_be_greater_than_in_time()
         {
             game.InTime = DateTime.Now;

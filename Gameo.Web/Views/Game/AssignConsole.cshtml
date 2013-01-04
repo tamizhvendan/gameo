@@ -45,6 +45,7 @@
                 <tr>
                     <td>
                         @Html.TextBoxFor(model => model[i].CustomerName, new { @class = "input-medium" })
+                        @Html.HiddenFor(model => model[i].BranchName)
                     </td>
                     <td>
                         @Html.TextBoxFor(model => model[i].CustomerContactNumber, new { @class = "input-small" })

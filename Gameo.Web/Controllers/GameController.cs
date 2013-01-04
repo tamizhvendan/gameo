@@ -33,8 +33,7 @@ namespace Gameo.Web.Controllers
         public ViewResult AssignConsole(CustomUserIdentity customUserIdentity)
         {
             RetrieveGamingConsolesAndPutItInViewBag(customUserIdentity.BranchName);
-            var games = new List<Game>();
-            games.Add(new Game());
+            var games = new List<Game> {new Game { BranchName = customUserIdentity.BranchName }};
             return View(games);
         }
 
@@ -59,7 +58,7 @@ namespace Gameo.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                games.Add(new Game());
+                games.Add(new Game { BranchName = userIdentity.BranchName });
                 return View("AssignConsole",games);
             }
             return View("AssignConsole",games);
