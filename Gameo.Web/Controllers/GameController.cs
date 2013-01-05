@@ -83,12 +83,12 @@ namespace Gameo.Web.Controllers
 
         public ViewResult NonCompletedGames(CustomUserIdentity customUserIdentity)
         {
-            return View(gameService.GetNonCompletedGames(customUserIdentity.BranchName, DateTime.Now));
+            return View(gameRepository.GetNonCompletedGames(customUserIdentity.BranchName, DateTime.Now));
         }
 
         public ViewResult CompletedGames(CustomUserIdentity customUserIdentity)
         {
-            return View(gameService.GetCompletedGamesWithinGivenDay(customUserIdentity.BranchName, DateTime.Now));
+            return View(gameRepository.GetCompletedGamesWithinGivenDay(customUserIdentity.BranchName, DateTime.Now));
         }
     }
 }

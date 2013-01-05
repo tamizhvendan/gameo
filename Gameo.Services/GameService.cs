@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
 
@@ -19,10 +20,11 @@ namespace Gameo.Services
         public IEnumerable<GameStatus> GetNonCompletedGamesStatus(string branchName, DateTime currentTime)
         {
             var gamingConsoles = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
+            var nonCompletedGames = gameRepository.GetNonCompletedGames(branchName, currentTime).ToList();
             foreach (var gamingConsole in gamingConsoles)
             {
                 var gameStatus = new GameStatus(gamingConsole.Name);
-                foreach (var nonCompletedGame in gameRepository.GetNonCompletedGames(gamingConsole.Name, currentTime))
+                foreach (var nonCompletedGame in nonCompletedGames.Where(game => game.ConsoleName == gameStatus.GamingConsoleName))
                 {
                     gameStatus
                         .AddPlayer(new Player
@@ -33,28 +35,6 @@ namespace Gameo.Services
                 }
                 yield return gameStatus;
             }
-        }
-
-        public IEnumerable<Game> GetNonCompletedGames(string branchName, DateTime currentTime)
-        {
-            var nonCompletedGames = new List<Game>();
-            var gamingConsoles = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
-            foreach (var gamingConsole in gamingConsoles)
-            {
-                nonCompletedGames.AddRange(gameRepository.GetNonCompletedGames(gamingConsole.Name, currentTime));
-            }
-            return nonCompletedGames;
-        }
-
-        public IEnumerable<Game> GetCompletedGamesWithinGivenDay(string branchName, DateTime currentTime)
-        {
-            var nonCompletedGames = new List<Game>();
-            var gamingConsoles = gamingConsoleRepository.GetGamingConsolesByBranchName(branchName);
-            foreach (var gamingConsole in gamingConsoles)
-            {
-                nonCompletedGames.AddRange(gameRepository.GetCompletedGamesWithinGivenDay(gamingConsole.Name, currentTime));
-            }
-            return nonCompletedGames;
         }
     }
 }

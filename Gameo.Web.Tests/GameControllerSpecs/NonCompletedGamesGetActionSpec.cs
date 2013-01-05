@@ -9,10 +9,10 @@ namespace Gameo.Web.Tests.GameControllerSpecs
     public class NonCompletedGamesGetActionSpec : GameControllerSpecBase
     {
         [Test]
-        public void Retrieves_non_completed_games_from_gameService_and_pass_as_view_model()
+        public void Retrieves_non_completed_games_from_game_repo_and_pass_as_view_model()
         {
             var currentTime = DateTime.Now;
-            GameServiceMock.Setup(service => service.GetNonCompletedGames(CustomUserIdentity.BranchName, currentTime))
+            GameRepositoryMock.Setup(repo => repo.GetNonCompletedGames(CustomUserIdentity.BranchName, currentTime))
                                 .Returns(Games);
 
             var viewResult = GameController.NonCompletedGames(CustomUserIdentity);

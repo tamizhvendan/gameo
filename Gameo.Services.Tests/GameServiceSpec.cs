@@ -38,6 +38,7 @@ namespace Gameo.Services.Tests
                         {
                             new Game
                                 {
+                                    BranchName = "Branch2",
                                     ConsoleName = nameOfConsole2,
                                     InTime = currentTime,
                                     OutTime = currentTime.AddHours(1),
@@ -45,6 +46,7 @@ namespace Gameo.Services.Tests
                                 },
                             new Game
                                 {
+                                    BranchName = "Branch2",
                                     ConsoleName = nameOfConsole2,
                                     InTime = currentTime,
                                     OutTime = currentTime.AddHours(2),
@@ -52,6 +54,7 @@ namespace Gameo.Services.Tests
                                 },
                             new Game
                                 {
+                                    BranchName = "Branch1",
                                     ConsoleName = nameOfConsole3,
                                     InTime = currentTime,
                                     OutTime = currentTime.AddHours(1),
@@ -59,6 +62,7 @@ namespace Gameo.Services.Tests
                                 },
                             new Game
                                 {
+                                    BranchName = "Branch1",
                                     ConsoleName = nameOfConsole3,
                                     InTime = currentTime,
                                     OutTime = currentTime.AddHours(2),
@@ -82,11 +86,9 @@ namespace Gameo.Services.Tests
         public void Retrieves_Status_of_all_non_completed_games_for_given_branch_name_Branch1()
         {
             gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole3, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
+                .Setup(repo => repo.GetNonCompletedGames("Branch1", currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
 
-            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch1", currentTime);
+            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch1", currentTime).ToList();
 
             nonCompletedGameStatuses.Count().ShouldEqual(2);
             var gamesOnConsole1 = nonCompletedGameStatuses.First(status => status.GamingConsoleName == nameOfConsole1);
@@ -105,11 +107,9 @@ namespace Gameo.Services.Tests
         public void Retrieves_Status_of_all_non_completed_games_for_given_branch_name_Branch2()
         {
             gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole2, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole2));
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole4, currentTime)).Returns(Enumerable.Empty<Game>());
+                .Setup(repo => repo.GetNonCompletedGames("Branch2", currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole2));
 
-            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch2", currentTime);
+            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus("Branch2", currentTime).ToList();
 
             nonCompletedGameStatuses.Count().ShouldEqual(2);
             var gameOnConsole4 = nonCompletedGameStatuses.First(status => status.GamingConsoleName == nameOfConsole4);
@@ -122,63 +122,6 @@ namespace Gameo.Services.Tests
             playByBar.CustomerName.ShouldEqual("bar");
             playByBar.InTime.ShouldEqual(currentTime);
             playByBar.OutTime.ShouldEqual(currentTime.AddHours(2));
-        }
-
-        [Test]
-        public void Retrieves_all_non_completed_games_for_given_branch_name_Branch1()
-        {
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole3, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
-
-            var nonCompletedGames = gameService.GetNonCompletedGames("Branch1", currentTime).ToList();
-
-            nonCompletedGames.Count().ShouldEqual(2);
-            var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");
-            fooGame.InTime.ShouldEqual(currentTime);
-            fooGame.OutTime.ShouldEqual(currentTime.AddHours(1));
-            var barGame = nonCompletedGames.First(game => game.CustomerName == "bar");
-            barGame.InTime.ShouldEqual(currentTime);
-            barGame.OutTime.ShouldEqual(currentTime.AddHours(2));
-        }
-
-        [Test]
-        public void Retrieves_all_non_completed_games_for_given_branch_name_Branch2()
-        {
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole2, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole2));
-            gameRepositoryMock
-                .Setup(repo => repo.GetNonCompletedGames(nameOfConsole4, currentTime)).Returns(Enumerable.Empty<Game>());
-
-            var nonCompletedGames = gameService.GetNonCompletedGames("Branch2", currentTime).ToList();
-
-            nonCompletedGames.Count().ShouldEqual(2);
-            var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");
-            fooGame.InTime.ShouldEqual(currentTime);
-            fooGame.OutTime.ShouldEqual(currentTime.AddHours(1));
-            var barGame = nonCompletedGames.First(game => game.CustomerName == "bar");
-            barGame.InTime.ShouldEqual(currentTime);
-            barGame.OutTime.ShouldEqual(currentTime.AddHours(2));
-        }
-
-        [Test]
-        public void Retrieves_all_completed_games_within_the_given_day_for_given_branch_name_branch1()
-        {
-            gameRepositoryMock
-                .Setup(repo => repo.GetCompletedGamesWithinGivenDay(nameOfConsole1, currentTime)).Returns(Enumerable.Empty<Game>());
-            gameRepositoryMock
-                .Setup(repo => repo.GetCompletedGamesWithinGivenDay(nameOfConsole3, currentTime)).Returns(games.Where(game => game.ConsoleName == nameOfConsole3));
-
-            var nonCompletedGames = gameService.GetCompletedGamesWithinGivenDay("Branch1", currentTime).ToList();
-
-            nonCompletedGames.Count().ShouldEqual(2);
-            var fooGame = nonCompletedGames.First(game => game.CustomerName == "foo");
-            fooGame.InTime.ShouldEqual(currentTime);
-            fooGame.OutTime.ShouldEqual(currentTime.AddHours(1));
-            var barGame = nonCompletedGames.First(game => game.CustomerName == "bar");
-            barGame.InTime.ShouldEqual(currentTime);
-            barGame.OutTime.ShouldEqual(currentTime.AddHours(2));
         }
     }
 }
