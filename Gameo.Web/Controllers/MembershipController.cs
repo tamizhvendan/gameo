@@ -123,7 +123,7 @@ namespace Gameo.Web.Controllers
             return View("AssignConsole", 
                 new MembershipAssignConsoleViewModel
                     {
-                        Membership = membership, Game = new Game { GamePaymentType = GamePaymentType.Membership}
+                        Membership = membership, Game = new Game { GamePaymentType = GamePaymentType.Membership, BranchName = customUserIdentity.BranchName}
                     });
         }
 
@@ -132,7 +132,7 @@ namespace Gameo.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //RetrieveGamingConsolesAndPutItInViewBag(membershipAssignConsoleViewModel.Game.);
+                RetrieveGamingConsolesAndPutItInViewBag(membershipAssignConsoleViewModel.Game.BranchName);
                 return View(membershipAssignConsoleViewModel);
             }
             return View();

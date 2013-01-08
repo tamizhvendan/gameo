@@ -14,7 +14,7 @@ namespace Gameo.Domain.Tests
         {
             game = new Game
                        {
-                           ConsoleName = "Console1", CustomerName = "Customer1", Price = 10
+                           ConsoleName = "Console1", CustomerName = "Customer1", Price = 10, BranchName = "Branch1"
                        };
         }
 

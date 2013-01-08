@@ -12,7 +12,8 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         public void If_model_state_is_invalid_return_Assign_Console_View()
         {
             SetUpRepositoryWithGamingConsoles();
-            var membershipAssignConsoleViewModel = new MembershipAssignConsoleViewModel();
+            var membershipAssignConsoleViewModel = new MembershipAssignConsoleViewModel
+                                                       {Game = {BranchName = CustomUserIdentity.BranchName}};
             MembershipController.ModelState.AddModelError("foo", "bar");
 
             var viewResult = MembershipController.AssignConsole(membershipAssignConsoleViewModel) as ViewResult;

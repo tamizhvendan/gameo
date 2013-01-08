@@ -53,6 +53,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
             var membershipAssignConsoleViewModel = viewResult.Model as MembershipAssignConsoleViewModel;
             membershipAssignConsoleViewModel.Game.ShouldNotBeNull();
             membershipAssignConsoleViewModel.Game.GamePaymentType.ShouldEqual(GamePaymentType.Membership);
+            membershipAssignConsoleViewModel.Game.BranchName.ShouldEqual(CustomUserIdentity.BranchName);
             membershipAssignConsoleViewModel.Membership.ShouldEqual(membership);
         }
 

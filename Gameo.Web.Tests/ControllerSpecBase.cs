@@ -78,7 +78,6 @@ namespace Gameo.Web.Tests
 
         protected void SetUpRepositoryWithGamingConsoles()
         {
-            User.BranchName = "Branch1";
             var gamingConsoles = new List<GamingConsole>
                                      {
                                          new GamingConsole
