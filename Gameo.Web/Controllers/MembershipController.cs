@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
+using Gameo.Services;
 using Gameo.Web.Models;
 using Gameo.Web.ViewModels;
 
@@ -12,11 +13,13 @@ namespace Gameo.Web.Controllers
     {
         private readonly IMembershipRepository membershipRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
+        private readonly IGameService gameService;
 
-        public MembershipController(IMembershipRepository membershipRepository, IGamingConsoleRepository gamingConsoleRepository)
+        public MembershipController(IMembershipRepository membershipRepository, IGamingConsoleRepository gamingConsoleRepository, IGameService gameService)
         {
             this.membershipRepository = membershipRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
+            this.gameService = gameService;
         }
 
         public ActionResult Index()
@@ -135,7 +138,19 @@ namespace Gameo.Web.Controllers
                 RetrieveGamingConsolesAndPutItInViewBag(membershipAssignConsoleViewModel.Game.BranchName);
                 return View(membershipAssignConsoleViewModel);
             }
-            return View();
+
+            var membership = membershipRepository.FindByMembershipId(membershipAssignConsoleViewModel.Membership.MembershipId);
+
+            if (membershipAssignConsoleViewModel.Game.HoursPlayed > membership.RemainingHours)
+            {
+                RetrieveGamingConsolesAndPutItInViewBag(membershipAssignConsoleViewModel.Game.BranchName);
+                ModelState.AddModelError("Game", string.Format("Membership has only {0} hours. Please recharge!", membership.RemainingHours));
+                return View(membershipAssignConsoleViewModel);
+            }
+
+            gameService.AssignConsoleForMembership(membership, membershipAssignConsoleViewModel.Game);
+            TempData["Message"] = "Game assigned to membership successfully";
+            return RedirectToAction("Index", "Game");
         }
 
         public ViewResult RechargeSuccess()

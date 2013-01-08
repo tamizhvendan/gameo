@@ -10,11 +10,13 @@ namespace Gameo.Services
     {
         private readonly IGameRepository gameRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
+        private readonly IMembershipRepository membershipRepository;
 
-        public GameService(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository)
+        public GameService(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository, IMembershipRepository membershipRepository)
         {
             this.gameRepository = gameRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
+            this.membershipRepository = membershipRepository;
         }
 
         public IEnumerable<GameStatus> GetNonCompletedGamesStatus(string branchName, DateTime currentTime)
@@ -35,6 +37,13 @@ namespace Gameo.Services
                 }
                 yield return gameStatus;
             }
+        }
+
+        public void AssignConsoleForMembership(Membership membership, Game game)
+        {
+            gameRepository.Add(game);
+            membership.AddGame(game);
+            membershipRepository.Update(membership);
         }
     }
 }

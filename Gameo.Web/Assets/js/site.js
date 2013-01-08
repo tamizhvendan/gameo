@@ -39,14 +39,6 @@
         changeMonth: true,
         changeYear: true
     });
-    
-    $(".time-picker-click").datetimepicker({
-        controlType: 'select',
-        dateFormat: 'dd/mm/yy',
-        timeFormat: "h:mm:ss TT",
-        changeMonth: true,
-        changeYear: true,
-        showOn: "button",
-        buttonText: "..."
-    }); 
+
+    $("#tabs").tabs();
 });

@@ -14,6 +14,7 @@ namespace Gameo.Services.Tests
     {
         private Mock<IGamingConsoleRepository> gamingConsoleRepositoryMock;
         private Mock<IGameRepository> gameRepositoryMock;
+        private Mock<IMembershipRepository> membershipRepositoryMock; 
         private DateTime currentTime;
         private GameService gameService;
         private string nameOfConsole1 = "Console1";
@@ -71,6 +72,7 @@ namespace Gameo.Services.Tests
                         };
             gamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
             gameRepositoryMock = new Mock<IGameRepository>();
+            membershipRepositoryMock = new Mock<IMembershipRepository>();
 
             gamingConsoleRepositoryMock
                 .Setup(repo => repo.GetGamingConsolesByBranchName("Branch1"))
@@ -79,7 +81,7 @@ namespace Gameo.Services.Tests
                 .Setup(repo => repo.GetGamingConsolesByBranchName("Branch2"))
                 .Returns(gamingConsoles.Where(console => console.BranchName == "Branch2"));
 
-            gameService = new GameService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object);
+            gameService = new GameService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object, membershipRepositoryMock.Object);
         }
 
         [Test]
@@ -122,6 +124,33 @@ namespace Gameo.Services.Tests
             playByBar.CustomerName.ShouldEqual("bar");
             playByBar.InTime.ShouldEqual(currentTime);
             playByBar.OutTime.ShouldEqual(currentTime.AddHours(2));
+        }
+
+
+        [Test]
+        public void AssignConsoleForMembership_adds_game_in_game_repository()
+        {
+            var membership = new Membership();
+            var game = new Game();
+            gameRepositoryMock.Setup(repo => repo.Add(game)).Verifiable();
+
+            gameService.AssignConsoleForMembership(membership, game);
+
+            gameRepositoryMock.Verify(repo => repo.Add(game));
+        }
+
+        [Test]
+        public void AssignConsoleForMembership_updates_membership_with_the_game_passed()
+        {
+            var membership = new Membership();
+            var game = new Game();
+            membershipRepositoryMock.Setup(repo => repo.Update(membership)).Verifiable();
+
+            gameService.AssignConsoleForMembership(membership, game);
+
+            membership.Games.Count.ShouldEqual(1);
+            membership.Games.First().ShouldEqual(game);
+            membershipRepositoryMock.Verify(repo => repo.Update(membership));
         }
     }
 }

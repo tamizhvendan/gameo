@@ -3,17 +3,25 @@
     ViewBag.Title = "Index";
 }
 <div class="container">
-   <p class="clearfix"></p>
-    <div class="control-group">
-            <div class="controls pull-left">
-                @Html.ActionLink("View By Console", "Index", "Game", new { @class = "btn btn-primary" })
-                @Html.ActionLink("View By Players", "NonCompletedGames", "Game", new { @class = "btn btn-primary active" })
-            </div>
+    <p class="clearfix">
+    </p>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                &times;</button>
+            @ViewBag.Message
         </div>
-        
-        @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
-    <p class="clearfix"></p>
-
+    }
+    <div class="control-group">
+        <div class="controls pull-left">
+            @Html.ActionLink("View By Console", "Index", "Game", new { @class = "btn btn-primary" })
+            @Html.ActionLink("View By Players", "NonCompletedGames", "Game", new { @class = "btn btn-primary active" })
+        </div>
+    </div>
+    @Html.ActionLink("Assign Console", "AssignConsole", "Game", new { @class = "pull-right btn btn-primary" })
+    <p class="clearfix">
+    </p>
     <div class="container">
         @foreach (var gameStatus in Model)
         {

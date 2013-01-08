@@ -15,7 +15,7 @@
     }
     @if (Model.Membership != null)
     {
-        <div class="row span8">
+        <div class="row span9">
             <div class="well">
                 <p>
                     Membership Id : <b>@Model.Membership.MembershipId</b>
@@ -38,55 +38,92 @@
                 <p>
                     Membership Expires On : <b>@Model.Membership.ExpiresOn.ToString("D")</b>
                 </p>
-                <div class="accordion" id="accordion1">
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                                Recharge History </a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse in">
-                            <div class="accordion-inner">
-                                @if (!Model.Membership.ReCharges.Any())
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-1">Recharges</a></li>
+                        <li><a href="#tabs-2">Games</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                        @if (!Model.Membership.ReCharges.Any())
+                        {
+                            <span>No Recharges Found! </span>
+                        }
+                        else
+                        {
+                            <table class="table table-condensed">
+                                <tr>
+                                    <th>
+                                        Recharged On
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th>
+                                        Hours
+                                    </th>
+                                    <th>
+                                        Branch Name
+                                    </th>
+                                </tr>
+                                @foreach (var recharge in Model.Membership.ReCharges.OrderByDescending(recharge => recharge.RechargedOn))
                                 {
-                                    <span>No Recharges Found! </span>
+                                    <tr>
+                                        <td>@recharge.RechargedOn.ToString("D")
+                                        </td>
+                                        <td>
+                                            @recharge.Price
+                                        </td>
+                                        <td>
+                                            @recharge.Hours
+                                        </td>
+                                        <td>
+                                            @recharge.BranchName
+                                        </td>
+                                    </tr>
                                 }
-                                else
+                            </table>
+                        }
+                    </div>
+                    <div id="tabs-2">
+                         @if (!Model.Membership.Games.Any())
+                        {
+                            <span>No Games Found! </span>
+                        }
+                        else
+                        {
+                            <table class="table table-condensed">
+                                <tr>
+                                    <th>
+                                        In time
+                                    </th>
+                                    <th>
+                                        Out Time
+                                    </th>
+                                    <th>
+                                        Customer Name
+                                    </th>
+                                    <th>
+                                        Branch Name
+                                    </th>
+                                </tr>
+                                @foreach (var game in Model.Membership.Games.OrderByDescending(g => g.InTime))
                                 {
-                                    <table class="table table-condensed">
-                                        <tr>
-                                            <th>
-                                                Recharged On
-                                            </th>
-                                            <th>
-                                                Price
-                                            </th>
-                                            <th>
-                                                Hours
-                                            </th>
-                                            <th>
-                                                Branch Name
-                                            </th>
-                                        </tr>
-                                        @foreach (var recharge in Model.Membership.ReCharges.OrderByDescending(recharge => recharge.RechargedOn))
-                                        {
-                                            <tr>
-                                                <td>@recharge.RechargedOn.ToString("D")
-                                                </td>
-                                                <td>
-                                                    @recharge.Price
-                                                </td>
-                                                <td>
-                                                    @recharge.Hours
-                                                </td>
-                                                <td>
-                                                    @recharge.BranchName
-                                                </td>
-                                            </tr>
-                                        }
-                                    </table>
+                                    <tr>
+                                        <td>@game.InTime.ToString("D")
+                                        </td>
+                                        <td>
+                                            @game.OutTime.ToString("D")
+                                        </td>
+                                        <td>
+                                            @game.CustomerName
+                                        </td>
+                                        <td>
+                                            @game.BranchName
+                                        </td>
+                                    </tr>
                                 }
-                            </div>
-                        </div>
+                            </table>
+                        }
                     </div>
                 </div>
             </div>

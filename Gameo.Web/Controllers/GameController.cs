@@ -25,6 +25,11 @@ namespace Gameo.Web.Controllers
 
         public ViewResult Index(CustomUserIdentity customUserIdentity)
         {
+            if (TempData.ContainsKey("Message"))
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+            
             var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus(customUserIdentity.BranchName, DateTime.Now);
             return View(nonCompletedGameStatuses);
         }
