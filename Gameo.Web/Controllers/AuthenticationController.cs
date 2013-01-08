@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
+using Gameo.Domain;
 using Gameo.Services;
 using Gameo.Web.ViewModels;
 
@@ -38,6 +39,11 @@ namespace Gameo.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
+            var user = Session["logged_user"] as User;
+            if (user != null)
+            {
+                return HandleRedirectionBasedOnUserRole(user);
+            }
             try
             {
                 var loggedUser = authenticationService.Authenticate(loginViewModel.UserName, loginViewModel.Password, loginViewModel.BranchName);
@@ -47,17 +53,17 @@ namespace Gameo.Web.Controllers
                 }
                 authenticationService.SetAuthCookie(loginViewModel.UserName);
                 Session["logged_user"] = loggedUser;
-                if (loggedUser.IsAdmin)
-                {
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
-                }
-
-                return RedirectToAction("Index", "Game");
+                return HandleRedirectionBasedOnUserRole(loggedUser);
             }
             catch (ArgumentException exception)
             {
                 return HandleUserLoginError(loginViewModel, exception.Message);
             }
+        }
+
+        private ActionResult HandleRedirectionBasedOnUserRole(User user)
+        {
+            return user.IsAdmin ? RedirectToAction("Index", "Home", new { area = "Admin" }) : RedirectToAction("Index", "Game");
         }
 
         private ActionResult HandleUserLoginError(LoginViewModel loginViewModel, string modelErrorMessage)
