@@ -6,6 +6,10 @@ namespace Gameo.Web.Models
     public class CustomUserIdentity : IIdentity
     {
         private readonly User user;
+        public string Password
+        {
+            get { return user.Password; }
+        }
 
         public CustomUserIdentity(User user)
         {

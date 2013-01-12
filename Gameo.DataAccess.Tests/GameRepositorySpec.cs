@@ -46,7 +46,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Retrieves_Non_Completed_Games_of_given_console()
         {
-            var currentTime = DateTime.Now;
+            var currentTime = DateTime.Now.ToIST();
             var fooGameOnBranch1 = new Game { BranchName = "Branch1", InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
             var fooGameOnBranch2 = new Game { BranchName = "Branch2", CustomerName = "foo" };
             var barGameOnBranch1 = new Game
@@ -78,7 +78,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Retrieves_Completed_Games_Within_given_day_for_given_branch()
         {
-            var currentDateTime = DateTime.Now;
+            var currentDateTime = DateTime.Now.ToIST();
             var branchName = "branch1";
             var completedGameOnBranch1 = new Game
                                               {

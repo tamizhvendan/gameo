@@ -18,7 +18,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void RechargedOn_should_be_current_time_by_default()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
 
             membershipReCharge.RechargedOn.Day.ShouldEqual(dateTime.Day);
             membershipReCharge.RechargedOn.Month.ShouldEqual(dateTime.Month);

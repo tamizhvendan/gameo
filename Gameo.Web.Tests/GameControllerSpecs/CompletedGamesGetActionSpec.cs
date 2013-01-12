@@ -1,4 +1,5 @@
 ﻿using System;
+using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
@@ -10,7 +11,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         [Test]
         public void Retrieves_completed_games_from_game_repo_and_pass_it_to_view()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
             GameRepositoryMock.Setup(repo => repo.GetCompletedGamesWithinGivenDay(CustomUserIdentity.BranchName, dateTime))
                                 .Returns(Games);
 

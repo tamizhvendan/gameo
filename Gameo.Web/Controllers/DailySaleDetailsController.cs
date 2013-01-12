@@ -18,7 +18,7 @@ namespace Gameo.Web.Controllers
 
         public RedirectToRouteResult Index(CustomUserIdentity customUserIdentity)
         {
-            if (!dailySaleDetailsRepository.IsDailySaleClosed(DateTime.Now, customUserIdentity.BranchName))
+            if (!dailySaleDetailsRepository.IsDailySaleClosed(DateTime.Now.ToIST(), customUserIdentity.BranchName))
             {
                 return RedirectToAction("Create");
             }

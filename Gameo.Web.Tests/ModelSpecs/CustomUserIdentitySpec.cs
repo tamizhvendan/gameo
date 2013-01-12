@@ -67,5 +67,13 @@ namespace Gameo.Web.Tests.ModelSpecs
 
             customUserIdentity.BranchName.ShouldEqual(user.BranchName);
         }
+
+        [Test]
+        public void Password_Returns_the_password_of_the_user()
+        {
+            user.Password = "foo";
+
+            customUserIdentity.Password.ShouldEqual(user.Password);
+        }
     }
 }

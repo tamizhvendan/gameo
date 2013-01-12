@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
@@ -11,7 +12,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         [Test]
         public void Retrieves_non_completed_games_from_game_repo_and_pass_as_view_model()
         {
-            var currentTime = DateTime.Now;
+            var currentTime = DateTime.Now.ToIST();
             GameRepositoryMock.Setup(repo => repo.GetNonCompletedGames(CustomUserIdentity.BranchName, currentTime))
                                 .Returns(Games);
 

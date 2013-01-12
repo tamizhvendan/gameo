@@ -20,7 +20,7 @@ namespace Gameo.Web.Tests.DailySaleDetailsControllerSpecs
         [Test]
         public void Redirects_to_Create_View_if_DailySales_not_closed()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
             DailySalesDetailRepositoryMock.Setup(repo => repo.IsDailySaleClosed(dateTime, customUserIdentity.BranchName)).Returns(false);
 
             var redirectToRouteResult = DailySaleDetailsController.Index(customUserIdentity);

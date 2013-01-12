@@ -13,7 +13,7 @@ namespace Gameo.Domain
 
         public DailySaleDetails()
         {
-            var currentTime = DateTime.Now;
+            var currentTime = DateTime.Now.ToIST();
 
             DateTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day);
         }

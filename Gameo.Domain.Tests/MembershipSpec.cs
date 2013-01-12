@@ -36,7 +36,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void IssuedOn_should_be_current_time_by_default()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
             membership.IssuedOn.Day.ShouldEqual(dateTime.Day);
             membership.IssuedOn.Month.ShouldEqual(dateTime.Month);
             membership.IssuedOn.Year.ShouldEqual(dateTime.Year);
@@ -54,7 +54,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void ExpiresOn_should_be_180_days_after_the_last_membership_recharge_date()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
             var membershipReCharges = new List<MembershipReCharge>
                                           {
                                               new MembershipReCharge { RechargedOn = dateTime.Subtract(new TimeSpan(45,0,0,0))},
@@ -76,7 +76,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void IsExpired_should_be_true_if_ExpiresOn_is_less_than_current_day()
         {
-            membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now.Subtract(new TimeSpan(230,0,0,0))});
+            membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now.ToIST().Subtract(new TimeSpan(230,0,0,0))});
 
             membership.IsExpired.ShouldBeTrue();    
         }
@@ -84,10 +84,10 @@ namespace Gameo.Domain.Tests
         [Test]
         public void IsExpired_should_be_false_if_ExpiresOn_is_greater_than_or_equal_to_current_day()
         {
-            membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now });
+            membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now.ToIST() });
             membership.IsExpired.ShouldBeFalse();
 
-            membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now.Subtract(new TimeSpan(1,0,0,0))});
+            membership.Recharge(new MembershipReCharge { RechargedOn = DateTime.Now.ToIST().Subtract(new TimeSpan(1,0,0,0))});
             membership.IsExpired.ShouldBeFalse();
         }
 
@@ -133,7 +133,7 @@ namespace Gameo.Domain.Tests
         public void RemainingHours_is_the_difference_of_sum_of_recharge_hours_minus_sum_of_games_played_hours()
         {
             var game = new Game();
-            var game2 = new Game { InTime = DateTime.Now.AddMinutes(30)};
+            var game2 = new Game { InTime = DateTime.Now.ToIST().AddMinutes(30)};
 
             var recharge = new MembershipReCharge { Hours = 4 };
 
@@ -147,7 +147,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void Filters_recharges_by_branch_name_and_issued_date()
         {
-            var rechargedOn = DateTime.Now;
+            var rechargedOn = DateTime.Now.ToIST();
             var reCharge1 = new MembershipReCharge {BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn};
             var reCharge2 = new MembershipReCharge {BranchName = "foo", Hours = 5, Price = 50, RechargedOn = rechargedOn};
             var yesterdayDateTime = rechargedOn.Subtract(new TimeSpan(1, 0, 0, 0));

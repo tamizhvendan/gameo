@@ -34,7 +34,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         [Test]
         public void If_game_hours_is_greater_than_membership_remaining_hours_return_Assign_Console_View_with_model_error()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
             membershipAssignConsoleViewModel.Game.InTime = dateTime;
             membershipAssignConsoleViewModel.Game.OutTime = dateTime.AddHours(1.5);
             var membership = new Membership();
@@ -54,7 +54,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         [Test]
         public void If_model_state_is_valid_assign_console_using_game_service_and_redirect_to_game_index()
         {
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.Now.ToIST();
             membershipAssignConsoleViewModel.Game.InTime = dateTime;
             membershipAssignConsoleViewModel.Game.OutTime = dateTime.AddHours(1.5);
             var membership = new Membership();

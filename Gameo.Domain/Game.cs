@@ -25,7 +25,7 @@ namespace Gameo.Domain
         public PackageType PackageType { get; set; }
         public Game()
         {
-            InTime = DateTime.Now;
+            InTime = DateTime.Now.ToIST();
             OutTime = InTime.AddHours(1);
             GamePaymentType = GamePaymentType.OneTime;
         }
@@ -59,7 +59,7 @@ namespace Gameo.Domain
 
             }
 
-            if (InTime > DateTime.Now)
+            if (InTime > DateTime.Now.ToIST())
             {
                 yield return new ValidationResult("In Time should not be greater than current time.");
             }

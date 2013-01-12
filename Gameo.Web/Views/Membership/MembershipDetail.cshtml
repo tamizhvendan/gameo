@@ -109,10 +109,10 @@
                                 @foreach (var game in Model.Membership.Games.OrderByDescending(g => g.InTime))
                                 {
                                     <tr>
-                                        <td>@game.InTime.ToString("D")
+                                        <td>@game.InTime.ToShortDateString() - @game.InTime.ToShortTimeString()
                                         </td>
                                         <td>
-                                            @game.OutTime.ToString("D")
+                                            @game.OutTime.ToShortDateString() - @game.OutTime.ToShortTimeString()
                                         </td>
                                         <td>
                                             @game.CustomerName

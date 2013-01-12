@@ -51,7 +51,7 @@ namespace Gameo.Domain
             {
                 if (ReCharges.Any())
                 {
-                    return ExpiresOn < DateTime.Now;
+                    return ExpiresOn < DateTime.Now.ToIST();
                 }
                 return true;
             }
@@ -64,7 +64,7 @@ namespace Gameo.Domain
         {
             Games = new List<Game>();
             ReCharges = new List<MembershipReCharge>();
-            IssuedOn = DateTime.Now;
+            IssuedOn = DateTime.Now.ToIST();
         }
 
         public void Recharge(MembershipReCharge membershipReCharge)
