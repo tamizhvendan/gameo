@@ -19,9 +19,11 @@ namespace Gameo.DataAccess.Tests
 
         protected RepositorySpecBase()
         {
-            var mongoClient = new MongoClient();
+            var mongoUrl = new MongoUrl(ConfigurationManager.AppSettings["database_connection_string"]);
+            var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
+            var mongoClient = new MongoClient(mongoClientSettings);
             var mongoServer = mongoClient.GetServer();
-            gameoTestDatabase = mongoServer.GetDatabase(ConfigurationManager.AppSettings["database_name"]);
+            gameoTestDatabase = mongoServer.GetDatabase(mongoUrl.DatabaseName);
         }
 
         [SetUp]

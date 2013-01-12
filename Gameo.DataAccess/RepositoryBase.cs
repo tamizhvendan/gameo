@@ -16,9 +16,11 @@ namespace Gameo.DataAccess
 
         protected RepositoryBase()
         {
-            var mongoClient = new MongoClient();
+            var mongoUrl = new MongoUrl(ConfigurationManager.AppSettings["database_connection_string"]);
+            var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
+            var mongoClient = new MongoClient(mongoClientSettings);
             var mongoServer = mongoClient.GetServer();
-            var gameoDatabase = mongoServer.GetDatabase(ConfigurationManager.AppSettings["database_name"]);
+            var gameoDatabase = mongoServer.GetDatabase(mongoUrl.DatabaseName);
             EntityCollection = gameoDatabase.GetCollection<T>(typeof (T).Name.ToLowerInvariant());
         }
 
