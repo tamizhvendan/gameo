@@ -77,6 +77,8 @@
     <Compile Include="GameControllerSpecs\AssignConsolePostActionSpec.cs" />
     <Compile Include="GameControllerSpecs\CompletedGamesGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\GameControllerSpecBase.cs" />
+    <Compile Include="GamingTrendControllerSpecs\GamingTrendControllerSpecBase.cs" />
+    <Compile Include="GamingTrendControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\AssignConsolePostActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\NonCompletedGamesGetActionSpec.cs" />

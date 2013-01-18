@@ -114,6 +114,37 @@ namespace Gameo.DataAccess.Tests
                 completedGames.Count().ShouldEqual(0);
             }
         }
+
+        [Test]
+        public void Retrieves_Games_Played_withing_given_timeframe_for_given_branch()
+        {
+            var currentTime = DateTime.Now.ToIST();
+            const string branch1Name = "Branch1";
+            var fooGameOnBranch1 = new Game { BranchName = branch1Name, InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
+            var fooGameOnBranch2 = new Game { BranchName = "Branch2", CustomerName = "foo" };
+            var barGameOnBranch1 = new Game
+            {
+                BranchName = branch1Name,
+                InTime = currentTime.Subtract(new TimeSpan(0, 2, 0)),
+                OutTime = currentTime.Subtract(new TimeSpan(0, 1, 0)),
+                CustomerName = "bar"
+            };
+            var foobarGameOnBranch1 = new Game
+            {
+                BranchName = branch1Name,
+                InTime = currentTime.AddDays(1),
+                OutTime = currentTime.AddDays(1).AddHours(2)
+            };
+
+            AddEntityToDatabase(fooGameOnBranch1, fooGameOnBranch2, barGameOnBranch1, foobarGameOnBranch1);
+
+            var games = gameRepository.GetGames(branch1Name, currentTime.Subtract(new TimeSpan(0, 3, 0)), currentTime.AddHours(5)).ToList();
+
+            games.Count().ShouldEqual(2);
+            games.All(game => game.BranchName == branch1Name).ShouldBeTrue();
+            games.Any(game => game.CustomerName == "foo").ShouldBeTrue();
+            games.Any(game => game.CustomerName == "bar").ShouldBeTrue();
+        }
     }
 
 

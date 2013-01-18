@@ -1,0 +1,22 @@
+﻿@using Gameo.Domain
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_admin.cshtml";
+}
+<div class="container span10">
+    <h4>
+        Select Time Difference to view the Gaming Trends</h4>
+    <br />
+    <div class="form-inline">
+        <label class="control-label" for="to">
+            From :
+        </label>
+        <input type="text" class="input-medium time-picker" id="from" value="@DateTime.Now.ToIST()"/>
+        <label class="control-label" for="">
+            To :
+        </label>
+        <input type="text" class="input-medium time-picker" id="to" value="@DateTime.Now.ToIST().AddHours(1)"/>
+        
+        <button id="findTrend" class="btn btn-primary">See the trend</button>
+    </div>
+</div> 

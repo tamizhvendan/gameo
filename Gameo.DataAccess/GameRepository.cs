@@ -23,7 +23,16 @@ namespace Gameo.DataAccess
                 .AsQueryable()
                 .Where(game => game.OutTime < dateTime)
                 .Where(game => game.BranchName == branchName)
-                .Where(game => game.InTime > DateTime.Today);
+                .Where(game => game.InTime > dateTime.Date);
+        }
+
+        public IEnumerable<Game> GetGames(string branchName, DateTime from, DateTime to)
+        {
+            return EntityCollection
+                .AsQueryable()
+                .Where(game => game.BranchName == branchName)
+                .Where(game => game.InTime >= from)
+                .Where(game => game.OutTime <= to);
         }
     }
 }
