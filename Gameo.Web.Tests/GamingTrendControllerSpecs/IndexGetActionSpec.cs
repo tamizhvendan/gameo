@@ -13,5 +13,15 @@ namespace Gameo.Web.Tests.GamingTrendControllerSpecs
 
             viewResult.ViewName.ShouldEqual(string.Empty);
         }
+
+        [Test]
+        public void Retrieves_Braches_From_BranchRepository_And_Put_Them_Into_ViewBag()
+        {
+            SetupBranchRepositoryToReturnSomeRandomBranches();
+
+            var viewResult = GamingTrendController.Index();
+            
+            AssertRandomBranchesPresentInViewBag(viewResult);
+        }
     }
 }

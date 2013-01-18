@@ -85,6 +85,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingTrendController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\TrendRequest.cs" />
     <Compile Include="Controllers\ApplicationControllerBase.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingConsoleController.cs" />
@@ -113,6 +114,7 @@
     <Content Include="Assets\img\glyphicons-halflings-white.png" />
     <Content Include="Assets\img\glyphicons-halflings.png" />
     <Content Include="Assets\js\lib\bootstrap.min.js" />
+    <Content Include="Assets\js\lib\highcharts.js" />
     <Content Include="Assets\js\lib\jquery-1.7.2.min.js" />
     <Content Include="Assets\js\lib\jquery-timepicker.js" />
     <Content Include="Assets\js\lib\jquery-ui-1.8.11.min.js" />
@@ -189,7 +191,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

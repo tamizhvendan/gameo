@@ -10,7 +10,7 @@ namespace Gameo.Web.Tests.GamingTrendControllerSpecs
         [SetUp]
         public void GamingTrendControllerSpecInit()
         {
-            GamingTrendController = new GamingTrendController();
+            GamingTrendController = new GamingTrendController(BranchRepositoryMock.Object);
         }
     }
 }

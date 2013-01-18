@@ -8,15 +8,164 @@
         Select Time Difference to view the Gaming Trends</h4>
     <br />
     <div class="form-inline">
-        <label class="control-label" for="to">
+        <label class="control-label" for="from">
             From :
         </label>
         <input type="text" class="input-medium time-picker" id="from" value="@DateTime.Now.ToIST()"/>
-        <label class="control-label" for="">
+        <label class="control-label" for="to">
             To :
         </label>
         <input type="text" class="input-medium time-picker" id="to" value="@DateTime.Now.ToIST().AddHours(1)"/>
-        
-        <button id="findTrend" class="btn btn-primary">See the trend</button>
+        <label class="control-label" for="branchName">
+            Branch :
+        </label>
+        @Html.DropDownList("BranchName", ViewBag.Branches as IEnumerable<SelectListItem>)
+        <button id="findTrend" class="btn btn-primary">
+            See the trend</button>
     </div>
-</div> 
+    <br />
+    <div class="well span8" id="trendChart">
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        function renderChart(data) {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'trendChart'
+                },
+                title: {
+                    text: 'Gaming Trend'
+                },
+                xAxis: {
+                    categories: [
+                        '9-11',
+                        '11-13',
+                        '13-15',
+                        '15-17',
+                        '17-19',
+                        '19-21'
+                    ],
+                    title: {
+                        text: 'TimeRange in a Day'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Number of Customers'
+                    },
+                    tickInterval: 10
+                },
+                legend: {
+                    layout: 'vertical',
+                    backgroundColor: '#FFFFFF',
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 80,
+                    y: 50,
+                    floating: true,
+                    shadow: true
+                },
+                tooltip: {
+                    formatter: function() {
+                        if (this.point.name) { // the pie chart
+                        return this.point.name +': '+ this.y +' Customer(s)';
+                    } else {
+                            return '' + this.y + ' Customer(s)';
+                        }
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    type : "column",
+                    name: 'X Box 1',
+                    data: [6, 10, 24, 3, 8, 10],
+                    color: '#4572A7' 
+    
+                }, {
+                    type : "column",
+                    name: 'X Box 2',
+                    data: [16, 10, 4, 30, 18, 20],
+                    color: '#AA4643' 
+    
+                }, {
+                    type : "column",
+                    name: 'Game Console 1',
+                    data: [7, 0, 14, 23, 8, 10],
+                    color: '#89A54E' 
+    
+                }, {
+                    type : "column",
+                    name: 'Game Console 2',
+                    data: [6, 1, 4, 3, 2, 1],
+                    color: '#8935AB' 
+    
+                }, {
+                    type: 'spline',
+                    name: 'Total Number of customers',
+                    data: [35, 21, 46, 59, 36, 41],
+                    marker: {
+                	    lineWidth: 2,
+                	    lineColor: Highcharts.getOptions().colors[3],
+                	    fillColor: 'white'
+                	}
+                }, {
+                    type: 'pie',
+                    name: 'Console Usage',
+                    data: [{
+                        name: 'X Box 1',
+                        y: 61,
+                        color: '#4572A7' 
+                    }, {
+                        name: 'X Box 2',
+                        y: 108,
+                        color: '#AA4643' 
+                    }, {
+                        name: 'Game Console 1',
+                        y: 62,
+                        color: '#89A54E' 
+                    }, {
+                        name : "Game Console 2",
+                        y : 17,
+                        color : "#8935AB"
+                    }],
+                    center: [600, 60],
+                    size: 100,
+                    showInLegend: false,
+                    dataLabels: {
+                        enabled: false
+                    }
+                }]
+            });
+        };
+
+        renderChart();
+
+        $("#findTrend").on("click", function () {
+            
+            var request = {
+                from: $("#from").val(),
+                to: $("#to").val(),
+                branchName: $("#BranchName").val()
+            };
+
+            $.ajax({
+                url : "@Url.Action("GetTrend", "GamingTrend", new { Area = "Admin" })",
+                type : "POST",
+                data : JSON.stringify(request),
+                contentType: 'application/json; charset=utf-8',
+                success : function(result) {
+                    console.log(result);
+                }
+            });
+
+        });
+    });
+</script>
