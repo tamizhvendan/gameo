@@ -35,7 +35,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
                     branchRepository.Add(branch);
                     return RedirectToAction("Index");        
                 }
-                ModelState.AddModelError("Name", "Branch Name already exists");
+                ModelState.AddModelError("name", "Branch name already exists");
             }
             return View(branch);
         }

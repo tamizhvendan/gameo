@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_admin.cshtml";
 }
-<div class="container span10">
+<div class="container span9">
     <h4>
         Select Time Difference to view the Gaming Trends</h4>
     <br />
@@ -23,15 +23,23 @@
         <button id="findTrend" class="btn btn-primary">
             See the trend</button>
     </div>
-    <br />
-    <div class="well span8" id="trendChart">
+    <div class="clearfix">
+        <br />
     </div>
+   
+        <div class="well span9 chart" id="splineChart" style="display: none">
+        </div>
+        <div class="well span9 chart" id="columnChart" style="display: none">
+        </div>
+        <div class="well span9 chart" id="pieChart" style="display: none">
+        </div>
 </div>
 <script type="text/javascript">
     $(function () {
-
         function renderChart(data) {
-            var chart = new Highcharts.Chart({
+            $(".chart").show();
+
+            var rendering = {
                 chart: {
                     renderTo: 'trendChart'
                 },
@@ -71,8 +79,8 @@
                 tooltip: {
                     formatter: function() {
                         if (this.point.name) { // the pie chart
-                        return this.point.name +': '+ this.y +' Customer(s)';
-                    } else {
+                            return this.point.name + ': ' + this.y + ' Customer(s)';
+                        } else {
                             return '' + this.y + ' Customer(s)';
                         }
                     }
@@ -82,71 +90,70 @@
                         pointPadding: 0.2,
                         borderWidth: 0
                     }
-                },
-                series: [{
-                    type : "column",
-                    name: 'X Box 1',
-                    data: [6, 10, 24, 3, 8, 10],
-                    color: '#4572A7' 
-    
-                }, {
-                    type : "column",
-                    name: 'X Box 2',
-                    data: [16, 10, 4, 30, 18, 20],
-                    color: '#AA4643' 
-    
-                }, {
-                    type : "column",
-                    name: 'Game Console 1',
-                    data: [7, 0, 14, 23, 8, 10],
-                    color: '#89A54E' 
-    
-                }, {
-                    type : "column",
-                    name: 'Game Console 2',
-                    data: [6, 1, 4, 3, 2, 1],
-                    color: '#8935AB' 
-    
-                }, {
+                }
+            };
+            
+            var series = [],
+                total = [0, 0, 0, 0, 0, 0],
+                splineChartData = {
                     type: 'spline',
                     name: 'Total Number of customers',
-                    data: [35, 21, 46, 59, 36, 41],
+                    data: total,
+                    align: 'center',
+                    verticalAlign: 'bottom',
                     marker: {
-                	    lineWidth: 2,
-                	    lineColor: Highcharts.getOptions().colors[3],
-                	    fillColor: 'white'
-                	}
-                }, {
+                        lineWidth: 2,
+                        lineColor: Highcharts.getOptions().colors[3],
+                        fillColor: 'white'
+                    }
+                },
+                pieChartData = {
                     type: 'pie',
                     name: 'Console Usage',
-                    data: [{
-                        name: 'X Box 1',
-                        y: 61,
-                        color: '#4572A7' 
-                    }, {
-                        name: 'X Box 2',
-                        y: 108,
-                        color: '#AA4643' 
-                    }, {
-                        name: 'Game Console 1',
-                        y: 62,
-                        color: '#89A54E' 
-                    }, {
-                        name : "Game Console 2",
-                        y : 17,
-                        color : "#8935AB"
-                    }],
-                    center: [600, 60],
-                    size: 100,
+                    data: [],
+                    size: 300,
                     showInLegend: false,
                     dataLabels: {
                         enabled: false
                     }
-                }]
-            });
-        };
+                
+                };
+            
+            for (i = 0; i < data.length; i++) {
+                
+                var r = data[i];
+                
+                r.type = "column";
+                series.push(data[i]);
+                
+                for (var j = 0; j < total.length; j++) {
+                    total[j] += r.data[j];
+                }
 
-        renderChart();
+                pieChartData.data.push({
+                    name: r.name,
+                    y : r.data.reduce(function (seed, d) { return seed + d; }, 0)
+                });
+            }
+
+            rendering.series = series;
+            rendering.chart.renderTo = "columnChart";
+            chart = new Highcharts.Chart(rendering);
+
+            series = [];
+            series.push(splineChartData);
+            rendering.series = series;
+            rendering.chart.renderTo = "splineChart";
+            chart = new Highcharts.Chart(rendering);
+            
+            series = [];
+            series.push(pieChartData);
+            rendering.series = series;
+            rendering.chart.renderTo = "pieChart";
+            chart = new Highcharts.Chart(rendering);
+            
+        };
+        
 
         $("#findTrend").on("click", function () {
             
@@ -156,16 +163,31 @@
                 branchName: $("#BranchName").val()
             };
 
+            var result = [{
+                name: 'Game Console 1',
+                data: [7, 0, 14, 23, 8, 10]
+            },{
+                name: 'Game Console 2',
+                data: [6, 1, 4, 3, 2, 1]
+            }, {
+                name: 'X Box 1',
+                data: [6, 10, 24, 3, 8, 10]
+            }, {
+                name: 'X Box 2',
+                data: [16, 10, 4, 30, 18, 20]
+            }];
+
+            
+
             $.ajax({
                 url : "@Url.Action("GetTrend", "GamingTrend", new { Area = "Admin" })",
                 type : "POST",
                 data : JSON.stringify(request),
                 contentType: 'application/json; charset=utf-8',
-                success : function(result) {
-                    console.log(result);
+                success : function(data) {
+                    renderChart(data);
                 }
             });
-
         });
     });
 </script>

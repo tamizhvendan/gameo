@@ -34,7 +34,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
                     userRepository.Add(user);
                     return RedirectToAction("Index");
                 }
-                ModelState.AddModelError("Name", "User Name already exists in the selected branch");
+                ModelState.AddModelError("name", "User name already exists in the selected branch");
             }
             ViewBag.Branches = MapBranchesToSelectListItems(branchRepository);
             return View(user);

@@ -44,7 +44,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
                     gamingConsoleRepository.Add(gamingConsole);
                     return RedirectToAction("Index");   
                 }
-                ModelState.AddModelError("Name", "Console Name already exists in the selected branch");
+                ModelState.AddModelError("name", "Console name already exists in the selected branch");
             }
 
             ViewBag.Branches = MapBranchesToSelectListItems(branchRepository);

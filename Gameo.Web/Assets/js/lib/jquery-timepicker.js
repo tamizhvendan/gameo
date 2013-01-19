@@ -682,7 +682,7 @@
 				millisec = parseInt(millisec, 10);
 			}
 
-			var ampm = o[hour < 12 ? 'amNames' : 'pmNames'][0];
+			var ampm = o[hour < 12 ? 'amnames' : 'pmnames'][0];
 
 			// If the update was done in the input field, the input field should not be updated.
 			// If the update was done using the sliders, update the input field.
@@ -1061,7 +1061,7 @@
 						resTime.ampm = '';
 					} else {
 						ampm = $.inArray(treg[order.t].toUpperCase(), o.amNames) !== -1 ? 'AM' : 'PM';
-						resTime.ampm = o[ampm == 'AM' ? 'amNames' : 'pmNames'][0];
+						resTime.ampm = o[ampm == 'AM' ? 'amnames' : 'pmnames'][0];
 					}
 				}
 
@@ -1155,7 +1155,7 @@
 	* Public utility to format the time
 	* format = string format of the time
 	* time = a {}, not a Date() for timezones
-	* options = essentially the regional[].. amNames, pmNames, ampm
+	* options = essentially the regional[].. amnames, pmnames, ampm
 	*/
 	$.datepicker.formatTime = function(format, time, options) {
 		options = options || {};
