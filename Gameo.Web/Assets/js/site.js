@@ -40,5 +40,11 @@
         changeYear: true
     });
 
+    $(".date-picker").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+
     $("#tabs").tabs();
 });

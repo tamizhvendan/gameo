@@ -1,4 +1,5 @@
-﻿@model MembershipDetaiRequestViewModel
+﻿@using Gameo.Domain
+@model MembershipDetaiRequestViewModel
 @{
     ViewBag.Title = "MembershipDetail";
     Layout = "~/Views/Shared/_membership.cshtml";
@@ -109,10 +110,10 @@
                                 @foreach (var game in Model.Membership.Games.OrderByDescending(g => g.InTime))
                                 {
                                     <tr>
-                                        <td>@game.InTime.ToShortDateString() - @game.InTime.ToShortTimeString()
+                                        <td>@game.InTime.ToGameoString()
                                         </td>
                                         <td>
-                                            @game.OutTime.ToShortDateString() - @game.OutTime.ToShortTimeString()
+                                            @game.OutTime.ToGameoString()
                                         </td>
                                         <td>
                                             @game.CustomerName

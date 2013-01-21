@@ -51,10 +51,10 @@
                         @Html.TextBoxFor(model => model[i].CustomerContactNumber, new { @class = "input-small" })
                     </td>
                     <td>
-                        @Html.TextBoxFor(model => model[i].InTime, new { @class = "input-medium time-picker" })
+                        <input type="text" class="input-medium time-picker" id="@string.Format("[{0}].InTime", i)" name="@string.Format("[{0}].InTime", i)" value="@Model[i].InTime.ToGameoString()"/>
                     </td>
                     <td>
-                        @Html.TextBoxFor(model => model[i].OutTime, new { @class = "input-medium time-picker" })
+                        <input type="text" class="input-medium time-picker" id="@string.Format("[{0}].OutTime", i)" name="@string.Format("[{0}].OutTime", i)" value="@Model[i].OutTime.ToGameoString()"/>
                     </td>
                     <td>
                         @Html.DropDownList(string.Format("[{0}].ConsoleName", i), ViewBag.GamingConsoles as IEnumerable<SelectListItem>)

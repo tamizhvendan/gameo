@@ -53,7 +53,7 @@ namespace Gameo.Web.Tests.UserControllerSpecs
 
             viewResult.Model.ShouldEqual(user);
             viewResult.ViewName.ShouldEqual(string.Empty);
-            AssertModelError(UserController, "Name", "User Name already exists in the selected branch");
+            AssertModelError(UserController, "Name", "User name already exists in the selected branch");
             AssertRandomBranchesPresentInViewBag(viewResult);
         }
     }

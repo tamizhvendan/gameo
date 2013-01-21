@@ -9,5 +9,15 @@ namespace Gameo.Domain
             return TimeZoneInfo
                     .ConvertTime(dateTime, TimeZoneInfo.Local, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
         }
+
+        public static string ToGameoString(this DateTime dateTime)
+        {
+            return dateTime.ToString(GetDateFormat());
+        }
+
+        public static string GetDateFormat()
+        {
+            return "dd/MM/yyyy h:mm:ss tt";
+        }
     }
 }

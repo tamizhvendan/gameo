@@ -47,9 +47,9 @@
                     </td>
                     <td>@game.ConsoleName
                     </td>
-                    <td>@game.InTime.ToLongDateString() - @game.InTime.ToShortTimeString()
+                    <td>@game.InTime.ToString("dd/MM/yyyy HH:mm") 
                     </td>
-                    <td>@game.OutTime.ToLongDateString() - @game.OutTime.ToShortTimeString()
+                    <td>@game.OutTime.ToString("dd/MM/yyyy HH:mm")
                     </td>
                 </tr>
             }

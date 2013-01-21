@@ -11,11 +11,11 @@
         <label class="control-label" for="from">
             From :
         </label>
-        <input type="text" class="input-medium time-picker" id="from" value="@DateTime.Now.ToIST()"/>
+        <input type="text" class="input-medium date-picker" id="from" value="@DateTime.Now.ToIST().ToString("dd/MM/yyyy")"/>
         <label class="control-label" for="to">
             To :
         </label>
-        <input type="text" class="input-medium time-picker" id="to" value="@DateTime.Now.ToIST().AddHours(1)"/>
+        <input type="text" class="input-medium date-picker" id="to" value="@DateTime.Now.ToIST().AddDays(1).ToString("dd/MM/yyyy")"/>
         <label class="control-label" for="branchName">
             Branch :
         </label>

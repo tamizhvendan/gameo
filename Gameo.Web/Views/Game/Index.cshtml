@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Gameo.Services.GameStatus>
+﻿@using Gameo.Domain
+@model IEnumerable<Gameo.Services.GameStatus>
 @{
     ViewBag.Title = "Index";
 }
@@ -56,10 +57,10 @@
                         <td>@player.CustomerName
                         </td>
                         <td>
-                            @player.InTime.ToLongDateString() - @player.InTime.ToShortTimeString()
+                            @player.InTime.ToGameoString()
                         </td>
                         <td>
-                            @player.OutTime.ToLongDateString() - @player.OutTime.ToShortTimeString()
+                            @player.OutTime.ToGameoString()
                         </td>
                     </tr>
                 }

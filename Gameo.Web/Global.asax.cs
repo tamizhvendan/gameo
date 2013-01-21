@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Gameo.DataAccess;
+using Gameo.Domain;
+using Gameo.Web.Areas.Admin.Models;
 using Gameo.Web.Models;
 
 namespace Gameo.Web
@@ -34,6 +37,7 @@ namespace Gameo.Web
             RegisterRoutes(RouteTable.Routes);
             MongoDbMapping.Initialize();
             ModelBinders.Binders.Add(typeof(CustomUserIdentity), new CustomUserIdentityModelBinder());
+            //ModelBinders.Binders.Add(typeof(Game), new DateTimeBinder());
         }
     }
 }

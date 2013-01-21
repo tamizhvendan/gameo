@@ -43,7 +43,7 @@ namespace Gameo.Web.Tests.BranchControllerSpecs
 
             viewResult.Model.ShouldEqual(branchWithExistingBranchName);
             viewResult.ViewName.ShouldEqual(string.Empty);
-            AssertModelError(BranchController, "Name", "Branch Name already exists");
+            AssertModelError(BranchController, "Name", "Branch name already exists");
         }
 
         [Test]
