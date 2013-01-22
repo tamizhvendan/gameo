@@ -1,4 +1,6 @@
-﻿using Gameo.Domain;
+﻿using System;
+using System.Collections.Generic;
+using Gameo.Domain;
 
 namespace Gameo.DataAccess.Core
 {
@@ -8,5 +10,6 @@ namespace Gameo.DataAccess.Core
         Membership FindByMembershipId(string membershipId);
         Membership FindByCustomer1ContactNumber(string customer1ContactNumber);
         void Recharge(string membershipId, MembershipReCharge membershipReCharge);
+        IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime dateTime);
     }
 }
