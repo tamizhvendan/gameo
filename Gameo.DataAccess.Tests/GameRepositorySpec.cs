@@ -145,6 +145,29 @@ namespace Gameo.DataAccess.Tests
             games.Any(game => game.CustomerName == "foo").ShouldBeTrue();
             games.Any(game => game.CustomerName == "bar").ShouldBeTrue();
         }
+
+        [Test]
+        public void Retrieves_Games_Started_On_a_given_day()
+        {
+            var currentTime = DateTime.Now.ToIST();
+            const string branch1Name = "Branch1";
+            var fooGameOnBranch1 = new Game { BranchName = branch1Name, InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
+            var fooNextDayGameOnBranch1 = new Game { BranchName = branch1Name, InTime = currentTime.AddDays(1), OutTime = currentTime.AddDays(1).AddHours(1), CustomerName = "foo" };
+            var fooGameOnBranch2 = new Game { BranchName = "Branch2", CustomerName = "foo" };
+            var barGameOnBranch1 = new Game
+            {
+                BranchName = branch1Name,
+                InTime = currentTime.Subtract(new TimeSpan(1, 2, 0, 0)),
+                OutTime = currentTime.Subtract(new TimeSpan(1, 1, 0, 0)),
+                CustomerName = "bar"
+            };
+            AddEntityToDatabase(barGameOnBranch1, fooGameOnBranch2, fooGameOnBranch1, fooNextDayGameOnBranch1);
+
+            var games = gameRepository.GetGames(branch1Name, currentTime);
+            
+            games.Count().ShouldEqual(1);
+            games.First().CustomerName.ShouldEqual("foo");
+        }
     }
 
 

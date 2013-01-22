@@ -34,5 +34,15 @@ namespace Gameo.DataAccess
                 .Where(game => game.InTime >= from)
                 .Where(game => game.OutTime <= to);
         }
+
+        public IEnumerable<Game> GetGames(string branchName, DateTime gamesPlayedOn)
+        {
+            return EntityCollection
+                .AsQueryable()
+                .Where(game => game.BranchName == branchName)
+                .Where(game => game.InTime > gamesPlayedOn.Date)
+                .Where(game => game.InTime < gamesPlayedOn.Date.AddDays(1));
+
+        }
     }
 }

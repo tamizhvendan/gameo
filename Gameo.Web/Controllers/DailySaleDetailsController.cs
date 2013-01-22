@@ -31,10 +31,15 @@ namespace Gameo.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DailySaleDetails dailySaleDetails, CustomUserIdentity customUserIdentity)
+        public ActionResult Create(DailySaleDetails dailySaleDetails, CustomUserIdentity customUserIdentity, string password)
         {
             if (!ModelState.IsValid)
             {
+                return View(dailySaleDetails);
+            }
+            if (password != customUserIdentity.Password)
+            {
+                ModelState.AddModelError("Password", "Invalid Password");
                 return View(dailySaleDetails);
             }
             dailySaleDetails.BranchName = customUserIdentity.BranchName;

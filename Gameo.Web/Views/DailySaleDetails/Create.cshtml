@@ -25,6 +25,15 @@
                 @Html.ValidationMessageFor(model => model.EbMeterReading)
             </div>
         </div>
+        
+         <div class="control-group">
+            <label class="control-label" for="Password">
+                Password</label>
+            <div class="controls">
+                @Html.Password("Password")
+                @Html.ValidationMessage("Password")
+            </div>
+        </div>
         <div class="control-group">
             <div class="controls">
                 <input type="submit" value="Submit" class="btn btn-primary offset1" onclick="return confirm('Are you sure to close the daily sales details ?')"/>
