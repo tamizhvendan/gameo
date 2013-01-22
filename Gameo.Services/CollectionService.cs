@@ -5,7 +5,7 @@ using Gameo.Domain;
 
 namespace Gameo.Services
 {
-    public class CollectionService
+    public class CollectionService : ICollectionService
     {
         private readonly IGameRepository gameRepository;
         private readonly IMembershipRepository membershipRepository;

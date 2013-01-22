@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.BranchControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.BranchControllerSpecs
 {
     [TestFixture]
     public class CreateGetActionSpec : BranchControllerSpecBase

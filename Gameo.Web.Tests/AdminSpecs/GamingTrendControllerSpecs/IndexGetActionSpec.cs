@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.GamingTrendControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.GamingTrendControllerSpecs
 {
     [TestFixture]
     public class IndexGetActionSpec : GamingTrendControllerSpecBase

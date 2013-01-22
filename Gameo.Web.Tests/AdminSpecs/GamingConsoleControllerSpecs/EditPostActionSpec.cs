@@ -1,7 +1,7 @@
-﻿using Gameo.Domain;
+using Gameo.Domain;
 using NUnit.Framework;
 
-namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs
 {
     [TestFixture]
     public class EditPostActionSpec : GamingConsoleControllerSpecBase

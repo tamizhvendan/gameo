@@ -1,7 +1,7 @@
-﻿using Gameo.Web.Areas.Admin.Controllers;
+using Gameo.Web.Areas.Admin.Controllers;
 using NUnit.Framework;
 
-namespace Gameo.Web.Tests.BranchControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.BranchControllerSpecs
 {
     public abstract class BranchControllerSpecBase : ControllerSpecBase
     {

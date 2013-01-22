@@ -3,7 +3,7 @@ using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.UserControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.UserControllerSpecs
 {
     [TestFixture]
     public class CreateGetActionSpec : UserControllerSpecBase

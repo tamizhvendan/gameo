@@ -47,6 +47,7 @@
     <Compile Include="GameStatus.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="ICollectionService.cs" />
     <Compile Include="IGameService.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,10 +1,9 @@
-﻿using Gameo.DataAccess.Core;
+using Gameo.DataAccess.Core;
 using Gameo.Web.Areas.Admin.Controllers;
-using Gameo.Web.Controllers;
 using Moq;
 using NUnit.Framework;
 
-namespace Gameo.Web.Tests.UserControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.UserControllerSpecs
 {
     public abstract class UserControllerSpecBase : ControllerSpecBase
     {

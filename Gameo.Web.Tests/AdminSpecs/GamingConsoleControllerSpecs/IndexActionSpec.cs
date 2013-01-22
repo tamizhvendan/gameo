@@ -1,10 +1,10 @@
-﻿using System.Linq;
+using System.Linq;
 using Gameo.Domain;
 using Moq;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs
 {
     [TestFixture]
     public class IndexActionSpec : GamingConsoleControllerSpecBase

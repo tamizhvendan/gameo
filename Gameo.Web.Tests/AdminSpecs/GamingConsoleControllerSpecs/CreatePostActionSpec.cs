@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs
 {
     public class CreatePostActionSpec : GamingConsoleControllerSpecBase
     {

@@ -1,11 +1,10 @@
-﻿using System.Linq;
+using System.Linq;
 using Gameo.Domain;
-using Gameo.Web.Areas.Admin.Controllers;
 using Moq;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.UserControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.UserControllerSpecs
 {
     [TestFixture]
     public class IndexActionSpec : UserControllerSpecBase

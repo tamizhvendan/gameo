@@ -1,10 +1,9 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Gameo.Domain;
-using Gameo.Web.Areas.Admin.Controllers;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.UserControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.UserControllerSpecs
 {
     public class CreatePostActionSpec : UserControllerSpecBase
     {

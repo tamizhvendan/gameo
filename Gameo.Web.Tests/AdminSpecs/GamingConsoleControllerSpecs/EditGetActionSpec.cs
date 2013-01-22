@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using Gameo.Domain;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.GamingConsoleControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs
 {
     [TestFixture]
     public class EditGetActionSpec : GamingConsoleControllerSpecBase

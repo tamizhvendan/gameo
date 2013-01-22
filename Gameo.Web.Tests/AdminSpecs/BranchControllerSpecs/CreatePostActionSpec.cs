@@ -1,11 +1,10 @@
-﻿using System.Linq;
 using System.Web.Mvc;
 using Gameo.Domain;
 using Moq;
 using NUnit.Framework;
 using Should;
 
-namespace Gameo.Web.Tests.BranchControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.BranchControllerSpecs
 {
     [TestFixture]
     public class CreatePostActionSpec : BranchControllerSpecBase

@@ -1,7 +1,7 @@
-﻿using Gameo.Web.Areas.Admin.Controllers;
+using Gameo.Web.Areas.Admin.Controllers;
 using NUnit.Framework;
 
-namespace Gameo.Web.Tests.GamingTrendControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.GamingTrendControllerSpecs
 {
     public abstract class GamingTrendControllerSpecBase : ControllerSpecBase
     {

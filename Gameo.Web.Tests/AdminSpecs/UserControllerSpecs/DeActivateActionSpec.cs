@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 
-namespace Gameo.Web.Tests.UserControllerSpecs
+namespace Gameo.Web.Tests.AdminSpecs.UserControllerSpecs
 {
     [TestFixture]
     public class DeActivateActionSpec : UserControllerSpecBase
