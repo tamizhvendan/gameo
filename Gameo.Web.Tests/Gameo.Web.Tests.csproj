@@ -58,14 +58,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminSpecs\BranchControllerSpecs\BranchControllerSpecBase.cs" />
+    <Compile Include="AdminSpecs\BranchControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\BranchControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="AdminSpecs\BranchControllerSpecs\IndexActionSpec.cs" />
+    <Compile Include="AdminSpecs\CollectionControllerSpecs\CollectionControllerSpecBase.cs" />
+    <Compile Include="AdminSpecs\CollectionControllerSpecs\IndexGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\CollectionControllerSpecs\ViewCollectionPostActionSpec.cs" />
+    <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\EditGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\EditPostActionSpec.cs" />
+    <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\GamingConsoleControllerSpecBase.cs" />
+    <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\IndexActionSpec.cs" />
+    <Compile Include="AdminSpecs\GamingTrendControllerSpecs\GamingTrendControllerSpecBase.cs" />
+    <Compile Include="AdminSpecs\GamingTrendControllerSpecs\IndexGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\UserControllerSpecs\ActivateActionSpec.cs" />
+    <Compile Include="AdminSpecs\UserControllerSpecs\CreateGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\UserControllerSpecs\CreatePostActionSpec.cs" />
+    <Compile Include="AdminSpecs\UserControllerSpecs\DeActivateActionSpec.cs" />
+    <Compile Include="AdminSpecs\UserControllerSpecs\IndexActionSpec.cs" />
+    <Compile Include="AdminSpecs\UserControllerSpecs\UserControllerSpecBase.cs" />
     <Compile Include="AuthenticationControllerSpecs\AuthenticationControllerSpecBase.cs" />
     <Compile Include="AuthenticationControllerSpecs\LoginGetActionSpec.cs" />
     <Compile Include="AuthenticationControllerSpecs\LoginPostActionSpec.cs" />
     <Compile Include="AuthenticationControllerSpecs\LogOffActionSpec.cs" />
-    <Compile Include="BranchControllerSpecs\BranchControllerSpecBase.cs" />
-    <Compile Include="BranchControllerSpecs\CreateGetActionSpec.cs" />
-    <Compile Include="BranchControllerSpecs\CreatePostActionSpec.cs" />
-    <Compile Include="BranchControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="ControllerSpecBase.cs" />
     <Compile Include="DailySaleDetailsControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="DailySaleDetailsControllerSpecs\CreatePostActionSpec.cs" />
@@ -77,18 +94,10 @@
     <Compile Include="GameControllerSpecs\AssignConsolePostActionSpec.cs" />
     <Compile Include="GameControllerSpecs\CompletedGamesGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\GameControllerSpecBase.cs" />
-    <Compile Include="GamingTrendControllerSpecs\GamingTrendControllerSpecBase.cs" />
-    <Compile Include="GamingTrendControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\AssignConsolePostActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\NonCompletedGamesGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\RemoveCustomerPostActionSpec.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\CreatePostActionSpec.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\CreateGetActionSpec.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\EditGetActionSpec.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\EditPostActionSpec.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\GamingConsoleControllerSpecBase.cs" />
-    <Compile Include="GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="MembershipControllerSpecs\MembershipDetailGetActionSpec.cs" />
@@ -102,12 +111,6 @@
     <Compile Include="ModelSpecs\CustomUserIdentitySpec.cs" />
     <Compile Include="ModelSpecs\CustomUserPrincipleSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControllerSpecs\ActivateActionSpec.cs" />
-    <Compile Include="UserControllerSpecs\CreateGetActionSpec.cs" />
-    <Compile Include="UserControllerSpecs\CreatePostActionSpec.cs" />
-    <Compile Include="UserControllerSpecs\DeActivateActionSpec.cs" />
-    <Compile Include="UserControllerSpecs\IndexActionSpec.cs" />
-    <Compile Include="UserControllerSpecs\UserControllerSpecBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

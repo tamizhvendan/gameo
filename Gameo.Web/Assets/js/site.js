@@ -30,7 +30,6 @@
         });
     });
 
-    $("input[type=text]").eq(0).focus();
 
     $(".time-picker").datetimepicker({
         controlType: 'select',
@@ -47,4 +46,28 @@
     });
 
     $("#tabs").tabs();
+
+    Handlebars.registerHelper('datetime', function (jsonDateTimeString) {
+        var dateTime = moment(jsonDateTimeString);
+
+        return dateTime.format("DD/MM/YYYY hh:mm A");
+    });
+
+    Handlebars.registerHelper('time', function (jsonDateTimeString) {
+        var dateTime = moment(jsonDateTimeString);
+
+        return dateTime.format("hh:mm A");
+    });
+
+    Handlebars.registerHelper('date', function (jsonDateTimeString) {
+        var dateTime = moment(jsonDateTimeString);
+
+        return dateTime.format("DD/MM/YYYY");
+    });
+
+    Handlebars.registerHelper('packageType', function (packageType) {
+        var packageTypes = ["No Package", "Package of 3 Hours", "Package of 5 Hours"];
+        return packageTypes[packageType];
+    });
+
 });

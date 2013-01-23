@@ -6,9 +6,9 @@ namespace Gameo.Web.Areas.Admin.Controllers
     [Authorize(Roles = "admin")]
     public class HomeController : ApplicationControllerBase
     {
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Collection");
         }
     }
 }
