@@ -18,7 +18,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void IsDailySaleClosed_returns_true_if_the_daily_sale_Details_Exists_for_branch_on_given_day()
+        public void IsDailySaleClosed_returs_true_if_the_daily_sale_Details_Exists_for_branch_on_given_day()
         {
             var dateTime = DateTime.Now.ToIST();
             AddEntityToDatabase(new DailySaleDetails { BranchName = "foo"});
@@ -29,7 +29,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void IsDailySaleClosed_returns_false_if_the_daily_sale_Details_not_Exists_for_given_day()
+        public void IsDailySaleClosed_returs_false_if_the_daily_sale_Details_not_Exists_for_given_day()
         {
             var dateTime = DateTime.Now.ToIST().AddDays(1);
             AddEntityToDatabase(new DailySaleDetails { BranchName = "bar"});
@@ -40,7 +40,7 @@ namespace Gameo.DataAccess.Tests
         }
 
         [Test]
-        public void GetDailySaleDetails_returns_DailySaleDetails_if_DailySaleDetails_exists_for_given_day()
+        public void GetDailySaleDetails_return_DailySaleDetails_if_DailySaleDetails_exists_for_given_day()
         {
             AddEntityToDatabase(new DailySaleDetails { BranchName = "bar", EbMeterReading = 246, TotalCollection = 350});
 

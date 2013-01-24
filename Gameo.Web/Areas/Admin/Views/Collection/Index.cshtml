@@ -50,6 +50,14 @@
                     <th><span  style="float:right">Net Collection</span></th>
                     <th> {{NetCollection}} </th>
                 </tr>
+                <tr>
+                    <th><span  style="float:right">Total Collection Reported</span></th>
+                    {{#if DailySaleDetails}}
+                        <th>{{DailySaleDetails.TotalCollection}}</th>
+                    {{else}}
+                        <th>N/A</th>
+                    {{/if}}
+                </tr>
             </tbody>
         </table>
     </script>

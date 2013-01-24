@@ -14,6 +14,7 @@ namespace Gameo.Services
         public IEnumerable<Game> OneTimePaymentGames { get; internal set; }
         public IEnumerable<Game> PackagePaymentGames { get; internal set; }
         public IEnumerable<MembershipReCharge> MembershipReCharges { get; internal set; }
+        public DailySaleDetails DailySaleDetails { get; set; }
 
         public decimal TotalPackageGamePaymentCollection    
         {

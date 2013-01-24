@@ -14,6 +14,7 @@ namespace Gameo.Services.Tests
     {
         private Mock<IGameRepository> gameRepositoryMock;
         private Mock<IMembershipRepository> membershipRepositoryMock;
+        private Mock<IDailySaleDetailsRepository> dailySalesRepositoryMock; 
         private CollectionService collectionService;
         private string branchName;
         private List<Game> games;
@@ -24,7 +25,8 @@ namespace Gameo.Services.Tests
         {
             gameRepositoryMock = new Mock<IGameRepository>();
             membershipRepositoryMock = new Mock<IMembershipRepository>();
-            collectionService = new CollectionService(gameRepositoryMock.Object, membershipRepositoryMock.Object);
+            dailySalesRepositoryMock = new Mock<IDailySaleDetailsRepository>();
+            collectionService = new CollectionService(gameRepositoryMock.Object, membershipRepositoryMock.Object, dailySalesRepositoryMock.Object);
             branchName = "branch1";
             games = new List<Game>
                         {
@@ -68,6 +70,17 @@ namespace Gameo.Services.Tests
             var totalCollection = collectionService.GetTotalCollection(branchName, currentTime);
             
             totalCollection.MembershipReCharges.ShouldEqual(membershipRecharges);
+        }
+
+        [Test]
+        public void GetTotalCollection_Retrieves_DailySalesDetails_In_Given_Branch_On_Given_Day()
+        {
+            var dailySaleDetails = new DailySaleDetails();
+            dailySalesRepositoryMock.Setup(repo => repo.GetDailySaleDetails(branchName, currentTime)).Returns(dailySaleDetails);
+
+            var totalCollection = collectionService.GetTotalCollection(branchName, currentTime);
+
+            totalCollection.DailySaleDetails.ShouldEqual(dailySaleDetails);
         }
     }
 }
