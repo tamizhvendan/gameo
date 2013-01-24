@@ -7,7 +7,7 @@ using Should;
 namespace Gameo.DataAccess.Tests
 {
     [TestFixture]
-    public class DailySaleDetailsSpec : RepositorySpecBase<DailySaleDetails>
+    public class DailySaleDetailsRepositorySpec : RepositorySpecBase<DailySaleDetails>
     {
         private DailySaleDetailsRepository dailySaleDetailsRepository;
 
@@ -37,6 +37,27 @@ namespace Gameo.DataAccess.Tests
             var isDailySaleClosed = dailySaleDetailsRepository.IsDailySaleClosed(dateTime, "bar");
 
             isDailySaleClosed.ShouldBeFalse();
+        }
+
+        [Test]
+        public void GetDailySaleDetails_return_DailySaleDetails_if_DailySaleDetails_exists_for_given_day()
+        {
+            AddEntityToDatabase(new DailySaleDetails { BranchName = "bar", EbMeterReading = 246, TotalCollection = 350});
+
+            var dailySaleDetails = dailySaleDetailsRepository.GetDailySaleDetails("bar", DateTime.Now.ToIST());
+
+            dailySaleDetails.TotalCollection.ShouldEqual(350);
+            dailySaleDetails.EbMeterReading.ShouldEqual(246);
+        }
+
+        [Test]
+        public void GetDailySaleDetails_return_null_if_DailySaleDetails_not_exists_for_given_day()
+        {
+            AddEntityToDatabase(new DailySaleDetails { BranchName = "bar", EbMeterReading = 246, TotalCollection = 350 });
+
+            var dailySaleDetails = dailySaleDetailsRepository.GetDailySaleDetails("bar", DateTime.Now.ToIST().AddDays(1));
+
+            dailySaleDetails.ShouldBeNull();
         }
     }
 }

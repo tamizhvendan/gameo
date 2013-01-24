@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="AssemblySetUp.cs" />
     <Compile Include="BranchRepositorySpec.cs" />
-    <Compile Include="DailySaleDetailsSpec.cs" />
+    <Compile Include="DailySaleDetailsRepositorySpec.cs" />
     <Compile Include="GameRepositorySpec.cs" />
     <Compile Include="GamingConsoleRepositorySpec.cs" />
     <Compile Include="MembershipRepositorySpec.cs" />
