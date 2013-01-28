@@ -16,7 +16,7 @@ namespace Gameo.DataAccess
 
         protected RepositoryBase()
         {
-            var mongoUrl = new MongoUrl(ConfigurationManager.AppSettings["database_connection_string"]);
+            var mongoUrl = new MongoUrl(ConfigurationManager.ConnectionStrings["gameo-db"].ConnectionString);
             var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
             var mongoClient = new MongoClient(mongoClientSettings);
             var mongoServer = mongoClient.GetServer();

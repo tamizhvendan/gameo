@@ -47,7 +47,7 @@ namespace Gameo.DataAccess.Tests
 
         private User CreateUser(string userName, string password, string branchName = "")
         {
-            return new User {Name = userName, Password = password, BranchName = branchName};
+            return new User { Name = userName, Password = password, BranchName = branchName };
         }
 
         [Test]
@@ -94,6 +94,28 @@ namespace Gameo.DataAccess.Tests
 
             var argumentException = Assert.Throws<ArgumentException>(() => userRepository.GetByUserName("user2"));
             argumentException.Message.ShouldEqual("Username not exists");
+        }
+
+        [Test]
+        public void HasAdminUser_returns_true_if_admin_users_exist()
+        {
+            AddEntityToDatabase(new User { IsAdmin = true });
+
+            userRepository.HasAdminUser.ShouldBeTrue();
+        }
+
+        [Test]
+        public void HasAdminUser_returns_false_if_no_users_exist()
+        {
+            userRepository.HasAdminUser.ShouldBeFalse();
+        }
+
+        [Test]
+        public void HasAdminUser_returns_false_if_no_admin_user_exist()
+        {
+            AddEntityToDatabase(new User());
+
+            userRepository.HasAdminUser.ShouldBeFalse();
         }
     }
 }

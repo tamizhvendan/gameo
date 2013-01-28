@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Gameo.DataAccess;
+using Gameo.DataAccess.Core;
 using Gameo.Domain;
 using Gameo.Web.Areas.Admin.Models;
 using Gameo.Web.Models;
+using Ninject;
 
 namespace Gameo.Web
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
@@ -37,7 +40,16 @@ namespace Gameo.Web
             RegisterRoutes(RouteTable.Routes);
             MongoDbMapping.Initialize();
             ModelBinders.Binders.Add(typeof(CustomUserIdentity), new CustomUserIdentityModelBinder());
-            //ModelBinders.Binders.Add(typeof(Game), new DateTimeBinder());
+            var userRepository = DependencyResolver.Current.GetService<IUserRepository>();
+            AddAdminUserIfNoUserFound(userRepository);
+        }
+
+        private static void AddAdminUserIfNoUserFound(IUserRepository userRepository)
+        {
+            if (!userRepository.HasAdminUser)
+            {
+                userRepository.Add(new User { Name = "spiel", Password = "gamer", IsAdmin = true });
+            }
         }
     }
 }

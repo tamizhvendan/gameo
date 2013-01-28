@@ -1,5 +1,7 @@
+using System.Linq;
 using Gameo.DataAccess;
 using Gameo.DataAccess.Core;
+using Gameo.Domain;
 using Gameo.Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Gameo.Web.App_Start.NinjectWebCommon), "Start")]
@@ -51,6 +53,8 @@ namespace Gameo.Web.App_Start
             return kernel;
         }
 
+       
+
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
@@ -66,6 +70,6 @@ namespace Gameo.Web.App_Start
             kernel.Bind<IDailySaleDetailsRepository>().To<DailySaleDetailsRepository>();
             kernel.Bind<IMembershipRepository>().To<MembershipRepository>();
             kernel.Bind<ICollectionService>().To<CollectionService>();
-        }        
+        }
     }
 }

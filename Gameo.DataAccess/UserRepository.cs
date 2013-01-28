@@ -44,5 +44,10 @@ namespace Gameo.DataAccess
 
             return retrievedUser;
         }
+
+        public bool HasAdminUser
+        {
+            get { return EntityCollection.AsQueryable().Any(user => user.IsAdmin); }
+        }
     }
 }
