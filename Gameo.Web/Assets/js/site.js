@@ -70,4 +70,15 @@
         return packageTypes[packageType];
     });
 
+    $(document).ajaxStart(function () {
+        var $ajaxButton = $(".ajax-button"),
+            loadingText = $ajaxButton.data('loading-text');
+        $ajaxButton.html(loadingText).attr('disabled', true);
+    });
+
+    $(document).ajaxStop(function () {
+        var $ajaxButton = $(".ajax-button"),
+            labelText = $ajaxButton.data('label-text');
+        $ajaxButton.html(labelText).removeAttr('disabled');
+    });
 });

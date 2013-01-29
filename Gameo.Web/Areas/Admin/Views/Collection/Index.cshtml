@@ -16,7 +16,7 @@
             Branch :
         </label>
         @Html.DropDownList("branchName", ViewBag.Branches as IEnumerable<SelectListItem>)
-        <button id="findCollection" class="btn btn-primary">
+        <button id="findCollection" class="btn btn-primary ajax-button" data-loading-text="Loading..." data-label-text="View Collection">
             View Collection</button>
     </div>
     <br/>
