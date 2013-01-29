@@ -17,7 +17,7 @@ namespace Gameo.Domain
 
         public static string GetDateFormat()
         {
-            return "dd/MM/yyyy h:mm:ss tt";
+            return "dd-MM-yyyy h:mm:ss tt";
         }
     }
 }

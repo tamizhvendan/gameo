@@ -33,14 +33,14 @@
 
     $(".time-picker").datetimepicker({
         controlType: 'select',
-        dateFormat: 'dd/mm/yy',
+        dateFormat: 'dd-mm-yy',
         timeFormat: "h:mm:ss TT",
         changeMonth: true,
         changeYear: true
     });
 
     $(".date-picker").datepicker({
-        dateFormat: 'dd/mm/yy',
+        dateFormat: 'dd-mm-yy',
         changeMonth: true,
         changeYear: true
     });
