@@ -26,7 +26,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
 
         public JsonResult ViewCollection(string branchName, DateTime day)
         {
-            return Json(collectionService.GetTotalCollection(branchName, day));
+            return Json(collectionService.GetTotalDayCollection(branchName, day));
         }
     }
 }

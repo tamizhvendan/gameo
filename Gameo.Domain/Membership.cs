@@ -80,11 +80,18 @@ namespace Gameo.Domain
 
         public string BranchName { get; set; }
 
-        public IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime dateTime)
+        public IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime date)
         {
             return
                 ReCharges
-                .Where(recharge => recharge.BranchName == branchName && recharge.RechargedOn.Date == dateTime.Date);
+                .Where(recharge => recharge.BranchName == branchName && recharge.RechargedOn.Date == date.Date);
+        }
+
+        public IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime from, DateTime to)
+        {
+            return
+                ReCharges
+                .Where(recharge => recharge.BranchName == branchName && recharge.RechargedOn.Date >= from.Date && recharge.RechargedOn.Date <= to.Date);
         }
     }
 }

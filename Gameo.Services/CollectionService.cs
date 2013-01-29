@@ -18,10 +18,10 @@ namespace Gameo.Services
             this.dailySaleDetailsRepository = dailySaleDetailsRepository;
         }
 
-        public TotalCollection GetTotalCollection(string branchName, DateTime dateTime)
+        public TotalDayCollection GetTotalDayCollection(string branchName, DateTime dateTime)
         {
             var games = gameRepository.GetGames(branchName, dateTime).ToList();
-            return new TotalCollection
+            return new TotalDayCollection
             {
                 OneTimePaymentGames = games.Where(game => game.GamePaymentType == GamePaymentType.OneTime && game.PackageType == PackageType.No_Package).ToList(),
                 PackagePaymentGames = games.Where(game => game.GamePaymentType == GamePaymentType.OneTime && game.PackageType != PackageType.No_Package).ToList(),

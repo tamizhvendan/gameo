@@ -4,8 +4,15 @@ using Gameo.Domain;
 
 namespace Gameo.Services
 {
-    public class TotalCollection
+    public abstract class TotalCollectionBase
     {
+        protected TotalCollectionBase()
+        {
+            OneTimePaymentGames = Enumerable.Empty<Game>();
+            PackagePaymentGames = Enumerable.Empty<Game>();
+            MembershipReCharges = Enumerable.Empty<MembershipReCharge>();
+        }
+
         public decimal TotalOneGamePaymentCollection
         {
             get { return OneTimePaymentGames.Sum(game => game.Price); }    
@@ -14,7 +21,6 @@ namespace Gameo.Services
         public IEnumerable<Game> OneTimePaymentGames { get; internal set; }
         public IEnumerable<Game> PackagePaymentGames { get; internal set; }
         public IEnumerable<MembershipReCharge> MembershipReCharges { get; internal set; }
-        public DailySaleDetails DailySaleDetails { get; set; }
 
         public decimal TotalPackageGamePaymentCollection    
         {
@@ -29,13 +35,6 @@ namespace Gameo.Services
         public decimal NetCollection
         {
             get { return TotalOneGamePaymentCollection + TotalPackageGamePaymentCollection + TotalRechargeCollection; }
-        }
-
-        public TotalCollection()
-        {
-            OneTimePaymentGames = Enumerable.Empty<Game>();
-            PackagePaymentGames = Enumerable.Empty<Game>();
-            MembershipReCharges = Enumerable.Empty<MembershipReCharge>();
         }
     }
 }

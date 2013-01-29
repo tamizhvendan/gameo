@@ -164,5 +164,26 @@ namespace Gameo.Domain.Tests
             membershipReCharges.Sum(r => r.Hours).ShouldEqual(7);
             membershipReCharges.Sum(r => r.Price).ShouldEqual(70);
         }
+
+        [Test]
+        public void Filters_recharges_by_branch_name_and_data_range()
+        {
+            var rechargedOn = DateTime.Now.ToIST();
+            var reCharge1 = new MembershipReCharge { BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn };
+            var reCharge2 = new MembershipReCharge { BranchName = "foo", Hours = 5, Price = 50, RechargedOn = rechargedOn.AddDays(15) };
+            var lastMonthDate = rechargedOn.Subtract(new TimeSpan(35, 0, 0, 0));
+            var reCharge3 = new MembershipReCharge { BranchName = "foo", Hours = 3, Price = 30, RechargedOn = lastMonthDate };
+            var reCharge4 = new MembershipReCharge { BranchName = "bar", Hours = 4, Price = 40, RechargedOn = rechargedOn };
+            membership.Recharge(reCharge1);
+            membership.Recharge(reCharge2);
+            membership.Recharge(reCharge3);
+            membership.Recharge(reCharge4);
+
+            var membershipReCharges = membership.GetRecharges("foo", rechargedOn, rechargedOn.AddMonths(1)).ToList();
+
+            membershipReCharges.Count().ShouldEqual(2);
+            membershipReCharges.Sum(r => r.Hours).ShouldEqual(7);
+            membershipReCharges.Sum(r => r.Price).ShouldEqual(70);
+        }
     }
 }

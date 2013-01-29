@@ -38,11 +38,11 @@ namespace Gameo.Services.Tests
         }
 
         [Test]
-        public void GetTotalCollection_Retrieves_OneTimeGamePayements_In_Given_Branch_On_Given_Day()
+        public void GetTotalDayCollection_Retrieves_OneTimeGamePayements_In_Given_Branch_On_Given_Day()
         {
             gameRepositoryMock.Setup(repo => repo.GetGames(branchName, currentTime)).Returns(games);
 
-            var totalCollection = collectionService.GetTotalCollection(branchName, currentTime);
+            var totalCollection = collectionService.GetTotalDayCollection(branchName, currentTime);
 
             var oneTimePaymentGames = totalCollection.OneTimePaymentGames.ToList();
             oneTimePaymentGames.Count.ShouldEqual(2);
@@ -50,11 +50,11 @@ namespace Gameo.Services.Tests
         }
 
         [Test]
-        public void GetTotalCollection_Retrieves_PackageGamePayments_In_Given_Branch_On_Given_Day()
+        public void GetTotalDayCollection_Retrieves_PackageGamePayments_In_Given_Branch_On_Given_Day()
         {
             gameRepositoryMock.Setup(repo => repo.GetGames(branchName, currentTime)).Returns(games);
 
-            var totalCollection = collectionService.GetTotalCollection(branchName, currentTime);
+            var totalCollection = collectionService.GetTotalDayCollection(branchName, currentTime);
 
             var oneTimePaymentGames = totalCollection.PackagePaymentGames.ToList();
             oneTimePaymentGames.Count.ShouldEqual(2);
@@ -62,23 +62,23 @@ namespace Gameo.Services.Tests
         }
 
         [Test]
-        public void GetTotalCollection_Retrieves_MembershipRecharges_In_Given_Branch_On_Given_Day()
+        public void GetTotalDayCollection_Retrieves_MembershipRecharges_In_Given_Branch_On_Given_Day()
         {
             var membershipRecharges = Enumerable.Empty<MembershipReCharge>();
             membershipRepositoryMock.Setup(repo => repo.GetRecharges(branchName, currentTime)).Returns(membershipRecharges);
 
-            var totalCollection = collectionService.GetTotalCollection(branchName, currentTime);
+            var totalCollection = collectionService.GetTotalDayCollection(branchName, currentTime);
             
             totalCollection.MembershipReCharges.ShouldEqual(membershipRecharges);
         }
 
         [Test]
-        public void GetTotalCollection_Retrieves_DailySalesDetails_In_Given_Branch_On_Given_Day()
+        public void GetTotalDayCollection_Retrieves_DailySalesDetails_In_Given_Branch_On_Given_Day()
         {
             var dailySaleDetails = new DailySaleDetails();
             dailySalesRepositoryMock.Setup(repo => repo.GetDailySaleDetails(branchName, currentTime)).Returns(dailySaleDetails);
 
-            var totalCollection = collectionService.GetTotalCollection(branchName, currentTime);
+            var totalCollection = collectionService.GetTotalDayCollection(branchName, currentTime);
 
             totalCollection.DailySaleDetails.ShouldEqual(dailySaleDetails);
         }
