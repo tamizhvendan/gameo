@@ -52,7 +52,7 @@ namespace Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs
 
             viewResult.Model.ShouldEqual(gameConsole);
             viewResult.ViewName.ShouldEqual(string.Empty);
-            AssertModelError(GamingConsoleController, "Name", "Console Name already exists in the selected branch");
+            AssertModelError(GamingConsoleController, "Name", "Console name already exists in the selected branch");
             AssertRandomBranchesPresentInViewBag(viewResult);
         }
     }

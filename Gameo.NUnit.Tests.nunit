@@ -1,0 +1,10 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="Gameo.Web.Tests\bin\Debug\Gameo.Web.Tests.dll" />
+    <assembly path="Gameo.Services.Tests\bin\Debug\Gameo.Services.Tests.dll" />
+    <assembly path="Gameo.Domain.Tests\bin\Debug\Gameo.Domain.Tests.dll" />
+    <assembly path="Gameo.DataAccess.Tests\bin\Debug\Gameo.DataAccess.Tests.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>

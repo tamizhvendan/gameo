@@ -42,8 +42,8 @@
                 <tr>
                     <td>@game.CustomerName</td>
                     <td>@game.ConsoleName</td>
-                    <td>@game.InTime.ToIST().ToGameoString() </td>
-                    <td>@game.OutTime.ToIST().ToGameoString() </td>
+                    <td>@game.InTime.ToGameoString() </td>
+                    <td>@game.OutTime.ToGameoString() </td>
                     <td>@Enum.GetName(typeof(GamePaymentType), @game.GamePaymentType)</td>
                     <td>@Enum.GetName(typeof(PackageType), @game.PackageType).Replace("_", " ")</td>
                 </tr>

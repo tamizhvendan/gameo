@@ -48,19 +48,19 @@
     $("#tabs").tabs();
 
     Handlebars.registerHelper('datetime', function (jsonDateTimeString) {
-        var dateTime = moment(jsonDateTimeString);
+        var dateTime = moment(jsonDateTimeString).subtract({ hours: 5, minutes: 30 });
 
         return dateTime.format("DD/MM/YYYY hh:mm A");
     });
 
     Handlebars.registerHelper('time', function (jsonDateTimeString) {
-        var dateTime = moment(jsonDateTimeString);
+        var dateTime = moment(jsonDateTimeString).subtract({hours : 5, minutes : 30});
 
         return dateTime.format("hh:mm A");
     });
 
     Handlebars.registerHelper('date', function (jsonDateTimeString) {
-        var dateTime = moment(jsonDateTimeString);
+        var dateTime = moment(jsonDateTimeString).subtract({ hours: 5, minutes: 30 });
 
         return dateTime.format("DD/MM/YYYY");
     });
