@@ -27,7 +27,7 @@ namespace Gameo.Services.Tests
         [SetUp]
         public void SetUp()
         {
-            currentTime = DateTime.Now.ToIST();
+            currentTime = DateTime.UtcNow.ToIST();
             gamingConsoles = new List<GamingConsole>
                                  {
                                      new GamingConsole {BranchName = "Branch1", Name = nameOfConsole1},

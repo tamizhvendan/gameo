@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Gameo.Domain.Game>
+﻿@using Gameo.Domain
+@model IEnumerable<Gameo.Domain.Game>
 @{
     ViewBag.Title = "Non Completed Games";
 }
@@ -47,9 +48,9 @@
                     </td>
                     <td>@game.ConsoleName
                     </td>
-                    <td>@game.InTime.ToString("dd/MM/yyyy HH:mm") 
+                    <td>@game.InTime.ToIST().ToGameoString()
                     </td>
-                    <td>@game.OutTime.ToString("dd/MM/yyyy HH:mm")
+                    <td>@game.OutTime.ToIST().ToGameoString()
                     </td>
                 </tr>
             }

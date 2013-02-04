@@ -12,7 +12,7 @@ namespace Gameo.Web.Tests.AdminSpecs.CollectionControllerSpecs
         [Test]
         public void Returns_TotalCollection_retreived_from_collection_service()
         {
-            var currentTime = DateTime.Now.ToIST();
+            var currentTime = DateTime.UtcNow.ToIST();
             const string branchName = "branch1";
             var totalCollection = new TotalDayCollection();
             CollectionServiceMock.Setup(service => service.GetTotalDayCollection(branchName, currentTime)).Returns(totalCollection);

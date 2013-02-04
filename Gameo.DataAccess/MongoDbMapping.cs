@@ -9,7 +9,7 @@ namespace Gameo.DataAccess
     {
         public static void Initialize()
         {
-            var dateTimeSerializationOptions = new DateTimeSerializationOptions { Kind = DateTimeKind.Local };
+            var dateTimeSerializationOptions = new DateTimeSerializationOptions { Kind = DateTimeKind.Utc };
 
             BsonClassMap.RegisterClassMap<Entity>(classMap =>
                                                       {
@@ -35,8 +35,6 @@ namespace Gameo.DataAccess
                                                               classMap.UnmapProperty(membership => membership.RemainingHours);
                                                               classMap.UnmapProperty(membership => membership.RemainingHours);
                                                               classMap.UnmapProperty(membership => membership.ExpiresOn);
-                                                              /*classMap.MapProperty(membership => membership.Games);
-                                                              classMap.MapProperty(membership => membership.ReCharges);*/
                                                               classMap.MapProperty(membership => membership.MembershipId);
                                                               classMap.GetMemberMap(membership => membership.IssuedOn)
                                                                   .SetSerializationOptions(dateTimeSerializationOptions);

@@ -34,7 +34,7 @@ namespace Gameo.Services.Tests
                             new Game { Price = 300, PackageType = PackageType.Package_Of_3_Hours}, new Game { Price  = 500, PackageType = PackageType.Package_Of_5_Hours},
                             new Game { Price = 0, GamePaymentType = GamePaymentType.Membership}
                         };
-            currentTime = DateTime.Now.ToIST();
+            currentTime = DateTime.UtcNow.ToIST();
         }
 
         [Test]

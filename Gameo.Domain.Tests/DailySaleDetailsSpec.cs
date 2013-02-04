@@ -18,7 +18,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void DateTime_should_be_current_Day_by_default()
         {
-            var currentTime = DateTime.Now.ToIST();
+            var currentTime = DateTime.UtcNow.ToIST();
 
             dailySaleDetails.DateTime.Day.ShouldEqual(currentTime.Day);
             dailySaleDetails.DateTime.Month.ShouldEqual(currentTime.Month);

@@ -46,7 +46,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Retrieves_Non_Completed_Games_of_given_console()
         {
-            var currentTime = DateTime.Now.ToIST();
+            var currentTime = DateTime.UtcNow.ToIST();
             var fooGameOnBranch1 = new Game { BranchName = "Branch1", InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
             var fooGameOnBranch2 = new Game { BranchName = "Branch2", CustomerName = "foo" };
             var barGameOnBranch1 = new Game
@@ -78,7 +78,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Retrieves_Completed_Games_Within_given_day_for_given_branch()
         {
-            var currentDateTime = DateTime.Now.ToIST();
+            var currentDateTime = DateTime.UtcNow.ToIST();
             var branchName = "branch1";
             var completedGameOnBranch1 = new Game
                                               {
@@ -118,7 +118,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Retrieves_Games_Played_withing_given_timeframe_for_given_branch()
         {
-            var currentTime = DateTime.Now.ToIST();
+            var currentTime = DateTime.UtcNow.ToIST();
             const string branch1Name = "Branch1";
             var fooGameOnBranch1 = new Game { BranchName = branch1Name, InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
             var fooGameOnBranch2 = new Game { BranchName = "Branch2", CustomerName = "foo" };
@@ -149,7 +149,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Retrieves_Games_Started_On_a_given_day()
         {
-            var currentTime = DateTime.Now.ToIST();
+            var currentTime = DateTime.UtcNow.ToIST();
             const string branch1Name = "Branch1";
             var fooGameOnBranch1 = new Game { BranchName = branch1Name, InTime = currentTime, OutTime = currentTime.AddHours(1), CustomerName = "foo" };
             var fooNextDayGameOnBranch1 = new Game { BranchName = branch1Name, InTime = currentTime.AddDays(1), OutTime = currentTime.AddDays(1).AddHours(1), CustomerName = "foo" };

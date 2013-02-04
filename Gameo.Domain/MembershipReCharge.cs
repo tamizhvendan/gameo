@@ -13,7 +13,7 @@ namespace Gameo.Domain
 
         public MembershipReCharge()
         {
-            RechargedOn = DateTime.Now.ToIST();
+            RechargedOn = DateTime.UtcNow.ToIST();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

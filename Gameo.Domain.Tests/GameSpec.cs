@@ -61,7 +61,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void Out_time_should_be_greater_than_in_time()
         {
-            game.InTime = DateTime.Now.ToIST();
+            game.InTime = DateTime.UtcNow.ToIST();
             game.OutTime = game.InTime.Subtract(new TimeSpan(0, 0, 30, 0));
 
             AssertEntityValidationError(game, "Out time should be greater than in time.");
@@ -78,8 +78,8 @@ namespace Gameo.Domain.Tests
         [TestCase(61, false)]
         public void Difference_between_In_time_and_Out_time_should_be_in_multiples_of_30_minutes(int noOfMinutesToAdd, bool isHappyPath)
         {
-            game.InTime = DateTime.Now.ToIST();
-            game.OutTime = DateTime.Now.ToIST().AddMinutes(noOfMinutesToAdd);
+            game.InTime = DateTime.UtcNow.ToIST();
+            game.OutTime = DateTime.UtcNow.ToIST().AddMinutes(noOfMinutesToAdd);
 
             if (isHappyPath)
             {
@@ -94,7 +94,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void Validates_the_difference_in_seconds_of_InTime_and_OutTime()
         {
-            game.InTime = DateTime.Now.ToIST();
+            game.InTime = DateTime.UtcNow.ToIST();
             game.OutTime = game.InTime.AddSeconds(5);
 
             AssertEntityValidationError(game, "Difference between In Time and Out Time should be in multiples of half-hour."); 
@@ -133,7 +133,7 @@ namespace Gameo.Domain.Tests
         [Test]
         public void By_default_InTime_should_be_current_time()
         {
-            var currentTime = DateTime.Now.ToIST();
+            var currentTime = DateTime.UtcNow.ToIST();
 
             AssertDateTimeEquality(game.InTime, currentTime);
         }
@@ -150,14 +150,14 @@ namespace Gameo.Domain.Tests
         [Test]
         public void By_default_OutTime_should_be_One_Hour_greater_than_current_time()
         {
-            AssertDateTimeEquality(game.OutTime, DateTime.Now.ToIST().AddHours(1));
+            AssertDateTimeEquality(game.OutTime, DateTime.UtcNow.ToIST().AddHours(1));
         }
 
         [Test]
         public void In_time_should_not_be_a_time_at_future()
         {
-            game.InTime = DateTime.Now.ToIST().AddHours(1);
-            game.OutTime = DateTime.Now.ToIST().AddHours(3);
+            game.InTime = DateTime.UtcNow.ToIST().AddHours(1);
+            game.OutTime = DateTime.UtcNow.ToIST().AddHours(3);
 
             AssertEntityValidationError(game, "In Time should not be greater than current time.");
         }
@@ -167,7 +167,7 @@ namespace Gameo.Domain.Tests
         {
             game.HoursPlayed.ShouldEqual(1);
 
-            game.InTime = DateTime.Now.ToIST().AddMinutes(30);
+            game.InTime = DateTime.UtcNow.ToIST().AddMinutes(30);
             game.HoursPlayed.ShouldEqual(0.5);
         }
 

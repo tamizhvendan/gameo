@@ -11,7 +11,7 @@
         <label class="control-label" for="day">
             Day :
         </label>
-        <input type="text" class="input-medium date-picker" id="day" value="@DateTime.Now.ToIST().ToString("dd/MM/yyyy")"/>
+        <input type="text" class="input-medium date-picker" id="day" value="@DateTime.UtcNow.ToIST().ToString("dd/MM/yyyy")"/>
         <label class="control-label" for="branchName">
             Branch :
         </label>

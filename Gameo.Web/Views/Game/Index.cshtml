@@ -57,10 +57,10 @@
                         <td>@player.CustomerName
                         </td>
                         <td>
-                            @player.InTime.ToGameoString()
+                            @player.InTime.ToIST().ToGameoString()
                         </td>
                         <td>
-                            @player.OutTime.ToGameoString()
+                            @player.OutTime.ToIST().ToGameoString()
                         </td>
                     </tr>
                 }

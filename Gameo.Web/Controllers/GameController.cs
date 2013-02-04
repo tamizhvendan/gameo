@@ -30,7 +30,7 @@ namespace Gameo.Web.Controllers
                 ViewBag.Message = TempData["Message"];
             }
             
-            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus(customUserIdentity.BranchName, DateTime.Now.ToIST());
+            var nonCompletedGameStatuses = gameService.GetNonCompletedGamesStatus(customUserIdentity.BranchName, DateTime.UtcNow.ToIST());
             return View(nonCompletedGameStatuses);
         }
 
@@ -88,12 +88,12 @@ namespace Gameo.Web.Controllers
 
         public ViewResult NonCompletedGames(CustomUserIdentity customUserIdentity)
         {
-            return View(gameRepository.GetNonCompletedGames(customUserIdentity.BranchName, DateTime.Now.ToIST()));
+            return View(gameRepository.GetNonCompletedGames(customUserIdentity.BranchName, DateTime.UtcNow.ToIST()));
         }
 
         public ViewResult CompletedGames(CustomUserIdentity customUserIdentity)
         {
-            return View(gameRepository.GetCompletedGamesWithinGivenDay(customUserIdentity.BranchName, DateTime.Now.ToIST()));
+            return View(gameRepository.GetCompletedGamesWithinGivenDay(customUserIdentity.BranchName, DateTime.UtcNow.ToIST()));
         }
     }
 }

@@ -88,7 +88,7 @@ namespace Gameo.DataAccess.Tests
         public void GetRecharges_Returns_the_recharges_for_given_day_and_given_branch_name()
         {
             var membership2 = new Membership {Customer1ContactNumber = "626262"};
-            var rechargedOn = DateTime.Now.ToIST().Subtract(new TimeSpan(1, 0, 0, 0));
+            var rechargedOn = DateTime.UtcNow.ToIST().Subtract(new TimeSpan(1, 0, 0, 0));
             var reCharge = new MembershipReCharge
                                {
                                    BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn
@@ -99,7 +99,7 @@ namespace Gameo.DataAccess.Tests
             membershipRepository.Recharge(membership2.MembershipId, membershipReCharge);
             membershipRepository.Recharge(membership2.MembershipId, reCharge);
 
-            var membershipReCharges = membershipRepository.GetRecharges("foo", DateTime.Now.ToIST());
+            var membershipReCharges = membershipRepository.GetRecharges("foo", DateTime.UtcNow.ToIST());
             membershipReCharges.Count().ShouldEqual(2);
             membershipReCharges.Sum(m => m.Hours).ShouldEqual(10);
             membershipReCharges.Sum(m => m.Price).ShouldEqual(100);

@@ -7,7 +7,7 @@ namespace Gameo.Domain
         public static DateTime ToIST(this DateTime dateTime)
         {
             return TimeZoneInfo
-                    .ConvertTime(dateTime, TimeZoneInfo.Local, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
+                    .ConvertTime(dateTime, TimeZoneInfo.Utc, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
         }
 
         public static string ToGameoString(this DateTime dateTime)

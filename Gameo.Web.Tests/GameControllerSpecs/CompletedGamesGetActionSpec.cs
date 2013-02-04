@@ -11,7 +11,7 @@ namespace Gameo.Web.Tests.GameControllerSpecs
         [Test]
         public void Retrieves_completed_games_from_game_repo_and_pass_it_to_view()
         {
-            var dateTime = DateTime.Now.ToIST();
+            var dateTime = DateTime.UtcNow.ToIST();
             GameRepositoryMock.Setup(repo => repo.GetCompletedGamesWithinGivenDay(CustomUserIdentity.BranchName, dateTime))
                                 .Returns(Games);
 
