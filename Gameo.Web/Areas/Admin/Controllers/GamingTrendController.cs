@@ -33,11 +33,11 @@ namespace Gameo.Web.Areas.Admin.Controllers
             {
                 var trendChartData = new TrendChartData
                                          {
-                                             name = "Gaming Console " + i
+                                             Name = "Gaming Console " + i
                                          };
                 for (var j = 0; j < 6; j++)
                 {
-                    trendChartData.data[j] = random.Next(20);
+                    trendChartData.Data[j] = random.Next(20);
                 }
                 data.Add(trendChartData);
             }
@@ -47,13 +47,13 @@ namespace Gameo.Web.Areas.Admin.Controllers
 
     class TrendChartData
     {
-        public string name { get; set; }
-        public int[] data { get; set; }
+        public string Name { get; set; }
+        public int[] Data { get; set; }
 
         public TrendChartData()
         {
-            name = string.Empty;
-            data = new int[6];
+            Name = string.Empty;
+            Data = new int[6];
         }
     }
 }
