@@ -28,6 +28,7 @@ namespace Gameo.Domain
             InTime = DateTime.UtcNow.ToIST();
             OutTime = InTime.AddHours(1);
             GamePaymentType = GamePaymentType.OneTime;
+            Price = 60;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

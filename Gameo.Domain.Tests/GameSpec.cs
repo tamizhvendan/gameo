@@ -14,7 +14,7 @@ namespace Gameo.Domain.Tests
         {
             game = new Game
                        {
-                           ConsoleName = "Console1", CustomerName = "Customer1", Price = 10, BranchName = "Branch1"
+                           ConsoleName = "Console1", CustomerName = "Customer1", BranchName = "Branch1"
                        };
         }
 
@@ -136,6 +136,12 @@ namespace Gameo.Domain.Tests
             var currentTime = DateTime.UtcNow.ToIST();
 
             AssertDateTimeEquality(game.InTime, currentTime);
+        }
+
+        [Test]
+        public void By_default_Price_should_be_60()
+        {
+            game.Price.ShouldEqual(60);
         }
 
         private void AssertDateTimeEquality(DateTime actualTime, DateTime expectedTime)
