@@ -10,6 +10,7 @@ namespace Gameo.Domain
         public decimal TotalCollection { get; set; }
         public decimal EbMeterReading { get; set; }
         public string BranchName { get; set; }
+        public decimal AmountInHand { get; set; }
 
         public DailySaleDetails()
         {
@@ -23,6 +24,11 @@ namespace Gameo.Domain
             if (EbMeterReading <= 0)
             {
                 yield return new ValidationResult("EB Meter Reading should be greater than zero.");
+            }
+
+            if (AmountInHand <= 0)
+            {
+                yield return new ValidationResult("Amount in hand should be greater than zero.");
             }
 
             if (TotalCollection < 0)

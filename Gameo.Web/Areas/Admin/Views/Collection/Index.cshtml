@@ -58,6 +58,14 @@
                         <th>N/A</th>
                     {{/if}}
                 </tr>
+                <tr>
+                    <th><span  style="float:right">Amount In Hand Reported</span></th>
+                    {{#if DailySaleDetails}}
+                        <th>{{DailySaleDetails.AmountInHand}}</th>
+                    {{else}}
+                        <th>N/A</th>
+                    {{/if}}
+                </tr>
             </tbody>
         </table>
     </script>

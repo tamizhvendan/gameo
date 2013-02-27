@@ -18,11 +18,19 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label" for="@Model.AmountInHand">
+                Amount In Hand</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.AmountInHand)
+                @Html.ValidationMessageFor(model => model.AmountInHand)
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label" for="@Model.EbMeterReading">
                 EB Meter Reading</label>
             <div class="controls">
                 @Html.TextBoxFor(model => model.EbMeterReading)
-                @Html.ValidationMessageFor(model => model.EbMeterReading)
+                @Html.ValidationMessage("EbMeterReading")
             </div>
         </div>
         

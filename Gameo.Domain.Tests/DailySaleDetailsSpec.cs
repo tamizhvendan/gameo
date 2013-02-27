@@ -12,7 +12,7 @@ namespace Gameo.Domain.Tests
         [SetUp]
         public void SetUp()
         {
-            dailySaleDetails = new DailySaleDetails { EbMeterReading = 5, TotalCollection = 5 };
+            dailySaleDetails = new DailySaleDetails { EbMeterReading = 5, TotalCollection = 5, AmountInHand = 5};
         }
 
         [Test]
@@ -43,6 +43,26 @@ namespace Gameo.Domain.Tests
             else
             {
                 AssertEntityValidationError(dailySaleDetails, "EB Meter Reading should be greater than zero.");
+            }
+
+        }
+
+        [Test]
+        [TestCase(0, false)]
+        [TestCase(-1, false)]
+        [TestCase(-60, false)]
+        [TestCase(60, true)]
+        [TestCase(1, true)]
+        public void AmountInHand_should_be_greater_than_zero(decimal amountInHand, bool isHappyPath)
+        {
+            dailySaleDetails.AmountInHand = amountInHand;
+            if (isHappyPath)
+            {
+                AssertZeroValidationError(dailySaleDetails);
+            }
+            else
+            {
+                AssertEntityValidationError(dailySaleDetails, "Amount in hand should be greater than zero.");
             }
 
         }
