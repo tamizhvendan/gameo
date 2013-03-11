@@ -14,7 +14,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         [SetUp]
         public void SetUp()
         {
-            membershipReCharge = new MembershipReCharge();
+            membershipReCharge = new MembershipReCharge { MembershipId = MembershipId};
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         {
             MembershipController.ModelState.AddModelError("foo", "bar");
 
-            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge) as ViewResult;
+            var viewResult = MembershipController.Recharge(membershipReCharge) as ViewResult;
 
             viewResult.ViewName.ShouldEqual(string.Empty);
             viewResult.Model.ShouldEqual(membershipReCharge);
@@ -34,7 +34,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
             Membership membership = null;
             MembershipRepositoryMock.Setup(repo => repo.FindByMembershipId(MembershipId)).Returns(membership);
 
-            var viewResult = MembershipController.Recharge(MembershipId, membershipReCharge) as ViewResult;
+            var viewResult = MembershipController.Recharge(membershipReCharge) as ViewResult;
 
             viewResult.ViewName.ShouldEqual(string.Empty);
             AssertModelError(MembershipController, "membershipId", "Membership Id not exists.");
@@ -45,11 +45,11 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         public void Recharge_using_repository_if_model_State_is_valid()
         {
             MembershipRepositoryMock.Setup(repo => repo.FindByMembershipId(MembershipId)).Returns(new Membership());
-            MembershipRepositoryMock.Setup(repo => repo.Recharge(MembershipId, membershipReCharge)).Verifiable();
+            MembershipRepositoryMock.Setup(repo => repo.Recharge(membershipReCharge)).Verifiable();
 
-            MembershipController.Recharge(MembershipId, membershipReCharge);
+            MembershipController.Recharge(membershipReCharge);
 
-            MembershipRepositoryMock.Verify(repo => repo.Recharge(MembershipId, membershipReCharge));
+            MembershipRepositoryMock.Verify(repo => repo.Recharge(membershipReCharge));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Gameo.Web.Tests.MembershipControllerSpecs
         {
             MembershipRepositoryMock.Setup(repo => repo.FindByMembershipId(MembershipId)).Returns(new Membership());
 
-            var actionResult = MembershipController.Recharge(MembershipId, membershipReCharge);
+            var actionResult = MembershipController.Recharge(membershipReCharge);
 
             AssertReadirectToAction(actionResult, "RechargeSuccess");
             var membershipId = MembershipController.TempData["MembershipId"] as string;

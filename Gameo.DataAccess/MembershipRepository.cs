@@ -24,9 +24,9 @@ namespace Gameo.DataAccess
             return EntityCollection.AsQueryable().FirstOrDefault(membership => membership.Customer1ContactNumber == customer1ContactNumber);
         }
 
-        public void Recharge(string membershipId, MembershipReCharge membershipReCharge)
+        public void Recharge(MembershipReCharge membershipReCharge)
         {
-            var membership = FindByMembershipId(membershipId);
+            var membership = FindByMembershipId(membershipReCharge.MembershipId);
             membership.Recharge(membershipReCharge);
             EntityCollection.Save(membership);
         }

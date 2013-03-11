@@ -9,7 +9,7 @@ namespace Gameo.DataAccess.Core
         bool IsCustomer1ContactNumberExists(string contactNumber);
         Membership FindByMembershipId(string membershipId);
         Membership FindByCustomer1ContactNumber(string customer1ContactNumber);
-        void Recharge(string membershipId, MembershipReCharge membershipReCharge);
+        void Recharge(MembershipReCharge membershipReCharge);
         IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime dateTime);
     }
 }

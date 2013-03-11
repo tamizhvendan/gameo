@@ -80,21 +80,21 @@ namespace Gameo.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Recharge(string membershipId, MembershipReCharge membershipReCharge)
+        public ActionResult Recharge(MembershipReCharge membershipReCharge)
         {
             if (!ModelState.IsValid)
             {
                 return View(membershipReCharge);
             }
 
-            if (membershipRepository.FindByMembershipId(membershipId) == null)
+            if (membershipRepository.FindByMembershipId(membershipReCharge.MembershipId) == null)
             {
-                ModelState.AddModelError("membershipId", "Membership Id not exists.");
+                ModelState.AddModelError("MembershipId", "Membership Id not exists.");
                 return View(membershipReCharge);
             }
 
-            membershipRepository.Recharge(membershipId, membershipReCharge);
-            TempData["MembershipId"] = membershipId;
+            membershipRepository.Recharge(membershipReCharge);
+            TempData["MembershipId"] = membershipReCharge.MembershipId;
 
             return RedirectToAction("RechargeSuccess");
         }

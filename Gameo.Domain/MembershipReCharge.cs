@@ -10,6 +10,7 @@ namespace Gameo.Domain
         public decimal Price { get; set; }
         public int Hours { get; set; }
         public string BranchName { get; set; }
+        public string MembershipId { get; set; }
 
         public MembershipReCharge()
         {

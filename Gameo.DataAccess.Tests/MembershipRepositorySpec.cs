@@ -18,7 +18,7 @@ namespace Gameo.DataAccess.Tests
         {
             membershipRepository = new MembershipRepository();
             membership = new Membership { Customer1ContactNumber = "99889" };
-            membershipReCharge = new MembershipReCharge { BranchName = "foo", Hours = 5, Price = 50 };
+            membershipReCharge = new MembershipReCharge { BranchName = "foo", Hours = 5, Price = 50, MembershipId = membership.MembershipId};
             AddEntityToDatabase(membership);
 
         }
@@ -72,7 +72,7 @@ namespace Gameo.DataAccess.Tests
         [Test]
         public void Recharges_by_retrieving_the_membership_and_adding_the_recharge_to_it()
         {
-            membershipRepository.Recharge(membership.MembershipId, membershipReCharge);
+            membershipRepository.Recharge(membershipReCharge);
 
             AssertUpdatedEntity(membership.Id, actualMembership =>
                                                    {
@@ -81,6 +81,7 @@ namespace Gameo.DataAccess.Tests
                                                        reCharge.BranchName.ShouldEqual(membershipReCharge.BranchName);
                                                        reCharge.Hours.ShouldEqual(membershipReCharge.Hours);
                                                        reCharge.Price.ShouldEqual(membershipReCharge.Price);
+                                                       reCharge.MembershipId.ShouldEqual(membership.MembershipId);
                                                    });
         }
 
@@ -91,13 +92,13 @@ namespace Gameo.DataAccess.Tests
             var rechargedOn = DateTime.UtcNow.ToIST().Subtract(new TimeSpan(1, 0, 0, 0));
             var reCharge = new MembershipReCharge
                                {
-                                   BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn
+                                   BranchName = "foo", Hours = 2, Price = 20, RechargedOn = rechargedOn, MembershipId = membership2.MembershipId
                                };
             AddEntityToDatabase(membership2);
-            membershipRepository.Recharge(membership.MembershipId, membershipReCharge);
-            membershipRepository.Recharge(membership.MembershipId, reCharge);
-            membershipRepository.Recharge(membership2.MembershipId, membershipReCharge);
-            membershipRepository.Recharge(membership2.MembershipId, reCharge);
+            membershipRepository.Recharge(membershipReCharge);
+            membershipRepository.Recharge(reCharge);
+            membershipRepository.Recharge(membershipReCharge);
+            membershipRepository.Recharge(reCharge);
 
             var membershipReCharges = membershipRepository.GetRecharges("foo", DateTime.UtcNow.ToIST());
             membershipReCharges.Count().ShouldEqual(2);
