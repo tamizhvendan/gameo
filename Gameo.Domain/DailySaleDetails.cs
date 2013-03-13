@@ -23,17 +23,17 @@ namespace Gameo.Domain
         {
             if (EbMeterReading <= 0)
             {
-                yield return new ValidationResult("EB Meter Reading should be greater than zero.");
+                yield return new ValidationResult("EB Meter Reading should be greater than zero.", new[] { "EbMeterReading" });
             }
 
             if (AmountInHand <= 0)
             {
-                yield return new ValidationResult("Amount in hand should be greater than zero.");
+                yield return new ValidationResult("Amount in hand should be greater than zero.", new[] { "AmountInHand" });
             }
 
             if (TotalCollection < 0)
             {
-                yield return new ValidationResult("Total Collection should be greater than or equal to zero.");
+                yield return new ValidationResult("Total Collection should be greater than or equal to zero.", new[] { "TotalCollection" });
             }
         }
     }

@@ -88,7 +88,6 @@
     <Compile Include="DailySaleDetailsControllerSpecs\CreatePostActionSpec.cs" />
     <Compile Include="DailySaleDetailsControllerSpecs\DailySaleClosedGetActionSpec.cs" />
     <Compile Include="DailySaleDetailsControllerSpecs\DailySaleDetailsControllerSpecBase.cs" />
-    <Compile Include="DailySaleDetailsControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\AddCustomerPostActionSpec.cs" />
     <Compile Include="GameControllerSpecs\AssignConsoleGetActionSpec.cs" />
     <Compile Include="GameControllerSpecs\AssignConsolePostActionSpec.cs" />

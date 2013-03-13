@@ -17,6 +17,14 @@
                 @Html.ValidationMessageFor(model => model.TotalCollection)
             </div>
         </div>
+         <div class="control-group">
+            <label class="control-label" for="@Model.AmountInHand">
+                Day</label>
+            <div class="controls">
+                <input type="text" class="date-picker-past" id="DateTime" name="DateTime" value="@Model.DateTime.ToString("dd-MM-yyyy")"/>
+                @Html.ValidationMessage("DateTime")
+            </div>
+        </div>
         <div class="control-group">
             <label class="control-label" for="@Model.AmountInHand">
                 Amount In Hand</label>

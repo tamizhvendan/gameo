@@ -45,6 +45,14 @@
         changeYear: true
     });
 
+    $(".date-picker-past").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        minDate: -10, 
+        maxDate: 0
+    });
+
     $("#tabs").tabs();
 
     Handlebars.registerHelper('datetime', function (jsonDateTimeString) {
@@ -54,7 +62,7 @@
     });
 
     Handlebars.registerHelper('time', function (jsonDateTimeString) {
-        var dateTime = moment(jsonDateTimeString).subtract({hours : 5, minutes : 30});
+        var dateTime = moment(jsonDateTimeString).subtract({ hours: 5, minutes: 30 });
 
         return dateTime.format("hh:mm A");
     });
