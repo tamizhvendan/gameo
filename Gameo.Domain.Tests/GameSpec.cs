@@ -144,6 +144,12 @@ namespace Gameo.Domain.Tests
             game.Price.ShouldEqual(60);
         }
 
+        [Test]
+        public void By_default_IsValid_should_be_true()
+        {
+            game.IsValid.ShouldBeTrue();
+        }
+
         private void AssertDateTimeEquality(DateTime actualTime, DateTime expectedTime)
         {
             actualTime.Minute.ShouldEqual(expectedTime.Minute);

@@ -41,9 +41,17 @@ namespace Gameo.Services
 
         public void AssignConsoleForMembership(Membership membership, Game game)
         {
+            game.MembershipId = membership.MembershipId;
             gameRepository.Add(game);
             membership.AddGame(game);
             membershipRepository.Update(membership);
+        }
+
+        public void MarkGameAsInvalid(Guid id)
+        {
+            var game = gameRepository.GetById(id);
+            game.IsValid = false;
+            gameRepository.Update(game);
         }
     }
 }

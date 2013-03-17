@@ -168,6 +168,58 @@ namespace Gameo.DataAccess.Tests
             games.Count().ShouldEqual(1);
             games.First().CustomerName.ShouldEqual("foo");
         }
+
+        [Test]
+        public void GetGames_on_given_day_should_ignore_invalid_games()
+        {
+            var invalidGame = new Game {BranchName = "Branch1", IsValid = false};
+
+            AddEntityToDatabase(invalidGame);
+
+            var games = gameRepository.GetGames("Branch1", DateTime.UtcNow.ToIST());
+
+            games.Count().ShouldEqual(0);
+        }
+
+        [Test]
+        public void GetGames_on_given_timeframe_should_ignore_invalid_games()
+        {
+            var invalidGame = new Game { BranchName = "Branch1", IsValid = false };
+
+            AddEntityToDatabase(invalidGame);
+
+            var games = gameRepository.GetGames("Branch1", DateTime.UtcNow.ToIST().Subtract(new TimeSpan(1,0,0)), DateTime.UtcNow.ToIST().AddHours(10));
+
+            games.Count().ShouldEqual(0);
+        }
+
+        [Test]
+        public void GetCompletedGamesWithinGivenDay_should_ignore_invalid_game()
+        {
+            var invalidCompletedGame = new Game
+                                           {
+                                               BranchName = "Branch1",
+                                               IsValid = false,
+                                               InTime = DateTime.UtcNow.Subtract(new TimeSpan(5, 0, 0)),
+                                               OutTime = DateTime.UtcNow.Subtract(new TimeSpan(4, 0, 0))
+                                           };
+
+            AddEntityToDatabase(invalidCompletedGame);
+
+            var games = gameRepository.GetCompletedGamesWithinGivenDay("Branch1", DateTime.UtcNow);
+
+            games.Count().ShouldEqual(0);
+        }
+
+        [Test]
+        public void GetNonCompletedGames_should_ignore_invalid_game()
+        {
+            var invalidGame = new Game { BranchName = "Branch1", IsValid = false };
+
+            AddEntityToDatabase(invalidGame);
+
+            gameRepository.GetNonCompletedGames("Branch1", DateTime.UtcNow).Count().ShouldEqual(0);
+        }
     }
 
 

@@ -107,7 +107,7 @@
                                         Branch Name
                                     </th>
                                 </tr>
-                                @foreach (var game in Model.Membership.Games.OrderByDescending(g => g.InTime))
+                                @foreach (var game in Model.Membership.Games.Where(g => g.IsValid).OrderByDescending(g => g.InTime))
                                 {
                                     <tr>
                                         <td>@game.InTime.ToGameoString()

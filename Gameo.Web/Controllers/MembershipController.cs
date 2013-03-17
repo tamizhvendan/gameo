@@ -21,7 +21,7 @@ namespace Gameo.Web.Controllers
             this.gamingConsoleRepository = gamingConsoleRepository;
             this.gameService = gameService;
         }
-
+        
         public ActionResult Index()
         {
             return RedirectToAction("MembershipDetail");

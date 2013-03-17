@@ -13,6 +13,7 @@ namespace Gameo.DataAccess
         {
             return EntityCollection
                 .AsQueryable()
+                .Where(game => game.IsValid)
                 .Where(game => game.BranchName == branchName)
                 .Where(game => game.OutTime > currentTime);
         }
@@ -21,6 +22,7 @@ namespace Gameo.DataAccess
         {
             return EntityCollection
                 .AsQueryable()
+                .Where(game => game.IsValid)
                 .Where(game => game.OutTime < dateTime)
                 .Where(game => game.BranchName == branchName)
                 .Where(game => game.InTime > dateTime.Date);
@@ -30,6 +32,7 @@ namespace Gameo.DataAccess
         {
             return EntityCollection
                 .AsQueryable()
+                .Where(game => game.IsValid)
                 .Where(game => game.BranchName == branchName)
                 .Where(game => game.InTime >= from)
                 .Where(game => game.OutTime <= to);
@@ -40,9 +43,9 @@ namespace Gameo.DataAccess
             return EntityCollection
                 .AsQueryable()
                 .Where(game => game.BranchName == branchName)
+                .Where(game => game.IsValid)
                 .Where(game => game.InTime > gamesPlayedOn.Date)
                 .Where(game => game.InTime < gamesPlayedOn.Date.AddDays(1));
-
         }
     }
 }

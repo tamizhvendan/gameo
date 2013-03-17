@@ -19,7 +19,7 @@ namespace Gameo.Domain
         {
             get
             {
-                return Math.Round(ReCharges.Sum(reCharge => reCharge.Hours) - Games.Sum(game => game.HoursPlayed), 1);
+                return Math.Round(ReCharges.Sum(reCharge => reCharge.Hours) - Games.Where(game => game.IsValid).Sum(game => game.HoursPlayed), 1);
             }
         }
 

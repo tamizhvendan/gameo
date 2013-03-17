@@ -145,6 +145,21 @@ namespace Gameo.Domain.Tests
         }
 
         [Test]
+        public void RemainingHours_ignore_the_invalid_games_for_its_computation()
+        {
+            var game = new Game();
+            var game2 = new Game {IsValid = false};
+
+            var recharge = new MembershipReCharge { Hours = 4 };
+
+            membership.Recharge(recharge);
+            membership.AddGame(game);
+            membership.AddGame(game2);
+
+            membership.RemainingHours.ShouldEqual(3);
+        }
+
+        [Test]
         public void Filters_recharges_by_branch_name_and_issued_date()
         {
             var rechargedOn = DateTime.UtcNow.ToIST();

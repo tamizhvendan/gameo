@@ -137,6 +137,18 @@ namespace Gameo.Services.Tests
             gameService.AssignConsoleForMembership(membership, game);
 
             gameRepositoryMock.Verify(repo => repo.Add(game));
+            game.MembershipId.ShouldEqual(membership.MembershipId);
+        }
+
+        [Test]
+        public void AssignConsoleForMembership_update_added_game_with_membership_id()
+        {
+            var membership = new Membership();
+            var game = new Game();
+
+            gameService.AssignConsoleForMembership(membership, game);
+
+            game.MembershipId.ShouldEqual(membership.MembershipId);
         }
 
         [Test]
@@ -151,6 +163,20 @@ namespace Gameo.Services.Tests
             membership.Games.Count.ShouldEqual(1);
             membership.Games.First().ShouldEqual(game);
             membershipRepositoryMock.Verify(repo => repo.Update(membership));
+            game.MembershipId.ShouldEqual(membership.MembershipId);
+        }
+
+        [Test]
+        public void MarkGameAsInvalid_retrieve_game_from_repository_and_updates_it_as_invalid()
+        {
+            var game = new Game();
+            gameRepositoryMock.Setup(repo => repo.GetById(game.Id)).Returns(game);
+            gameRepositoryMock.Setup(repo => repo.Update(game)).Verifiable();
+
+            gameService.MarkGameAsInvalid(game.Id);
+
+            game.IsValid.ShouldBeFalse();
+            gameRepositoryMock.Verify(repo => repo.Update(game));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Gameo.Services.Tests
             gameRepositoryMock = new Mock<IGameRepository>();
             gamingTrendService = new GamingTrendService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object);
             startDate = new DateTime(2011, 1, 1);
-            endDate = new DateTime(2011, 31, 1);
+            endDate = new DateTime(2011, 1, 31);
             branchName = "Branch1";
         }
 

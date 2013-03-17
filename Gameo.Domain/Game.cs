@@ -23,12 +23,16 @@ namespace Gameo.Domain
         public string BranchName { get; set; }
         public GamePaymentType GamePaymentType { get; set; }
         public PackageType PackageType { get; set; }
+        public bool IsValid { get; set; }
+        public string MembershipId { get; set; }
+        
         public Game()
         {
             InTime = DateTime.UtcNow.ToIST();
             OutTime = InTime.AddHours(1);
             GamePaymentType = GamePaymentType.OneTime;
             Price = 60;
+            IsValid = true;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
