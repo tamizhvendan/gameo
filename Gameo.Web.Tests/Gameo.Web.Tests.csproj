@@ -58,6 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminSpecs\AdminControllerSpecs\AdminControllerSpecBase.cs" />
+    <Compile Include="AdminSpecs\AdminControllerSpecs\IndexGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\AdminControllerSpecs\InvalidateGamePostActionSpec.cs" />
+    <Compile Include="AdminSpecs\AdminControllerSpecs\ViewGamesPostActionSpec.cs" />
     <Compile Include="AdminSpecs\BranchControllerSpecs\BranchControllerSpecBase.cs" />
     <Compile Include="AdminSpecs\BranchControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="AdminSpecs\BranchControllerSpecs\CreatePostActionSpec.cs" />
