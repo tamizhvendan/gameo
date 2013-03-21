@@ -93,5 +93,10 @@ namespace Gameo.Domain
                 ReCharges
                 .Where(recharge => recharge.BranchName == branchName && recharge.RechargedOn.Date >= from.Date && recharge.RechargedOn.Date <= to.Date);
         }
+
+        public void MarkGameAsInvalid(Guid gameId)
+        {
+            Games.First(game => game.Id == gameId).IsValid = false;
+        }
     }
 }

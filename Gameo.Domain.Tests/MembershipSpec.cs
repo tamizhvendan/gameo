@@ -200,5 +200,17 @@ namespace Gameo.Domain.Tests
             membershipReCharges.Sum(r => r.Hours).ShouldEqual(7);
             membershipReCharges.Sum(r => r.Price).ShouldEqual(70);
         }
+
+        [Test]
+        public void Can_mark_a_game_as_invalid_using_its_id()
+        {
+            var id = Guid.NewGuid();
+            var game = new Game {Id = id};
+            membership.AddGame(game);
+
+            membership.MarkGameAsInvalid(id);
+            
+            game.IsValid.ShouldBeFalse();
+        }
     }
 }

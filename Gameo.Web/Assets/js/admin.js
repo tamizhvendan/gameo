@@ -26,8 +26,15 @@
     function initializeInvalidateGames() {
         $(".invalidateGame").off('click');
         $(".invalidateGame").on('click', function () {
-            var $this = $(this);
-            var isInvalid = confirm("Are you sure to invalid the Game ?"),
+            var $this = $(this),
+                $parentRow = $this.parent().parent(),
+                gamerName = $($parentRow.children()[1]).html(),
+                inTime = $($parentRow.children()[2]).html(),
+                outTime = $($parentRow.children()[3]).html(),
+                price = $($parentRow.children()[4]).html(),
+                gameConfirmationString = " Name : " + gamerName + " \n InTime : " + inTime + "\n OutTime : " + outTime + "\n Price : " + price;
+
+            var isInvalid = confirm("Are you sure to mark the Game as invalid ? \n" + gameConfirmationString),
                 id = $this.data('id');
 
             if (isInvalid) {

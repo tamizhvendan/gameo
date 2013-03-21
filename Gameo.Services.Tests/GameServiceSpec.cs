@@ -178,5 +178,23 @@ namespace Gameo.Services.Tests
             game.IsValid.ShouldBeFalse();
             gameRepositoryMock.Verify(repo => repo.Update(game));
         }
+
+        [Test]
+        public void ForMembershipGame_MarkGameAsInvalid_invalidate_both_game_and_game_in_membership()
+        {
+            var membership = new Membership();
+            var game = new Game {MembershipId = membership.MembershipId};
+            membership.AddGame(game);
+            membershipRepositoryMock.Setup(repo => repo.FindByMembershipId(membership.MembershipId)).Returns(membership);
+            gameRepositoryMock.Setup(repo => repo.GetById(game.Id)).Returns(game);
+            gameRepositoryMock.Setup(repo => repo.Update(game)).Verifiable();
+            membershipRepositoryMock.Setup(repo => repo.Update(membership)).Verifiable();
+
+            gameService.MarkGameAsInvalid(game.Id);
+
+            gameRepositoryMock.Verify(repo => repo.Update(game));
+            membershipRepositoryMock.Verify(repo => repo.Update(membership));
+            game.IsValid.ShouldBeFalse();
+        }
     }
 }

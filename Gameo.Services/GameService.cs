@@ -52,6 +52,12 @@ namespace Gameo.Services
             var game = gameRepository.GetById(id);
             game.IsValid = false;
             gameRepository.Update(game);
+            if (game.MembershipId != null)
+            {
+                var membership = membershipRepository.FindByMembershipId(game.MembershipId);
+                membership.MarkGameAsInvalid(game.Id);
+                membershipRepository.Update(membership);
+            }
         }
     }
 }
