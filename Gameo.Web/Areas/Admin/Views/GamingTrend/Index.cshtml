@@ -20,7 +20,7 @@
             Branch :
         </label>
         @Html.DropDownList("BranchName", ViewBag.Branches as IEnumerable<SelectListItem>)
-        <button id="findTrend" class="btn btn-primary">
+        <button id="findTrend" class="btn btn-primary ajax-button" data-loading-text="Loading..." data-label-text="See the trend">
             See the trend</button>
     </div>
     <div class="clearfix">

@@ -14,7 +14,8 @@ namespace Gameo.Services.Tests
     {
         private Mock<IGamingConsoleRepository> gamingConsoleRepositoryMock;
         private Mock<IGameRepository> gameRepositoryMock;
-        private Mock<IMembershipRepository> membershipRepositoryMock; 
+        private Mock<IMembershipRepository> membershipRepositoryMock;
+        private Mock<IGamingTrend> gamingTrendMock; 
         private DateTime currentTime;
         private GameService gameService;
         private string nameOfConsole1 = "Console1";
@@ -23,11 +24,13 @@ namespace Gameo.Services.Tests
         private string nameOfConsole4 = "Console4";
         private List<GamingConsole> gamingConsoles;
         private List<Game> games;
+        private TrendRequest trendRequest;
 
         [SetUp]
         public void SetUp()
         {
             currentTime = DateTime.UtcNow.ToIST();
+            trendRequest = new TrendRequest { BranchName = "foo", From = DateTime.UtcNow, To = DateTime.UtcNow.AddDays(5) };
             gamingConsoles = new List<GamingConsole>
                                  {
                                      new GamingConsole {BranchName = "Branch1", Name = nameOfConsole1},
@@ -73,6 +76,7 @@ namespace Gameo.Services.Tests
             gamingConsoleRepositoryMock = new Mock<IGamingConsoleRepository>();
             gameRepositoryMock = new Mock<IGameRepository>();
             membershipRepositoryMock = new Mock<IMembershipRepository>();
+            gamingTrendMock = new Mock<IGamingTrend>();
 
             gamingConsoleRepositoryMock
                 .Setup(repo => repo.GetGamingConsolesByBranchName("Branch1"))
@@ -81,7 +85,7 @@ namespace Gameo.Services.Tests
                 .Setup(repo => repo.GetGamingConsolesByBranchName("Branch2"))
                 .Returns(gamingConsoles.Where(console => console.BranchName == "Branch2"));
 
-            gameService = new GameService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object, membershipRepositoryMock.Object);
+            gameService = new GameService(gameRepositoryMock.Object, gamingConsoleRepositoryMock.Object, membershipRepositoryMock.Object, gamingTrendMock.Object);
         }
 
         [Test]
@@ -195,6 +199,28 @@ namespace Gameo.Services.Tests
             gameRepositoryMock.Verify(repo => repo.Update(game));
             membershipRepositoryMock.Verify(repo => repo.Update(membership));
             game.IsValid.ShouldBeFalse();
+        }
+
+        [Test]
+        public void GetGamingTrends_retrieve_games_from_game_repository_for_given_date_range_and_branch()
+        {
+            gameRepositoryMock.Setup(repo => repo.GetGames(trendRequest.BranchName, trendRequest.From, trendRequest.To)).Returns(games);
+
+            gameService.GetGamingTrends(trendRequest);
+
+            gameRepositoryMock.Verify(repo => repo.GetGames(trendRequest.BranchName, trendRequest.From, trendRequest.To));
+        }
+
+        [Test]
+        public void GetGamingTrends_compute_gaming_trends_using_GamingTrend()
+        {
+            var buckets = new[] { new Bucket<Game>() };
+            gameRepositoryMock.Setup(repo => repo.GetGames(trendRequest.BranchName, trendRequest.From, trendRequest.To)).Returns(games);
+            gamingTrendMock.Setup(trend => trend.Compute(games)).Returns(buckets);
+
+            var gamingTrends = gameService.GetGamingTrends(trendRequest);
+
+            gamingTrends.ShouldEqual(buckets);
         }
     }
 }

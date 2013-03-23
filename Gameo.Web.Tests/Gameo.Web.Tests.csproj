@@ -76,6 +76,7 @@
     <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\GamingConsoleControllerSpecBase.cs" />
     <Compile Include="AdminSpecs\GamingConsoleControllerSpecs\IndexActionSpec.cs" />
     <Compile Include="AdminSpecs\GamingTrendControllerSpecs\GamingTrendControllerSpecBase.cs" />
+    <Compile Include="AdminSpecs\GamingTrendControllerSpecs\GetTrendActionSpec.cs" />
     <Compile Include="AdminSpecs\GamingTrendControllerSpecs\IndexGetActionSpec.cs" />
     <Compile Include="AdminSpecs\UserControllerSpecs\ActivateActionSpec.cs" />
     <Compile Include="AdminSpecs\UserControllerSpecs\CreateGetActionSpec.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="MembershipControllerSpecs\RechargeSuccessGetActionSpec.cs" />
     <Compile Include="ModelSpecs\CustomUserIdentitySpec.cs" />
     <Compile Include="ModelSpecs\CustomUserPrincipleSpec.cs" />
+    <Compile Include="ModelSpecs\TrendChartEngineSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

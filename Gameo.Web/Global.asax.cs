@@ -5,7 +5,6 @@ using System.Web.Routing;
 using Gameo.DataAccess;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
-using Gameo.Web.Areas.Admin.Models;
 using Gameo.Web.Models;
 using Ninject;
 

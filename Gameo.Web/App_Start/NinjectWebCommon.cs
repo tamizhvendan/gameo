@@ -3,6 +3,7 @@ using Gameo.DataAccess;
 using Gameo.DataAccess.Core;
 using Gameo.Domain;
 using Gameo.Services;
+using Gameo.Web.Models;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Gameo.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Gameo.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -67,9 +68,11 @@ namespace Gameo.Web.App_Start
             kernel.Bind<IGameRepository>().To<GameRepository>();
             kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
             kernel.Bind<IGameService>().To<GameService>();
+            kernel.Bind<IGamingTrend>().To<GamingTrend>();
             kernel.Bind<IDailySaleDetailsRepository>().To<DailySaleDetailsRepository>();
             kernel.Bind<IMembershipRepository>().To<MembershipRepository>();
             kernel.Bind<ICollectionService>().To<CollectionService>();
+            kernel.Bind<ITrendChartEngine>().To<TrendChartEngine>();
         }
     }
 }

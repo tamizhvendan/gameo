@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Gameo.Web.Areas.Admin.Models
+namespace Gameo.Services
 {
     public class TrendRequest
     {

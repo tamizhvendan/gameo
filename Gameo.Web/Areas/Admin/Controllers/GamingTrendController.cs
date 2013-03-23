@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Gameo.DataAccess.Core;
-using Gameo.Web.Areas.Admin.Models;
+using Gameo.Services;
 using Gameo.Web.Controllers;
+using Gameo.Web.Models;
 
 namespace Gameo.Web.Areas.Admin.Controllers
 {
@@ -11,10 +12,14 @@ namespace Gameo.Web.Areas.Admin.Controllers
     public class GamingTrendController : ApplicationControllerBase
     {
         private readonly IBranchRepository branchRepository;
+        private readonly IGameService gameService;
+        private readonly ITrendChartEngine trendChartEngine;
 
-        public GamingTrendController(IBranchRepository branchRepository)
+        public GamingTrendController(IBranchRepository branchRepository, IGameService gameService, ITrendChartEngine trendChartEngine)
         {
             this.branchRepository = branchRepository;
+            this.gameService = gameService;
+            this.trendChartEngine = trendChartEngine;
         }
 
         public ViewResult Index()
@@ -26,34 +31,9 @@ namespace Gameo.Web.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult GetTrend(TrendRequest trendRequest)
         {
-            var data = new List<TrendChartData>();
-            var random = new Random();
-            
-            for (var i = 1; i < 8; i++)
-            {
-                var trendChartData = new TrendChartData
-                                         {
-                                             Name = "Gaming Console " + i
-                                         };
-                for (var j = 0; j < 6; j++)
-                {
-                    trendChartData.Data[j] = random.Next(20);
-                }
-                data.Add(trendChartData);
-            }
-            return Json(data);
-        }
-    }
+            var gamingTrends = gameService.GetGamingTrends(trendRequest);
 
-    class TrendChartData
-    {
-        public string Name { get; set; }
-        public int[] Data { get; set; }
-
-        public TrendChartData()
-        {
-            Name = string.Empty;
-            Data = new int[6];
+            return Json(trendChartEngine.Transform(gamingTrends));
         }
     }
 }

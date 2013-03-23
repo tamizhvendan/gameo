@@ -9,5 +9,6 @@ namespace Gameo.Services
         IEnumerable<GameStatus> GetNonCompletedGamesStatus(string branchName, DateTime currentTime);
         void AssignConsoleForMembership(Membership membership, Game game);
         void MarkGameAsInvalid(Guid id);
+        IEnumerable<Bucket<Game>> GetGamingTrends(TrendRequest trendRequest);
     }
 }

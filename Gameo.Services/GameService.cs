@@ -11,12 +11,15 @@ namespace Gameo.Services
         private readonly IGameRepository gameRepository;
         private readonly IGamingConsoleRepository gamingConsoleRepository;
         private readonly IMembershipRepository membershipRepository;
+        private readonly IGamingTrend gamingTrend;
 
-        public GameService(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository, IMembershipRepository membershipRepository)
+        public GameService(IGameRepository gameRepository, IGamingConsoleRepository gamingConsoleRepository, IMembershipRepository membershipRepository, 
+            IGamingTrend gamingTrend)
         {
             this.gameRepository = gameRepository;
             this.gamingConsoleRepository = gamingConsoleRepository;
             this.membershipRepository = membershipRepository;
+            this.gamingTrend = gamingTrend;
         }
 
         public IEnumerable<GameStatus> GetNonCompletedGamesStatus(string branchName, DateTime currentTime)
@@ -58,6 +61,13 @@ namespace Gameo.Services
                 membership.MarkGameAsInvalid(game.Id);
                 membershipRepository.Update(membership);
             }
+        }
+
+        public IEnumerable<Bucket<Game>> GetGamingTrends(TrendRequest trendRequest)
+        {
+            var games = gameRepository.GetGames(trendRequest.BranchName, trendRequest.From, trendRequest.To);
+            
+            return gamingTrend.Compute(games);
         }
     }
 }

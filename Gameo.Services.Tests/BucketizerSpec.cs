@@ -10,7 +10,6 @@ namespace Gameo.Services.Tests
         private class SampleClassForTest
         {
             public int PredicateProperty { get; set; }
-            public int ValueProperty { get; set; }
         }
 
         private Bucketizer<SampleClassForTest> bucketizer;

@@ -87,7 +87,6 @@
     <Compile Include="Areas\Admin\Controllers\CollectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingTrendController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Models\TrendRequest.cs" />
     <Compile Include="Controllers\ApplicationControllerBase.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingConsoleController.cs" />
@@ -103,6 +102,9 @@
     <Compile Include="Models\CustomUserIdentityModelBinder.cs" />
     <Compile Include="Models\CustomUserPrinciple.cs" />
     <Compile Include="Models\HttpParamActionAttribute.cs" />
+    <Compile Include="Models\ITrendChartEngine.cs" />
+    <Compile Include="Models\TrendChartDatum.cs" />
+    <Compile Include="Models\TrendChartEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MembershipAssignConsoleViewModel.cs" />
@@ -169,6 +171,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
