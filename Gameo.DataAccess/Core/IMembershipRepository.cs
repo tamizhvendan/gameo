@@ -11,5 +11,6 @@ namespace Gameo.DataAccess.Core
         Membership FindByCustomer1ContactNumber(string customer1ContactNumber);
         void Recharge(MembershipReCharge membershipReCharge);
         IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime dateTime);
+        IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime from, DateTime to);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gameo.Domain
 {
@@ -18,6 +19,25 @@ namespace Gameo.Domain
         public static string GetDateFormat()
         {
             return "dd-MM-yyyy h:mm:ss tt";
+        }
+
+        public static DateTime FirstDayOfMonth(this DateTime dateTime)
+        {
+            return new DateTime(dateTime.Year, dateTime.Month, 1);
+        }
+        
+        public static DateTime LastDayOfMonth(this DateTime dateTime)
+        {
+            return FirstDayOfMonth(dateTime).AddMonths(1).AddDays(-1);
+        }
+
+        public static IEnumerable<DateTime> LastSevenMonths(this DateTime dateTime)
+        {
+            for (var i = 1; i <= 7; i++)
+            {
+                var lastMonth = dateTime.AddMonths(1 - i);
+                yield return new DateTime(lastMonth.Year, lastMonth.Month, 1);
+            }
         }
     }
 }

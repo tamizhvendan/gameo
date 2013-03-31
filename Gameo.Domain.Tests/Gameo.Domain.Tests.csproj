@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BranchSpec.cs" />
     <Compile Include="DailySaleDetailsSpec.cs" />
+    <Compile Include="DateTimeExtensionsSpec.cs" />
     <Compile Include="EntitySpecBase.cs" />
     <Compile Include="GameSpec.cs" />
     <Compile Include="GamingConsoleSpec.cs" />

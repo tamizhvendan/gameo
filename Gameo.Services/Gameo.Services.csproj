@@ -53,8 +53,11 @@
     <Compile Include="ICollectionService.cs" />
     <Compile Include="IGameService.cs" />
     <Compile Include="IGamingTrend.cs" />
+    <Compile Include="IRevenueService.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MonthlyRevenue.cs" />
+    <Compile Include="RevenueService.cs" />
     <Compile Include="TotalCollectionBase.cs" />
     <Compile Include="TotalDayCollection.cs" />
     <Compile Include="TrendRequest.cs" />

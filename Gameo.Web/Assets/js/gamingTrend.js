@@ -126,7 +126,7 @@
         };
 
         $.ajax({
-            url: "/Admin/GamingTrend/GetTrend",
+            url: "/Admin/Revenue/GetTrend",
             type: "POST",
             data: JSON.stringify(request),
             contentType: 'application/json; charset=utf-8',

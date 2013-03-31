@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gameo.DataAccess.Core;
@@ -36,6 +37,20 @@ namespace Gameo.DataAccess
             var membershipRecharges = new List<MembershipReCharge>();
 
             var recharges = EntityCollection.AsQueryable().Select(membership => membership.GetRecharges(branchName, dateTime));
+
+            foreach (var recharge in recharges)
+            {
+                membershipRecharges.AddRange(recharge);
+            }
+
+            return membershipRecharges;
+        }
+
+        public IEnumerable<MembershipReCharge> GetRecharges(string branchName, DateTime from, DateTime to)
+        {
+            var membershipRecharges = new List<MembershipReCharge>();
+
+            var recharges = EntityCollection.AsQueryable().Select(membership => membership.GetRecharges(branchName, from, to));
 
             foreach (var recharge in recharges)
             {

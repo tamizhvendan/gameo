@@ -57,7 +57,9 @@
     <Compile Include="GameServiceSpec.cs" />
     <Compile Include="GameStatusSpec.cs" />
     <Compile Include="GamingTrendSpec.cs" />
+    <Compile Include="MonthlyRevenueSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RevenueServiceSpec.cs" />
     <Compile Include="TotalCollectionSpec.cs" />
   </ItemGroup>
   <ItemGroup>

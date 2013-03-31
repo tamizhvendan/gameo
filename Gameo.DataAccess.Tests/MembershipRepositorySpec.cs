@@ -105,5 +105,42 @@ namespace Gameo.DataAccess.Tests
             membershipReCharges.Sum(m => m.Hours).ShouldEqual(10);
             membershipReCharges.Sum(m => m.Price).ShouldEqual(100);
         }
+
+        [Test]
+        public void GetRecharges_returns_recharges_made_on_given_time_frame()
+        {
+            var currentTime = DateTime.UtcNow.ToIST();
+            var lastMonthDateTime = currentTime.AddMonths(-1);
+            var lastMonthRechargeOnMembership = new MembershipReCharge {BranchName = "foo", Hours = 1, Price = 45, MembershipId = membership.MembershipId, RechargedOn = lastMonthDateTime};
+            var membership2 = new Membership { Customer1ContactNumber = "626262" };
+            var currentDateTime = DateTime.UtcNow.ToIST();
+            var currentMonthRechargeOnMembership2 = new MembershipReCharge
+            {
+                BranchName = "foo",
+                Hours = 2,
+                Price = 120,
+                RechargedOn = currentDateTime,
+                MembershipId = membership2.MembershipId
+            };
+            var currentMonthRechargeOnMembership = new MembershipReCharge
+            {
+                BranchName = "foo",
+                Hours = 1,
+                Price = 60,
+                RechargedOn = currentDateTime,
+                MembershipId = membership.MembershipId
+            };
+            AddEntityToDatabase(membership2);
+            membershipRepository.Recharge(lastMonthRechargeOnMembership);
+            membershipRepository.Recharge(currentMonthRechargeOnMembership);
+            membershipRepository.Recharge(currentMonthRechargeOnMembership2);
+
+            var membershipReCharges = membershipRepository.GetRecharges("foo", currentTime.FirstDayOfMonth(), currentTime.LastDayOfMonth());
+
+            membershipReCharges.Sum(recharge => recharge.Price).ShouldEqual(180);
+            membershipReCharges.Sum(recharge => recharge.Hours).ShouldEqual(3);
+            membershipReCharges.Count().ShouldEqual(2);
+            membershipReCharges.All(recharge => recharge.BranchName == "foo");
+        }
     }
 }

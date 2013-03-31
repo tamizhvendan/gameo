@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Services;
 using Gameo.Web.Controllers;

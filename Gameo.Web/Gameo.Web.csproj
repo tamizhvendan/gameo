@@ -87,6 +87,7 @@
     <Compile Include="Areas\Admin\Controllers\CollectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingTrendController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RevenueController.cs" />
     <Compile Include="Controllers\ApplicationControllerBase.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingConsoleController.cs" />
@@ -117,6 +118,7 @@
     <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\img\glyphicons-halflings-white.png" />
     <Content Include="Assets\img\glyphicons-halflings.png" />
+    <Content Include="Assets\js\revenueTrend.js" />
     <Content Include="Assets\js\admin.js" />
     <Content Include="Assets\js\dailyCollection.js" />
     <Content Include="Assets\js\gamingTrend.js" />
@@ -257,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Revenue\Index.cshtml" />
     <None Include="Properties\PublishProfiles\gameo-test - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gameo-test - Web Deploy.pubxml" />
   </ItemGroup>

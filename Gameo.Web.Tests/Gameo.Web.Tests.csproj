@@ -78,6 +78,9 @@
     <Compile Include="AdminSpecs\GamingTrendControllerSpecs\GamingTrendControllerSpecBase.cs" />
     <Compile Include="AdminSpecs\GamingTrendControllerSpecs\GetTrendActionSpec.cs" />
     <Compile Include="AdminSpecs\GamingTrendControllerSpecs\IndexGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\RevenueControllerSpecs\GetLastSevenMonthRevenueSpec.cs" />
+    <Compile Include="AdminSpecs\RevenueControllerSpecs\IndexGetActionSpec.cs" />
+    <Compile Include="AdminSpecs\RevenueControllerSpecs\RevenueControllerSpecBase.cs" />
     <Compile Include="AdminSpecs\UserControllerSpecs\ActivateActionSpec.cs" />
     <Compile Include="AdminSpecs\UserControllerSpecs\CreateGetActionSpec.cs" />
     <Compile Include="AdminSpecs\UserControllerSpecs\CreatePostActionSpec.cs" />
