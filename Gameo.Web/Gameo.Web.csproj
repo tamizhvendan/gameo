@@ -118,6 +118,8 @@
     <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\img\glyphicons-halflings-white.png" />
     <Content Include="Assets\img\glyphicons-halflings.png" />
+    <Content Include="Assets\js\lib\exporting.js" />
+    <Content Include="Assets\js\lib\underscore-min.js" />
     <Content Include="Assets\js\revenueTrend.js" />
     <Content Include="Assets\js\admin.js" />
     <Content Include="Assets\js\dailyCollection.js" />
@@ -262,6 +264,8 @@
     <Content Include="Areas\Admin\Views\Revenue\Index.cshtml" />
     <None Include="Properties\PublishProfiles\gameo-test - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gameo-test - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\spiel - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\spiel - Web Deploy.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

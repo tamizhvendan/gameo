@@ -25,6 +25,7 @@ namespace Gameo.Services
             {
                 OneTimePaymentGames = games.Where(game => game.GamePaymentType == GamePaymentType.OneTime && game.PackageType == PackageType.No_Package).ToList(),
                 PackagePaymentGames = games.Where(game => game.GamePaymentType == GamePaymentType.OneTime && game.PackageType != PackageType.No_Package).ToList(),
+                MembershipGames = games.Where(game => game.GamePaymentType == GamePaymentType.Membership),
                 MembershipReCharges = membershipRepository.GetRecharges(branchName, dateTime),
                 DailySaleDetails = dailySaleDetailsRepository.GetDailySaleDetails(branchName, dateTime)
             };

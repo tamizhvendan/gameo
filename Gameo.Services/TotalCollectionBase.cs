@@ -11,6 +11,7 @@ namespace Gameo.Services
             OneTimePaymentGames = Enumerable.Empty<Game>();
             PackagePaymentGames = Enumerable.Empty<Game>();
             MembershipReCharges = Enumerable.Empty<MembershipReCharge>();
+            MembershipGames = Enumerable.Empty<Game>();
         }
 
         public decimal TotalOneGamePaymentCollection
@@ -21,6 +22,7 @@ namespace Gameo.Services
         public IEnumerable<Game> OneTimePaymentGames { get; internal set; }
         public IEnumerable<Game> PackagePaymentGames { get; internal set; }
         public IEnumerable<MembershipReCharge> MembershipReCharges { get; internal set; }
+        public IEnumerable<Game> MembershipGames { get; internal set; }
 
         public decimal TotalPackageGamePaymentCollection    
         {

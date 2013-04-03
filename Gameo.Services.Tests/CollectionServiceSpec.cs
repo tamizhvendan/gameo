@@ -32,7 +32,7 @@ namespace Gameo.Services.Tests
                         {
                             new Game {Price = 50}, new Game { Price = 45}, 
                             new Game { Price = 300, PackageType = PackageType.Package_Of_3_Hours}, new Game { Price  = 500, PackageType = PackageType.Package_Of_5_Hours},
-                            new Game { Price = 0, GamePaymentType = GamePaymentType.Membership}
+                            new Game { Price = 45, GamePaymentType = GamePaymentType.Membership, MembershipId = "12345"}
                         };
             currentTime = DateTime.UtcNow.ToIST();
         }
@@ -81,6 +81,22 @@ namespace Gameo.Services.Tests
             var totalCollection = collectionService.GetTotalDayCollection(branchName, currentTime);
 
             totalCollection.DailySaleDetails.ShouldEqual(dailySaleDetails);
+        }
+
+        [Test]
+        public void GetTotalDayCollection_Retrieves_MembershipGames_In_Given_Branch_On_Given_Day()
+        {
+            gameRepositoryMock.Setup(repo => repo.GetGames(branchName, currentTime)).Returns(games);
+
+            var totalCollection = collectionService.GetTotalDayCollection(branchName, currentTime);
+
+            var membershipGames = totalCollection.MembershipGames.ToList();
+
+            membershipGames.Count.ShouldEqual(1);
+            var membershipGame = membershipGames[0];
+            membershipGame.Price.ShouldEqual(45);
+            membershipGame.MembershipId.ShouldEqual("12345");
+            membershipGame.GamePaymentType.ShouldEqual(GamePaymentType.Membership);
         }
     }
 }
