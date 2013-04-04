@@ -222,5 +222,20 @@ namespace Gameo.Services.Tests
 
             gamingTrends.ShouldEqual(buckets);
         }
+
+        [Test]
+        public void GetGamePriceTrends_compute_gaming_price_trends_from_game_buckets()
+        {
+            var bucket1 = new Bucket<Game> {Label = "9-11", Values = new[] {new Game {Price = 40}, new Game {Price = 40}}};
+            var bucket2 = new Bucket<Game> {Label = "11-13", Values = new[] {new Game {Price = 20}, new Game {Price = 30}}};
+
+            var gamePriceTrends = gameService.GetGamePriceTrends(new[] {bucket1, bucket2}).ToList();
+
+            gamePriceTrends.Count.ShouldEqual(2);
+            gamePriceTrends.First().TimeDurationLabel.ShouldEqual("9-11");
+            gamePriceTrends.First().Price.ShouldEqual(80);
+            gamePriceTrends.Last().TimeDurationLabel.ShouldEqual("11-13");
+            gamePriceTrends.Last().Price.ShouldEqual(50);
+        }
     }
 }

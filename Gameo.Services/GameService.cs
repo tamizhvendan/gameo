@@ -69,5 +69,10 @@ namespace Gameo.Services
             
             return gamingTrend.Compute(games);
         }
+
+        public IEnumerable<GamePriceTrend> GetGamePriceTrends(IEnumerable<Bucket<Game>> buckets)
+        {
+            return buckets.Select(bucket => new GamePriceTrend { TimeDurationLabel = bucket.Label, Price = bucket.Values.Sum(game => game.Price) });
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Gameo.Services
         void AssignConsoleForMembership(Membership membership, Game game);
         void MarkGameAsInvalid(Guid id);
         IEnumerable<Bucket<Game>> GetGamingTrends(TrendRequest trendRequest);
+        IEnumerable<GamePriceTrend> GetGamePriceTrends(IEnumerable<Bucket<Game>> buckets);
     }
 }

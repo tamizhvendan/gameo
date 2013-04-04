@@ -36,9 +36,22 @@ namespace Gameo.Web.Tests.AdminSpecs.GamingTrendControllerSpecs
             GameServiceMock.Setup(service => service.GetGamingTrends(trendRequest)).Returns(buckets);
             TrendChartEngineMock.Setup(engine => engine.Transform(buckets)).Returns(trendChartData);
 
-            var jsonResult = GamingTrendController.GetTrend(trendRequest);
+            var jsonResult = GamingTrendController.GetTrend(trendRequest).Data as TrendChartResponse;
 
-            jsonResult.Data.ShouldEqual(trendChartData);
+            jsonResult.TrendCharts.ShouldEqual(trendChartData);
+        }
+
+        [Test]
+        public void Get_game_price_trends_from_game_Service()
+        {
+            var buckets = Enumerable.Empty<Bucket<Game>>();
+            var gamePriceTrends = Enumerable.Empty<GamePriceTrend>();
+            GameServiceMock.Setup(service => service.GetGamingTrends(trendRequest)).Returns(buckets);
+            GameServiceMock.Setup(service => service.GetGamePriceTrends(buckets)).Returns(gamePriceTrends);
+
+            var jsonResult = GamingTrendController.GetTrend(trendRequest).Data as TrendChartResponse;
+
+            jsonResult.GamePriceTrends.ShouldEqual(gamePriceTrends);
         }
     }
 }

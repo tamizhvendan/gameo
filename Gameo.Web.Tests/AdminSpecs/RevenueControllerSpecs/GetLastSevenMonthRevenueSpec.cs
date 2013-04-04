@@ -24,7 +24,7 @@ namespace Gameo.Web.Tests.AdminSpecs.RevenueControllerSpecs
                     .Returns(monthlyRevenues[i]);
             }
 
-            var jsonResult = RevenueController.GetMonthlyRevenue(branchName);
+            var jsonResult = RevenueController.GetMonthlyRevenueTrend(branchName);
 
             jsonResult.Data.ShouldEqual(monthlyRevenues);
         }

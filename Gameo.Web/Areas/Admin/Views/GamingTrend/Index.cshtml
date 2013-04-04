@@ -20,21 +20,22 @@
             Branch :
         </label>
         @Html.DropDownList("BranchName", ViewBag.Branches as IEnumerable<SelectListItem>)
-        <button id="findTrend" class="btn btn-primary ajax-button" data-loading-text="Loading..." data-label-text="See the trend">
+        <button id="findTrend" class="btn btn-primary ajax-button" data-loading-text="Loading..."
+            data-label-text="See the trend">
             See the trend</button>
     </div>
     <div class="clearfix">
         <br />
     </div>
-   
-        <div class="well span9 chart" id="splineChart" style="display: none">
-        </div>
-        <div class="well span9 chart" id="columnChart" style="display: none">
-        </div>
-        <div class="well span9 chart" id="pieChart" style="display: none">
-        </div>
+    <div class="well span9 chart" id="splineChart" style="display: none">
+    </div>
+    <div class="well span9 chart" id="columnChart" style="display: none">
+    </div>
+    <div class="well span9 chart" id="pieChart" style="display: none">
+    </div>
+    <div class="well span9 chart" id="gamingPriceTrend" style="display: none">
+    </div>
 </div>
-
 @section script
 {
     <script src="@Url.Content("/Assets/js/gamingTrend.js")" type="text/javascript"></script>

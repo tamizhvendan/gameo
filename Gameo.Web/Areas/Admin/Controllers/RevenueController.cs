@@ -26,7 +26,7 @@ namespace Gameo.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public JsonResult GetMonthlyRevenue(string branchName)
+        public JsonResult GetMonthlyRevenueTrend(string branchName)
         {
             var lastSevenMonths = DateTime.UtcNow.ToIST().LastSevenMonths();
             

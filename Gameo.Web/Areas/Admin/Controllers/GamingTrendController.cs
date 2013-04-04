@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Gameo.DataAccess.Core;
 using Gameo.Services;
 using Gameo.Web.Controllers;
@@ -29,9 +30,15 @@ namespace Gameo.Web.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult GetTrend(TrendRequest trendRequest)
         {
-            var gamingTrends = gameService.GetGamingTrends(trendRequest);
+            var gamingTrends = gameService.GetGamingTrends(trendRequest).ToList();
 
-            return Json(trendChartEngine.Transform(gamingTrends));
+            var trendChartResponse = new TrendChartResponse
+                {
+                    TrendCharts = trendChartEngine.Transform(gamingTrends),
+                    GamePriceTrends = gameService.GetGamePriceTrends(gamingTrends)
+                };
+
+            return Json(trendChartResponse);
         }
     }
 }

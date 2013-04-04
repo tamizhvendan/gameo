@@ -19,5 +19,7 @@ namespace Gameo.Services
         {
             get { return RevenueByGames + RevenueByMembershipRecharges; }
         }
+
+        public decimal EbMeterReading { get; set; }
     }
 }

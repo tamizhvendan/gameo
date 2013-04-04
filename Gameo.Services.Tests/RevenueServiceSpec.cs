@@ -17,9 +17,11 @@ namespace Gameo.Services.Tests
             private RevenueService revenueService;
             private Mock<IGameRepository> gameRepositoryMock;
             private Mock<IMembershipRepository> membershipRepositoryMock;
+            
             private DateTime currentTime;
             private IEnumerable<Game> games;
             private IEnumerable<MembershipReCharge> membershipReCharges;
+            private Mock<IDailySaleDetailsRepository> dailySaleDetailsRepository;
             private const string BranchName = "branch1";
 
             [SetUp]
@@ -27,7 +29,8 @@ namespace Gameo.Services.Tests
             {
                 gameRepositoryMock = new Mock<IGameRepository>();
                 membershipRepositoryMock = new Mock<IMembershipRepository>();
-                revenueService = new RevenueService(gameRepositoryMock.Object, membershipRepositoryMock.Object);
+                dailySaleDetailsRepository = new Mock<IDailySaleDetailsRepository>();
+                revenueService = new RevenueService(gameRepositoryMock.Object, membershipRepositoryMock.Object, dailySaleDetailsRepository.Object);
                 currentTime = DateTime.UtcNow.ToIST();
                 games = Enumerable.Empty<Game>();
                 membershipReCharges = Enumerable.Empty<MembershipReCharge>();
@@ -107,6 +110,18 @@ namespace Gameo.Services.Tests
                 var monthlyRevenue = revenueService.ComputeMonthlyRevenue(BranchName, currentTime.Year, currentTime.Month);
 
                 monthlyRevenue.RevenueByMembershipRecharges.ShouldEqual(30);
+            }
+
+            [Test]
+            public void Returns_MonthlyRevenue_with_EbMeterReadingForThatMonth()
+            {
+                const decimal expectedEbMeterReading = 234m;
+                dailySaleDetailsRepository.Setup(repo => repo.GetEbMeterReadingForTheMonth(BranchName, currentTime.Year, currentTime.Month))
+                                          .Returns(expectedEbMeterReading);
+
+                var monthlyRevenue = revenueService.ComputeMonthlyRevenue(BranchName, currentTime.Year, currentTime.Month);
+
+                monthlyRevenue.EbMeterReading.ShouldEqual(expectedEbMeterReading);
             }
         }
     }

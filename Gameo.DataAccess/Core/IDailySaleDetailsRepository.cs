@@ -7,5 +7,6 @@ namespace Gameo.DataAccess.Core
     {
         bool IsDailySaleClosed(DateTime dateTime, string branchName);
         DailySaleDetails GetDailySaleDetails(string branchName, DateTime dateTime);
+        decimal GetEbMeterReadingForTheMonth(string branchName, int year, int month );
     }
 }

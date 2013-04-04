@@ -66,6 +66,14 @@
                         <th>N/A</th>
                     {{/if}}
                 </tr>
+                <tr>
+                    <th><span  style="float:right">EbMeter Reading Noted</span></th>
+                    {{#if DailySaleDetails}}
+                        <th>{{DailySaleDetails.EbMeterReading}}</th>
+                    {{else}}
+                        <th>N/A</th>
+                    {{/if}}
+                </tr>
             </tbody>
         </table>
     </script>

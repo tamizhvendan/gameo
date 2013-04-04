@@ -1,5 +1,5 @@
 ﻿$(function () {
-    function renderChart(data) {
+    function renderGamingTrendChart(data) {
         $(".chart").show();
 
         var rendering = {
@@ -85,7 +85,7 @@
         for (i = 0; i < data.length; i++) {
 
             var r = data[i];
-            series.push({name : r.Name, data : r.Data});
+            series.push({ name: r.Name, data: r.Data });
 
             for (var j = 0; j < total.length; j++) {
                 total[j] += r.Data[j];
@@ -116,6 +116,48 @@
 
     };
 
+    var lineChartConfig = {
+        chart: {
+            type: "line",
+            renderTo: "gamingPriceTrend"
+        },
+
+        title: {
+            text: 'Revenue earned on hourly basics'
+        },
+
+        xAxis: {},
+        yAxis: {
+            title: {
+                text: 'Revenue in Rupees'
+            }
+        },
+        tooltip: {
+            enabled: false,
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.x + ': ' + this.y + '°C';
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        }
+    };
+
+    function renderGamingPriceTrendChart(gamePriceTrends) {
+        lineChartConfig.xAxis.categories = _.pluck(gamePriceTrends, "TimeDurationLabel");
+        lineChartConfig.series = [{
+            name: 'Revenue',
+            data: _.pluck(gamePriceTrends, "Price")
+        }];
+        new Highcharts.Chart(lineChartConfig);
+    }
+
 
     $("#findTrend").on("click", function () {
 
@@ -131,7 +173,8 @@
             data: JSON.stringify(request),
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                renderChart(data);
+                renderGamingTrendChart(data.TrendCharts);
+                renderGamingPriceTrendChart(data.GamePriceTrends);
             }
         });
     });

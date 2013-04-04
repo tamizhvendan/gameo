@@ -51,15 +51,54 @@
         }
     };
 
+    var lineChartConfig = {
+        chart: {
+            type: "line",
+            renderTo: "ebMeterReadingTrend"
+        },
+
+        title: {
+            text: 'EbMeter Reading Trend for the last 7 months'
+        },
+
+        xAxis: {},
+        yAxis: {
+            title: {
+                text: 'EbMeter Reading'
+            }
+        },
+        tooltip: {
+            enabled: false,
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.x + ': ' + this.y + '°C';
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        }
+    };
 
     function renderChart(data) {
+        $(".chart").show();
         stackedChartConfig.xAxis.categories = _.pluck(data, "UserFriendlyMonthlyString");
         stackedChartConfig.series = [
-            { name: "Revenue by Games", data: _.pluck(data, "RevenueByGames") },
-            { name: "Revenue by Membership Recharges", data: _.pluck(data, "RevenueByMembershipRecharges") }
+            { name: "Revenue by Membership Recharges", data: _.pluck(data, "RevenueByMembershipRecharges") },
+            { name: "Revenue by Games", data: _.pluck(data, "RevenueByGames") }
         ];
 
+        lineChartConfig.xAxis.categories = _.pluck(data, "UserFriendlyMonthlyString");
+        lineChartConfig.series = [{
+            name: 'EbMeter Reading',
+            data: _.pluck(data, "EbMeterReading")
+        }];
         new Highcharts.Chart(stackedChartConfig);
+        new Highcharts.Chart(lineChartConfig);
     }
 
 
@@ -68,7 +107,7 @@
         var branchName = $("#branchName").val();
 
         $.ajax({
-            url: "/Admin/Revenue/GetMonthlyRevenue",
+            url: "/Admin/Revenue/GetMonthlyRevenueTrend",
             type: "POST",
             data: JSON.stringify({ branchName: branchName }),
             contentType: 'application/json; charset=utf-8',

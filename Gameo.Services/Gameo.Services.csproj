@@ -46,6 +46,7 @@
     <Compile Include="Bucket.cs" />
     <Compile Include="Bucketizer.cs" />
     <Compile Include="CollectionService.cs" />
+    <Compile Include="GamePriceTrend.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="GamingTrend.cs" />
