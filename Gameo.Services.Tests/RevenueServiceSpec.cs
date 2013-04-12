@@ -89,14 +89,25 @@ namespace Gameo.Services.Tests
             }
 
             [Test]
-            public void Returns_MonthlyRevenue_with_RevenueByGames()
+            public void Returns_MonthlyRevenue_with_RevenueByNonPackageOneTimeGames()
             {
                 games = new[] { new Game { Price = 15 }, new Game { Price = 20 }, new Game { Price = 40, GamePaymentType = GamePaymentType.Membership } };
                 gameRepositoryMock.Setup(repo => repo.GetGames(BranchName, currentTime.FirstDayOfMonth(), currentTime.LastDayOfMonth())).Returns(games);
 
                 var monthlyRevenue = revenueService.ComputeMonthlyRevenue(BranchName, currentTime.Year, currentTime.Month);
 
-                monthlyRevenue.RevenueByGames.ShouldEqual(35);
+                monthlyRevenue.RevenueByNonPackageOneTimeGames.ShouldEqual(35);
+            }
+
+            [Test]
+            public void Returns_MonthlyRevenue_with_RevenueByPackageOneTimeGames()
+            {
+                games = new[] { new Game { Price = 15 }, new Game { Price = 20, PackageType = PackageType.Package_Of_3_Hours}, new Game { Price = 40, GamePaymentType = GamePaymentType.Membership } };
+                gameRepositoryMock.Setup(repo => repo.GetGames(BranchName, currentTime.FirstDayOfMonth(), currentTime.LastDayOfMonth())).Returns(games);
+
+                var monthlyRevenue = revenueService.ComputeMonthlyRevenue(BranchName, currentTime.Year, currentTime.Month);
+
+                monthlyRevenue.RevenueByPackageOneTimeGames.ShouldEqual(20);
             }
 
             [Test]

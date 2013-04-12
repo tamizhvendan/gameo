@@ -20,7 +20,7 @@ namespace Gameo.Services.Tests
         [Test]
         public void TotalCollection_is_sum_of_Revenues_from_games_and_membership_recharges()
         {
-            var monthlyRevenue = new MonthlyRevenue {RevenueByGames = 10, RevenueByMembershipRecharges = 20};
+            var monthlyRevenue = new MonthlyRevenue {RevenueByNonPackageOneTimeGames = 10, RevenueByMembershipRecharges = 20};
 
             monthlyRevenue.TotalCollection.ShouldEqual(30);
         }

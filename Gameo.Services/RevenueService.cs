@@ -22,19 +22,23 @@ namespace Gameo.Services
         {
             var dateTime = new DateTime(year, month, 1);
 
-            var games = gameRepository
+            var oneTimeGames = gameRepository
                             .GetGames(branchName, dateTime.FirstDayOfMonth(), dateTime.LastDayOfMonth())
-                            .Where(game => game.GamePaymentType == GamePaymentType.OneTime )
+                            .Where(game => game.GamePaymentType == GamePaymentType.OneTime)
                             .ToList();
+
+            var packageGames = oneTimeGames.Where(game => game.PackageType != PackageType.No_Package);
+            var nonPackageGames = oneTimeGames.Where(game => game.PackageType == PackageType.No_Package);
 
             var membershipReCharges = membershipRepository.GetRecharges(branchName, dateTime.FirstDayOfMonth(), dateTime.LastDayOfMonth()).ToList();
 
             return new MonthlyRevenue
                        {
                            DateTime = dateTime,
-                           NonMembershipGamesCount = games.Count,
+                           NonMembershipGamesCount = oneTimeGames.Count,
                            MembershipRechargesCount = membershipReCharges.Count,
-                           RevenueByGames = games.Sum(game => game.Price),
+                           RevenueByNonPackageOneTimeGames = nonPackageGames.Sum(game => game.Price),
+                           RevenueByPackageOneTimeGames = packageGames.Sum(game => game.Price),
                            RevenueByMembershipRecharges = membershipReCharges.Sum(recharge => recharge.Price),
                            EbMeterReading = dailySaleDetailsRepository.GetEbMeterReadingForTheMonth(branchName, year, month)
                        };

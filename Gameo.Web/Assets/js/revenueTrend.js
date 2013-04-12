@@ -89,7 +89,8 @@
         stackedChartConfig.xAxis.categories = _.pluck(data, "UserFriendlyMonthlyString");
         stackedChartConfig.series = [
             { name: "Revenue by Membership Recharges", data: _.pluck(data, "RevenueByMembershipRecharges") },
-            { name: "Revenue by Games", data: _.pluck(data, "RevenueByGames") }
+            { name: "Revenue by Package Games", data: _.pluck(data, "RevenueByPackageOneTimeGames") },
+            { name: "Revenue by Non Package Games", data: _.pluck(data, "RevenueByNonPackageOneTimeGames") }
         ];
 
         lineChartConfig.xAxis.categories = _.pluck(data, "UserFriendlyMonthlyString");

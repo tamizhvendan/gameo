@@ -5,7 +5,7 @@ namespace Gameo.Services
     public class MonthlyRevenue
     {
         public DateTime DateTime { get; set; }
-        public decimal RevenueByGames { get; set; }
+        public decimal RevenueByNonPackageOneTimeGames { get; set; }
         public decimal RevenueByMembershipRecharges { get; set; }
         public int NonMembershipGamesCount { get; set; }
         public int MembershipRechargesCount { get; set; }
@@ -17,9 +17,11 @@ namespace Gameo.Services
 
         public decimal TotalCollection
         {
-            get { return RevenueByGames + RevenueByMembershipRecharges; }
+            get { return RevenueByNonPackageOneTimeGames + RevenueByMembershipRecharges; }
         }
 
         public decimal EbMeterReading { get; set; }
+
+        public decimal RevenueByPackageOneTimeGames { get; set; }
     }
 }
