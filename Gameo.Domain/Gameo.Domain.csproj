@@ -45,11 +45,13 @@
     <Compile Include="DailySaleDetails.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GamePaymentType.cs" />
     <Compile Include="GamingConsole.cs" />
     <Compile Include="Membership.cs" />
     <Compile Include="MembershipReCharge.cs" />
+    <Compile Include="MonthlyExpense.cs" />
     <Compile Include="PackageType.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

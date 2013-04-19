@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]E:\gameo\Gameo.NUnit.Tests.nunit</TopNode>
-  <SelectedNode>[0-1350]Gameo.DataAccess.Tests.BranchRepositorySpec.Adds_new_branch</SelectedNode>
+  <SelectedNode>[0-1000]E:\gameo\Gameo.NUnit.Tests.nunit</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]E:\gameo\Gameo.NUnit.Tests.nunit" Expanded="true" />
-    <Node UniqueName="[0-1166]Gameo" Expanded="true" />
-    <Node UniqueName="[0-1168]Gameo.Web.Tests" Expanded="true" />
-    <Node UniqueName="[0-1173]Gameo.Web.Tests.AdminSpecs" Expanded="true" />
-    <Node UniqueName="[0-1177]Gameo.Web.Tests.AdminSpecs.AdminControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1179]Gameo.Web.Tests.AdminSpecs.BranchControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1174]Gameo.Web.Tests.AdminSpecs.CollectionControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1178]Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1180]Gameo.Web.Tests.AdminSpecs.GamingTrendControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1175]Gameo.Web.Tests.AdminSpecs.UserControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1172]Gameo.Web.Tests.AuthenticationControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1176]Gameo.Web.Tests.DailySaleDetailsControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1169]Gameo.Web.Tests.GameControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1170]Gameo.Web.Tests.MembershipControllerSpecs" Expanded="true" />
-    <Node UniqueName="[0-1171]Gameo.Web.Tests.ModelSpecs" Expanded="true" />
-    <Node UniqueName="[0-1066]Gameo.Web.Tests.ModelSpecs.CustomUserIdentitySpec" Expanded="true" />
-    <Node UniqueName="[0-1225]Gameo" Expanded="true" />
-    <Node UniqueName="[0-1226]Gameo.Services" Expanded="true" />
-    <Node UniqueName="[0-1227]Gameo.Services.Tests" Expanded="true" />
-    <Node UniqueName="[0-1206]Gameo.Services.Tests.AuthenticationServiceSpec" Expanded="true" />
-    <Node UniqueName="[0-1216]Gameo.Services.Tests.GamingTrendSpec" Expanded="true" />
-    <Node UniqueName="[0-1322]Gameo" Expanded="true" />
-    <Node UniqueName="[0-1323]Gameo.Domain" Expanded="true" />
-    <Node UniqueName="[0-1324]Gameo.Domain.Tests" Expanded="true" />
-    <Node UniqueName="[0-1281]Gameo.Domain.Tests.DailySaleDetailsSpec" Expanded="true" />
-    <Node UniqueName="[0-1249]Gameo.Domain.Tests.GameSpec" Expanded="true" />
-    <Node UniqueName="[0-1228]Gameo.Domain.Tests.MembershipRechargeSpec" Expanded="true" />
-    <Node UniqueName="[0-1242]Gameo.Domain.Tests.UserSpec" Expanded="true" />
-    <Node UniqueName="[0-1377]E:\gameo\Gameo.DataAccess.Tests\bin\Debug\Gameo.DataAccess.Tests.dll" Expanded="true" />
-    <Node UniqueName="[0-1378]Gameo" Expanded="true" />
-    <Node UniqueName="[0-1379]Gameo.DataAccess" Expanded="true" />
-    <Node UniqueName="[0-1334]Gameo.DataAccess.Tests.AssemblySetUp" Expanded="true" />
-    <Node UniqueName="[0-1349]Gameo.DataAccess.Tests.BranchRepositorySpec" Expanded="true" />
+    <Node UniqueName="[0-1171]E:\gameo\Gameo.Web.Tests\bin\Debug\Gameo.Web.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1172]Gameo" Expanded="true" />
+    <Node UniqueName="[0-1173]Gameo.Web" Expanded="true" />
+    <Node UniqueName="[0-1174]Gameo.Web.Tests" Expanded="true" />
+    <Node UniqueName="[0-1179]Gameo.Web.Tests.AdminSpecs" Expanded="true" />
+    <Node UniqueName="[0-1183]Gameo.Web.Tests.AdminSpecs.AdminControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1186]Gameo.Web.Tests.AdminSpecs.BranchControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1180]Gameo.Web.Tests.AdminSpecs.CollectionControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1184]Gameo.Web.Tests.AdminSpecs.GamingConsoleControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1187]Gameo.Web.Tests.AdminSpecs.GamingTrendControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1185]Gameo.Web.Tests.AdminSpecs.RevenueControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1181]Gameo.Web.Tests.AdminSpecs.UserControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1178]Gameo.Web.Tests.AuthenticationControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1182]Gameo.Web.Tests.DailySaleDetailsControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1175]Gameo.Web.Tests.GameControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1176]Gameo.Web.Tests.MembershipControllerSpecs" Expanded="true" />
+    <Node UniqueName="[0-1177]Gameo.Web.Tests.ModelSpecs" Expanded="true" />
+    <Node UniqueName="[0-1068]Gameo.Web.Tests.ModelSpecs.CustomUserIdentitySpec" Expanded="true" />
+    <Node UniqueName="[0-1246]E:\gameo\Gameo.Services.Tests\bin\Debug\Gameo.Services.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1247]Gameo" Expanded="true" />
+    <Node UniqueName="[0-1248]Gameo.Services" Expanded="true" />
+    <Node UniqueName="[0-1249]Gameo.Services.Tests" Expanded="true" />
+    <Node UniqueName="[0-1236]Gameo.Services.Tests.AuthenticationServiceSpec" Expanded="true" />
+    <Node UniqueName="[0-1188]Gameo.Services.Tests.GamingTrendSpec" Expanded="true" />
+    <Node UniqueName="[0-1351]E:\gameo\Gameo.Domain.Tests\bin\Debug\Gameo.Domain.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1352]Gameo" Expanded="true" />
+    <Node UniqueName="[0-1353]Gameo.Domain" Expanded="true" />
+    <Node UniqueName="[0-1354]Gameo.Domain.Tests" Expanded="true" />
+    <Node UniqueName="[0-1303]Gameo.Domain.Tests.DailySaleDetailsSpec" Expanded="true" />
+    <Node UniqueName="[0-1340]Gameo.Domain.Tests.DateTimeExtensionsSpec" Expanded="true" />
+    <Node UniqueName="[0-1271]Gameo.Domain.Tests.GameSpec" Expanded="true" />
+    <Node UniqueName="[0-1250]Gameo.Domain.Tests.MembershipRechargeSpec" Expanded="true" />
+    <Node UniqueName="[0-1264]Gameo.Domain.Tests.UserSpec" Expanded="true" />
+    <Node UniqueName="[0-1410]E:\gameo\Gameo.DataAccess.Tests\bin\Debug\Gameo.DataAccess.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1411]Gameo" Expanded="true" />
+    <Node UniqueName="[0-1412]Gameo.DataAccess" Expanded="true" />
+    <Node UniqueName="[0-1364]Gameo.DataAccess.Tests.AssemblySetUp" Expanded="true" />
   </Nodes>
 </VisualState>

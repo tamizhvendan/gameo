@@ -47,6 +47,12 @@ namespace Gameo.DataAccess
                                                                     classMap.GetMemberMap(membershipRefil => membershipRefil.RechargedOn)
                                                                         .SetSerializationOptions(dateTimeSerializationOptions);
                                                                 });
+
+            BsonClassMap.RegisterClassMap<MonthlyExpense>(classMap =>
+                {
+                    classMap.AutoMap();
+                    classMap.UnmapMember(m => m.TotalExpenses);
+                });
         }
     }
 }

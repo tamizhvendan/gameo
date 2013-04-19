@@ -58,6 +58,7 @@
     <Compile Include="GamingConsoleSpec.cs" />
     <Compile Include="MembershipRechargeSpec.cs" />
     <Compile Include="MembershipSpec.cs" />
+    <Compile Include="MonthlyExpensesSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserSpec.cs" />
   </ItemGroup>

@@ -87,6 +87,7 @@
     <Compile Include="Areas\Admin\Controllers\CollectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\GamingTrendController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MonthlyExpensesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RevenueController.cs" />
     <Compile Include="Controllers\ApplicationControllerBase.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
@@ -264,6 +265,8 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Revenue\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MonthlyExpenses\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MonthlyExpenses\Create.cshtml" />
     <None Include="Properties\PublishProfiles\gameo-test - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gameo-test - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\spiel - FTP.pubxml" />

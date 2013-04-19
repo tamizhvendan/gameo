@@ -71,6 +71,7 @@ namespace Gameo.Web.App_Start
             kernel.Bind<IGamingTrend>().To<GamingTrend>();
             kernel.Bind<IDailySaleDetailsRepository>().To<DailySaleDetailsRepository>();
             kernel.Bind<IMembershipRepository>().To<MembershipRepository>();
+            kernel.Bind<IMonthlyExpensesRepository>().To<MonthlyExpensesRepository>();
             kernel.Bind<ICollectionService>().To<CollectionService>();
             kernel.Bind<IRevenueService>().To<RevenueService>();
             kernel.Bind<ITrendChartEngine>().To<TrendChartEngine>();

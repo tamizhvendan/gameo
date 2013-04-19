@@ -1,0 +1,72 @@
+﻿@using System.Globalization
+@model IEnumerable<Gameo.Domain.MonthlyExpense>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_admin.cshtml";
+    var monthNames = new DateTimeFormatInfo().MonthNames;
+}
+<h4>Monthly Expense Details</h4>
+<div class="pull-right">
+    @Html.ActionLink("Enter Monthly Expense Details", "Create", "MonthlyExpenses", new { @class = "btn btn-primary" })
+    <br/> <br/>
+</div>
+@if (Model.Any())
+{
+    <table class="table table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Month
+                </th>
+                <th>
+                    Branch
+                </th>
+                <th>
+                    Total Expenses
+                </th>
+                <th>
+                    EB Payment
+                </th>
+                <th>
+                    Rent
+                </th>
+                <th>
+                    Salary Paid
+                </th>
+                <th>
+                    Other Expenses
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var monthlyExpense in Model.OrderBy(m => m.Month))
+            {
+                <tr>
+                    <td>@monthNames[monthlyExpense.Month - 1] , @monthlyExpense.Year
+                    </td>
+                    <td>@monthlyExpense.BranchName
+                    </td>
+                    <td>@monthlyExpense.TotalExpenses
+                    </td>
+                    <td>@monthlyExpense.EbPayment
+                    </td>
+                    <td>@monthlyExpense.Rent
+                    </td>
+                    <td>@monthlyExpense.SalaryPaid
+                    </td>
+                    <td>@monthlyExpense.OtherExpenses
+                    </td>
+                    <td>@monthlyExpense.Description
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>No monthly expense details available</div>
+}

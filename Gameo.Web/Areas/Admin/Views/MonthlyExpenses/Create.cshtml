@@ -1,0 +1,107 @@
+﻿@using System.Globalization
+@using Gameo.Domain
+@model MonthlyExpense
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_admin.cshtml";
+    var monthNames = new DateTimeFormatInfo()
+                            .MonthNames
+                            .TakeWhile(monthName => monthName != string.Empty)
+                            .SelectWithIndex((monthName, index) => new SelectListItem {Text = monthName, Value = (index + 1).ToString(CultureInfo.InvariantCulture)});
+    var currentYear = DateTime.Now.Year;
+    var years = new[]
+        {
+            new SelectListItem {Selected = true, Text = currentYear.ToString(CultureInfo.InvariantCulture), Value = currentYear.ToString(CultureInfo.InvariantCulture)},
+            new SelectListItem {Text = (currentYear - 1).ToString(CultureInfo.InvariantCulture), Value = (currentYear - 1).ToString(CultureInfo.InvariantCulture)},
+            new SelectListItem {Text = (currentYear + 1).ToString(CultureInfo.InvariantCulture), Value = (currentYear + 1).ToString(CultureInfo.InvariantCulture)}
+        };
+}
+
+<h2>Enter Monthly Expense Detail</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Create", "MonthlyExpenses", FormMethod.Post, new { @class = "form-horizontal gameo-form" }))
+    {
+        <div class="control-group">
+            <h4>
+                Enter Monthly Expense Detail</h4>
+            <label class="control-label" for="@Model.Month">
+                Month</label>
+            <div class="controls">
+                @Html.DropDownList("Month", monthNames)
+                @Html.ValidationMessageFor(model => model.Month)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.Year">
+                Year</label>
+            <div class="controls">
+                @Html.DropDownList("Year", years)
+                @Html.ValidationMessageFor(model => model.Year)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.BranchName">
+                Branch Name</label>
+            <div class="controls">
+                @Html.DropDownList("BranchName", ViewBag.Branches as IEnumerable<SelectListItem>)
+                @Html.ValidationMessageFor(model => model.BranchName)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.SalaryPaid">
+                Salary Paid</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.SalaryPaid)
+                @Html.ValidationMessageFor(model => model.SalaryPaid)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.EbPayment">
+                EB Amount Paid</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.EbPayment)
+                @Html.ValidationMessageFor(model => model.EbPayment)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.InternetBill">
+                Internet Amount</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.InternetBill)
+                @Html.ValidationMessageFor(model => model.InternetBill)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.Rent">
+                Rent Amount</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Rent)
+                @Html.ValidationMessageFor(model => model.Rent)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.OtherExpenses">
+                Other Expenses</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.OtherExpenses)
+                @Html.ValidationMessageFor(model => model.OtherExpenses)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="@Model.Description">
+                Description</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Create" class="btn btn-primary offset1" />
+                @Html.ActionLink("Back", "Index", "MonthlyExpenses", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>
