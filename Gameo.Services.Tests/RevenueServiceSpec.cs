@@ -22,6 +22,7 @@ namespace Gameo.Services.Tests
             private IEnumerable<Game> games;
             private IEnumerable<MembershipReCharge> membershipReCharges;
             private Mock<IDailySaleDetailsRepository> dailySaleDetailsRepository;
+            private Mock<IMonthlyExpensesRepository> monthlyExpenseRepositoryMock;
             private const string BranchName = "branch1";
 
             [SetUp]
@@ -30,7 +31,8 @@ namespace Gameo.Services.Tests
                 gameRepositoryMock = new Mock<IGameRepository>();
                 membershipRepositoryMock = new Mock<IMembershipRepository>();
                 dailySaleDetailsRepository = new Mock<IDailySaleDetailsRepository>();
-                revenueService = new RevenueService(gameRepositoryMock.Object, membershipRepositoryMock.Object, dailySaleDetailsRepository.Object);
+                monthlyExpenseRepositoryMock = new Mock<IMonthlyExpensesRepository>();
+                revenueService = new RevenueService(gameRepositoryMock.Object, membershipRepositoryMock.Object, dailySaleDetailsRepository.Object, monthlyExpenseRepositoryMock.Object);
                 currentTime = DateTime.UtcNow.ToIST();
                 games = Enumerable.Empty<Game>();
                 membershipReCharges = Enumerable.Empty<MembershipReCharge>();
@@ -133,6 +135,17 @@ namespace Gameo.Services.Tests
                 var monthlyRevenue = revenueService.ComputeMonthlyRevenue(BranchName, currentTime.Year, currentTime.Month);
 
                 monthlyRevenue.EbMeterReading.ShouldEqual(expectedEbMeterReading);
+            }
+
+            [Test]
+            public void Returns_MonthlyRevenue_with_MonthlyExpense_for_that_month()
+            {
+                var expectedMonthlyExpense = new MonthlyExpense();
+                monthlyExpenseRepositoryMock.Setup(repo => repo.GetMonthlyExpenses(BranchName, currentTime.Month, currentTime.Year)).Returns(expectedMonthlyExpense);
+
+                var monthlyRevenue = revenueService.ComputeMonthlyRevenue(BranchName, currentTime.Year, currentTime.Month);
+
+                monthlyRevenue.MonthlyExpense.ShouldEqual(expectedMonthlyExpense);
             }
         }
     }

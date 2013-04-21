@@ -10,12 +10,15 @@ namespace Gameo.Services
         private readonly IGameRepository gameRepository;
         private readonly IMembershipRepository membershipRepository;
         private readonly IDailySaleDetailsRepository dailySaleDetailsRepository;
+        private readonly IMonthlyExpensesRepository monthlyExpensesRepository;
 
-        public RevenueService(IGameRepository gameRepository, IMembershipRepository membershipRepository, IDailySaleDetailsRepository dailySaleDetailsRepository)
+        public RevenueService(IGameRepository gameRepository, IMembershipRepository membershipRepository, 
+            IDailySaleDetailsRepository dailySaleDetailsRepository, IMonthlyExpensesRepository monthlyExpensesRepository)
         {
             this.gameRepository = gameRepository;
             this.membershipRepository = membershipRepository;
             this.dailySaleDetailsRepository = dailySaleDetailsRepository;
+            this.monthlyExpensesRepository = monthlyExpensesRepository;
         }
 
         public MonthlyRevenue ComputeMonthlyRevenue(string branchName, int year, int month)
@@ -40,7 +43,8 @@ namespace Gameo.Services
                            RevenueByNonPackageOneTimeGames = nonPackageGames.Sum(game => game.Price),
                            RevenueByPackageOneTimeGames = packageGames.Sum(game => game.Price),
                            RevenueByMembershipRecharges = membershipReCharges.Sum(recharge => recharge.Price),
-                           EbMeterReading = dailySaleDetailsRepository.GetEbMeterReadingForTheMonth(branchName, year, month)
+                           EbMeterReading = dailySaleDetailsRepository.GetEbMeterReadingForTheMonth(branchName, year, month),
+                           MonthlyExpense = monthlyExpensesRepository.GetMonthlyExpenses(branchName, month, year)
                        };
         }
     }

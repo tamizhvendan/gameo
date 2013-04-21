@@ -1,4 +1,5 @@
 ﻿using System;
+using Gameo.Domain;
 
 namespace Gameo.Services
 {
@@ -23,5 +24,7 @@ namespace Gameo.Services
         public decimal EbMeterReading { get; set; }
 
         public decimal RevenueByPackageOneTimeGames { get; set; }
+
+        public MonthlyExpense MonthlyExpense { get; set; }
     }
 }

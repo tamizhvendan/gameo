@@ -21,7 +21,7 @@ namespace Gameo.Web.Tests.AdminSpecs.GamingTrendControllerSpecs
         [Test]
         public void ComputeTrend_using_GameService()
         {
-            GameServiceMock.Setup(service => service.GetGamingTrends(trendRequest)).Verifiable();
+            GameServiceMock.Setup(service => service.GetGamingTrends(trendRequest)).Returns(new [] { new Bucket<Game>() }).Verifiable();
 
             GamingTrendController.GetTrend(trendRequest);
 

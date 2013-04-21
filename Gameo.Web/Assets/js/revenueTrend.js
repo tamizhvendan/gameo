@@ -86,11 +86,15 @@
 
     function renderChart(data) {
         $(".chart").show();
+        var monthlyExpenses = _.map(_.pluck(data, "MonthlyExpense"), function (monthlyExpense) {
+            return monthlyExpense ? monthlyExpense.TotalExpenses : 0;
+        });
         stackedChartConfig.xAxis.categories = _.pluck(data, "UserFriendlyMonthlyString");
         stackedChartConfig.series = [
-            { name: "Revenue by Membership Recharges", data: _.pluck(data, "RevenueByMembershipRecharges") },
-            { name: "Revenue by Package Games", data: _.pluck(data, "RevenueByPackageOneTimeGames") },
-            { name: "Revenue by Non Package Games", data: _.pluck(data, "RevenueByNonPackageOneTimeGames") }
+            { name: "Revenue by Membership Recharges", data: _.pluck(data, "RevenueByMembershipRecharges"), stack: "revenue" },
+            { name: "Revenue by Package Games", data: _.pluck(data, "RevenueByPackageOneTimeGames"), stack: "revenue" },
+            { name: "Revenue by Non Package Games", data: _.pluck(data, "RevenueByNonPackageOneTimeGames"), stack: "revenue" },
+            { name: "Monthly Expenses", data: monthlyExpenses, stack: "expense"}
         ];
 
         lineChartConfig.xAxis.categories = _.pluck(data, "UserFriendlyMonthlyString");
