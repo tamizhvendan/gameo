@@ -1,6 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{718280EC-9E4A-415E-A84B-DE3C9C504AE7}"
+	ProjectSection(SolutionItems) = preProject
+		learnings.txt = learnings.txt
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Web", "Gameo.Web\Gameo.Web.csproj", "{C9B112DF-D698-42FE-85FA-2D1CBC5AC4CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Domain", "Gameo.Domain\Gameo.Domain.csproj", "{6C1430F5-F4B4-49E1-9699-17A389669124}"
@@ -12,11 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.DataAccess", "Gameo.DataAccess\Gameo.DataAccess.csproj", "{793918AB-BA53-417E-8CA2-0191E42582B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.DataAccess.Tests", "Gameo.DataAccess.Tests\Gameo.DataAccess.Tests.csproj", "{629D85F5-7CA7-4AD9-A65B-4820FA9B9CE8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{718280EC-9E4A-415E-A84B-DE3C9C504AE7}"
-	ProjectSection(SolutionItems) = preProject
-		learnings.txt = learnings.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gameo.Services.Tests", "Gameo.Services.Tests\Gameo.Services.Tests.csproj", "{46439A5E-F2CB-422E-A6E5-E7D75C0EBB6E}"
 EndProject
