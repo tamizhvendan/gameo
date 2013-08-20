@@ -190,7 +190,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Branch\Index.cshtml" />
@@ -278,6 +277,10 @@
     <Content Include="Areas\Admin\Views\Revenue\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MonthlyExpenses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MonthlyExpenses\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\spiel2 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\spiel2 - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -28,16 +28,26 @@ namespace Gameo.DataAccess.Core
             var startDateTime = new DateTime(year, month, 1);
             var endDateTime = startDateTime.LastDayOfMonth();
 
+            var lastMonthStartDateTime = startDateTime.AddMonths(-1);
+            var lastMonthEndDateTime = lastMonthStartDateTime.LastDayOfMonth();
+
             var salesDetailForGivenMonth = EntityCollection
                 .AsQueryable()
                 .Where(dailySaleDetailsRepository => dailySaleDetailsRepository.DateTime >= startDateTime && dailySaleDetailsRepository.DateTime <= endDateTime).ToList();
+                
+             var salesDetailForPreviousMonth =  EntityCollection
+                .AsQueryable()
+                .Where(dailySaleDetailsRepository => dailySaleDetailsRepository.DateTime >= lastMonthStartDateTime && dailySaleDetailsRepository.DateTime <= lastMonthEndDateTime).ToList();
 
             if (!salesDetailForGivenMonth.Any())
             {
                 return 0;
             }
 
-            var startingReadingForTheMonth = salesDetailForGivenMonth.Min(dailySaleDetails => dailySaleDetails.EbMeterReading);
+            decimal startingReadingForTheMonth = salesDetailForPreviousMonth.Any() ? 
+                                                     salesDetailForPreviousMonth.Max(dailySaleDetails => dailySaleDetails.EbMeterReading) 
+                                                     :   salesDetailForGivenMonth.Min(dailySaleDetails => dailySaleDetails.EbMeterReading);
+            
             var endingReadingForTheMonth = salesDetailForGivenMonth.Max(dailySaleDetails => dailySaleDetails.EbMeterReading);
 
             return endingReadingForTheMonth - startingReadingForTheMonth;
